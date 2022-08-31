@@ -1,4 +1,6 @@
 import 'package:hive/hive.dart';
+import 'package:yaaseen/hive_helper/hive_adapters.dart';
+import 'package:yaaseen/hive_helper/hive_types.dart';
 
 part 'verse_model.g.dart';
 
