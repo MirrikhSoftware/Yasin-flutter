@@ -19,7 +19,7 @@ class RoundedIconButton extends StatelessWidget {
         child: Icon(icon, size: 18.r),
         padding: EdgeInsets.all(4.r),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.primary, width: 2.w),
+          border: Border.all(color: AppColors.green, width: 2.w),
           borderRadius: _borderRadius(),
         ),
       ),
