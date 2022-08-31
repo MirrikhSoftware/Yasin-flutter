@@ -18,6 +18,7 @@ class AppRoutes {
       // default:
       //   return _route(const HomeScreen());
     }
+    return null;
   }
 
   MaterialPageRoute _route(Widget route) =>

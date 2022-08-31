@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yaaseen/core/components/app_packages.dart';
+import 'package:yaaseen/core/theme/app_theme.dart';
 import 'route/routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,12 +8,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Yosin Surasi',
-      navigatorKey: AppNavigator.navigatorKey,
-      initialRoute: RouteNames.initial,
-      onGenerateRoute: AppRoutes().onGenerateRoute,
-    );
+    return ScreenUtilInit(builder: (context, w) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Yosin Surasi',
+        theme: AppTheme().green,
+        navigatorKey: AppNavigator.navigatorKey,
+        initialRoute: RouteNames.initial,
+        onGenerateRoute: AppRoutes().onGenerateRoute,
+      );
+    });
   }
 }
