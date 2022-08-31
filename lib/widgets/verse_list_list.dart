@@ -1,4 +1,4 @@
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
@@ -55,19 +55,22 @@ class VerseListTile extends StatelessWidget {
 
               SizedBox(width: 12.w),
 
-              // COPY
-              RoundedIconButton(
-                icon: Icons.copy,
-                onPressed: _onCopyPressed,
-              ),
-              SizedBox(width: 12.w),
-
               // SAVE
               RoundedIconButton(
                 icon: verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
                 onPressed: () async {
                   verse.isSaved = !verse.isSaved;
                   await verse.save();
+                },
+              ),
+              SizedBox(width: 12.w),
+
+              // PLAY
+              RoundedIconButton(
+                icon: Icons.play_arrow,
+                onPressed: () async {
+                  AudioPlayer player = AudioPlayer();
+                  player.setSourceAsset('assets/');
                 },
               )
             ],
@@ -87,9 +90,7 @@ class VerseListTile extends StatelessWidget {
     AppFormatter formatter = AppFormatter();
     String clipboardText = formatter.formatClipboard(verse);
     Share.share(clipboardText);
-    
 
-    
     // var data = await Clipboard.getData(Clipboard.kTextPlain);
     // print(data?.text);
   }

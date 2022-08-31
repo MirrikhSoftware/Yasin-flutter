@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
@@ -14,12 +15,14 @@ class HomeScreen extends StatelessWidget {
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.verseBox.listenable(),
         builder: (context, Box<VerseModel> box, child) {
-
           return CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
-              SliverAppBar(
+              const SliverAppBar(
                 floating: true,
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: AppColors.green
+                ),
                 title: Text('Yosin'),
               ),
               // SliverToBoxAdapter(
