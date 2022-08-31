@@ -14,6 +14,7 @@ class VerseModel extends HiveObject {
     this.plain,
     this.arabic,
     this.meaning,
+    this.meaningUz,
     this.isSaved = false,
   }) {
     id = id;
@@ -34,6 +35,7 @@ class VerseModel extends HiveObject {
     plain = json['plain'];
     arabic = json['arabic'];
     meaning = json['meaning'];
+    meaningUz = json['meaning_uz'];
     isSaved = json['is_saved'] ?? false;
   }
 
@@ -52,6 +54,8 @@ class VerseModel extends HiveObject {
   @HiveField(6)
   late String? meaning;
   @HiveField(7)
+  late String? meaningUz;
+  @HiveField(8)
   bool isSaved = false;
 
   VerseModel copyWith({
@@ -62,6 +66,7 @@ class VerseModel extends HiveObject {
     String? plain,
     String? arabic,
     String? meaning,
+    String? meaningUz,
   }) =>
       VerseModel(
         id: id,
@@ -71,6 +76,7 @@ class VerseModel extends HiveObject {
         plain: plain,
         arabic: arabic,
         meaning: meaning,
+        meaningUz: meaningUz
       );
 
   Map<String, dynamic> toJson() {
@@ -82,6 +88,7 @@ class VerseModel extends HiveObject {
     map['plain'] = plain;
     map['arabic'] = arabic;
     map['meaning'] = meaning;
+    map['meaning_uz'] = meaningUz;
     map['is_saved'] = isSaved;
     return map;
   }
