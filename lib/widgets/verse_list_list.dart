@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 
+import 'rounded_icon_button.dart';
+
 class VerseListTile extends StatelessWidget {
   final VerseModel verse;
   const VerseListTile({Key? key, required this.verse}) : super(key: key);
@@ -54,11 +56,11 @@ class VerseListTile extends StatelessWidget {
               SizedBox(width: 12.w),
 
               // COPY
-              // RoundedIconButton(
-              //   icon: Icons.copy,
-              //   onPressed: _onCopyPressed,
-              // ),
-              // SizedBox(width: 12.w),
+              RoundedIconButton(
+                icon: Icons.copy,
+                onPressed: _onCopyPressed,
+              ),
+              SizedBox(width: 12.w),
 
               // SAVE
               RoundedIconButton(
