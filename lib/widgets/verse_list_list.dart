@@ -18,16 +18,24 @@ class VerseListTile extends StatefulWidget {
 
 class _VerseListTileState extends State<VerseListTile> {
   final AudioPlayer _player = AudioPlayer();
+  AppFormatter formatter = AppFormatter();
+  late final VerseModel _verse = widget.verse;
+  late String number = formatter.numberFormat(_verse.verseId!);
+  late String formatted = '\uFD3F$number\uFD3E';
+  bool _isPlaying = false;
+
   @override
   void initState() {
     super.initState();
+    _player.onPlayerStateChanged.listen((event) => setState(() {
+          _isPlaying = event == PlayerState.playing;
+        }));
+    _player.onPlayerComplete
+        .listen((event) => setState(() => _isPlaying = false));
   }
 
   @override
   Widget build(BuildContext context) {
-    AppFormatter formatter = AppFormatter();
-    String number = formatter.numberFormat(widget.verse.verseId!);
-    String formatted = '\uFD3F$number\uFD3E';
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
@@ -51,7 +59,7 @@ class _VerseListTileState extends State<VerseListTile> {
           ),
           SizedBox(height: 20.h),
           Text(
-            '${widget.verse.verseId}. ${widget.verse.meaning}',
+            '${_verse.verseId}. ${_verse.meaning}',
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -70,11 +78,9 @@ class _VerseListTileState extends State<VerseListTile> {
 
               // SAVE
               RoundedIconButton(
-                icon: widget.verse.isSaved
-                    ? Icons.bookmark
-                    : Icons.bookmark_border,
+                icon: _verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
                 onPressed: () async {
-                  widget.verse.isSaved = !widget.verse.isSaved;
+                  widget.verse.isSaved = !_verse.isSaved;
                   await widget.verse.save();
                 },
               ),
@@ -82,14 +88,17 @@ class _VerseListTileState extends State<VerseListTile> {
 
               // PLAY
               RoundedIconButton(
-                icon: Icons.play_arrow,
+                icon: _isPlaying ? Icons.pause : Icons.play_arrow,
                 onPressed: () async {
-                  String id = '${widget.verse.verseId}'.padLeft(2, '0');
+                  String id = '${_verse.verseId}'.padLeft(2, '0');
                   String path = 'assets/audio/yasin$id.mp3';
-                  // await player.setSourceAsset('assets/audio/yasin00.mp3');
                   var byteData = await rootBundle.load(path);
                   Uint8List bytes = byteData.buffer.asUint8List();
-                  await _player.play(BytesSource(bytes));
+                  if (_isPlaying) {
+                    await _player.stop();
+                  } else {
+                    await _player.play(BytesSource(bytes));
+                  }
                 },
               )
             ],
@@ -99,19 +108,16 @@ class _VerseListTileState extends State<VerseListTile> {
     );
   }
 
-  Future<void> _onCopyPressed() async {
-    AppFormatter formatter = AppFormatter();
-    String clipboardText = formatter.formatClipboard(widget.verse);
-    await Clipboard.setData(ClipboardData(text: clipboardText));
-  }
+  // Future<void> _onCopyPressed() async {
+  //   AppFormatter formatter = AppFormatter();
+  //   String clipboardText = formatter.formatClipboard(_verse);
+  //   await Clipboard.setData(ClipboardData(text: clipboardText));
+  // }
 
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();
-    String clipboardText = formatter.formatClipboard(widget.verse);
+    String clipboardText = formatter.formatClipboard(_verse);
     Share.share(clipboardText);
-
-    // var data = await Clipboard.getData(Clipboard.kTextPlain);
-    // print(data?.text);
   }
 
   @override
