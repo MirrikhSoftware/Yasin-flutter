@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,14 +8,25 @@ import 'package:yaaseen/models/verse/verse_model.dart';
 
 import 'rounded_icon_button.dart';
 
-class VerseListTile extends StatelessWidget {
+class VerseListTile extends StatefulWidget {
   final VerseModel verse;
   const VerseListTile({Key? key, required this.verse}) : super(key: key);
 
   @override
+  State<VerseListTile> createState() => _VerseListTileState();
+}
+
+class _VerseListTileState extends State<VerseListTile> {
+  final AudioPlayer _player = AudioPlayer();
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     AppFormatter formatter = AppFormatter();
-    String number = formatter.numberFormat(verse.verseId!);
+    String number = formatter.numberFormat(widget.verse.verseId!);
     String formatted = '\uFD3F$number\uFD3E';
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -23,7 +36,7 @@ class VerseListTile extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              '${verse.arabic!.replaceFirst('\n', '')} $formatted',
+              '${widget.verse.arabic!.replaceFirst('\n', '')} $formatted',
               textAlign: TextAlign.start,
               locale: const Locale('ar'),
               textDirection: TextDirection.rtl,
@@ -38,7 +51,7 @@ class VerseListTile extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           Text(
-            '${verse.verseId}. ${verse.meaning}',
+            '${widget.verse.verseId}. ${widget.verse.meaning}',
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -57,10 +70,12 @@ class VerseListTile extends StatelessWidget {
 
               // SAVE
               RoundedIconButton(
-                icon: verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
+                icon: widget.verse.isSaved
+                    ? Icons.bookmark
+                    : Icons.bookmark_border,
                 onPressed: () async {
-                  verse.isSaved = !verse.isSaved;
-                  await verse.save();
+                  widget.verse.isSaved = !widget.verse.isSaved;
+                  await widget.verse.save();
                 },
               ),
               SizedBox(width: 12.w),
@@ -69,8 +84,12 @@ class VerseListTile extends StatelessWidget {
               RoundedIconButton(
                 icon: Icons.play_arrow,
                 onPressed: () async {
-                  AudioPlayer player = AudioPlayer();
-                  player.setSourceAsset('assets/');
+                  String id = '${widget.verse.verseId}'.padLeft(2, '0');
+                  String path = 'assets/audio/yasin$id.mp3';
+                  // await player.setSourceAsset('assets/audio/yasin00.mp3');
+                  var byteData = await rootBundle.load(path);
+                  Uint8List bytes = byteData.buffer.asUint8List();
+                  await _player.play(BytesSource(bytes));
                 },
               )
             ],
@@ -82,16 +101,22 @@ class VerseListTile extends StatelessWidget {
 
   Future<void> _onCopyPressed() async {
     AppFormatter formatter = AppFormatter();
-    String clipboardText = formatter.formatClipboard(verse);
+    String clipboardText = formatter.formatClipboard(widget.verse);
     await Clipboard.setData(ClipboardData(text: clipboardText));
   }
 
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();
-    String clipboardText = formatter.formatClipboard(verse);
+    String clipboardText = formatter.formatClipboard(widget.verse);
     Share.share(clipboardText);
 
     // var data = await Clipboard.getData(Clipboard.kTextPlain);
     // print(data?.text);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _player.dispose();
   }
 }
