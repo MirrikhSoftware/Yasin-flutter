@@ -25,10 +25,19 @@ class AppTheme {
   ThemeData get green => ThemeData(
         canvasColor: AppColors.background,
         primaryColor: AppColors.green,
+        splashColor: AppColors.green,
+        primaryColorLight: AppColors.green,
         iconTheme: const IconThemeData(color: AppColors.green),
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.green,
+        ),
+        sliderTheme: SliderThemeData(
+          trackHeight: 2.h,
+          thumbColor: AppColors.green,
+          activeTrackColor: AppColors.green,
+          inactiveTrackColor: AppColors.green.withOpacity(.5),
+          showValueIndicator: ShowValueIndicator.always
         ),
         scrollbarTheme: ScrollbarThemeData(
             interactive: true,

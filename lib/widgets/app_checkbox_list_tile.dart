@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yaaseen/core/constants/app_colors.dart';
+import 'package:yaaseen/core/core.dart';
 
 class AppCheckboxListTile extends StatelessWidget {
   final String title;
@@ -15,8 +17,13 @@ class AppCheckboxListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CheckboxListTile(
       value: value,
-      title: Text(title),
+      title: Text(title, style: TextStyle(
+        fontSize: 12.sp
+      )),
       onChanged: onChanged,
+      contentPadding: EdgeInsets.zero,
+      controlAffinity: ListTileControlAffinity.leading,
+      activeColor: AppColors.green,
     );
   }
 }

@@ -21,39 +21,42 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.verseBox.listenable(),
         builder: (context, Box<VerseModel> box, child) {
-          return Scrollbar(
-          
-            controller: _scrollController,
-            child: CustomScrollView(
-              controller: _scrollController,
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                const HomeAppBar(),
-                // SliverToBoxAdapter(
-                //   child: Padding(
-                //     padding: EdgeInsets.only(top: 24.h, bottom: 24.h),
-                //     child: SvgPicture.asset(
-                //       AppImages.basmalah,
-                //       color: AppColors.black,
-                //     ),
-                //   ),
-                // ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final int itemIndex = index ~/ 2;
-                      if (index.isEven) {
-                        VerseModel verse = box.getAt(itemIndex)!;
-                        return VerseListTile(verse: verse);
-                      }
-                      return Divider(thickness: 1.h, height: 24.h);
+          List<VerseModel> verses = box.values.toList();
+          return CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              const HomeAppBar(),
+              SliverToBoxAdapter(
+                child: Scrollbar(
+                  controller: _scrollController,
+                  child: ListView.separated(
+                    controller: _scrollController,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: verses.length,
+                    separatorBuilder: (ctx, i) => const Divider(),
+                    itemBuilder: (context, index) {
+                      VerseModel verse = verses[index];
+                      return VerseListTile(verse: verse);
                     },
-                    childCount: math.max(0, verses.length * 2 - 1),
                   ),
                 ),
-                SliverToBoxAdapter(child: SizedBox(height: 24.h))
-              ],
-            ),
+              ),
+              // SliverList(
+              //   delegate: SliverChildBuilderDelegate(
+              //     (context, index) {
+              //       final int itemIndex = index ~/ 2;
+              //       if (index.isEven) {
+              //         VerseModel verse = box.getAt(itemIndex)!;
+              //         return VerseListTile(verse: verse);
+              //       }
+              //       return Divider(thickness: 1.h, height: 24.h);
+              //     },
+              //     childCount: math.max(0, verses.length * 2 - 1),
+              //   ),
+              // ),
+              SliverToBoxAdapter(child: SizedBox(height: 24.h))
+            ],
           );
         },
       ),

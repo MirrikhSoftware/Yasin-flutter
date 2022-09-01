@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
-  const SimpleAppBar({Key? key}) : super(key: key);
+  final String title;
+  const SimpleAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-    );
+    return AppBar(title: Text(title));
   }
 
   @override
