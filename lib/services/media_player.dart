@@ -11,15 +11,11 @@ class MediaPlayer {
 
     Uint8List bytes = byteData.buffer.asUint8List();
     if (_player != null) {
-      _player?.stop();
-      _player?.release();
+      await _player?.stop();
+      await _player?.release();
     }
 
     _player = AudioPlayer(playerId: path);
     await _player?.play(BytesSource(bytes));
-
-  }
-  static dispose() {
-    _player!.dispose();
   }
 }

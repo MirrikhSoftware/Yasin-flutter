@@ -1,5 +1,8 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
+import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/services/media_player.dart';
 import 'rounded_icon_button.dart';
@@ -14,6 +17,7 @@ class VerseListTile extends StatefulWidget {
 
 class _VerseListTileState extends State<VerseListTile> {
   AppFormatter formatter = AppFormatter();
+  AudioPlayer _player = AudioPlayer();
   late final VerseModel _verse = widget.verse;
   late String number = formatter.numberFormat(_verse.verseId!);
   late String formatted = '\uFD3F$number\uFD3E';
@@ -37,8 +41,8 @@ class _VerseListTileState extends State<VerseListTile> {
               textAlign: TextAlign.start,
               locale: const Locale('ar'),
               textDirection: TextDirection.rtl,
-              style: const TextStyle(
-                fontSize: 32,
+              style: TextStyle(
+                fontSize: AppPrefs.arabicSize,
                 fontFamily: AppFonts.meQuran,
                 wordSpacing: 12,
                 height: 1.8,
@@ -81,6 +85,9 @@ class _VerseListTileState extends State<VerseListTile> {
                 onPressed: () async {
                   String id = '${_verse.verseId}'.padLeft(2, '0');
                   String path = 'assets/audio/yasin$id.mp3';
+                  var bytes = await rootBundle.load(path);
+
+                  // _player.play(BytesSource(bytes.buffer.asUint8List()));
                   MediaPlayer.play(path);
                 },
               )
@@ -100,6 +107,5 @@ class _VerseListTileState extends State<VerseListTile> {
   @override
   void dispose() {
     super.dispose();
-    MediaPlayer.dispose();
   }
 }

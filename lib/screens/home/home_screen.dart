@@ -6,49 +6,60 @@ import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 import 'dart:math' as math;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.verseBox.listenable(),
         builder: (context, Box<VerseModel> box, child) {
-          return CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              const SliverAppBar(
-                floating: true,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: AppColors.green
+          return Scrollbar(
+          
+            controller: _scrollController,
+            child: CustomScrollView(
+              controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                const SliverAppBar(
+                  floating: true,
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: AppColors.green
+                  ),
+                  title: Text('Yosin'),
                 ),
-                title: Text('Yosin'),
-              ),
-              // SliverToBoxAdapter(
-              //   child: Padding(
-              //     padding: EdgeInsets.only(top: 24.h, bottom: 24.h),
-              //     child: SvgPicture.asset(
-              //       AppImages.basmalah,
-              //       color: AppColors.black,
-              //     ),
-              //   ),
-              // ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final int itemIndex = index ~/ 2;
-                    if (index.isEven) {
-                      VerseModel verse = box.getAt(itemIndex)!;
-                      return VerseListTile(verse: verse);
-                    }
-                    return Divider(thickness: 1.h, height: 24.h);
-                  },
-                  childCount: math.max(0, verses.length * 2 - 1),
+                // SliverToBoxAdapter(
+                //   child: Padding(
+                //     padding: EdgeInsets.only(top: 24.h, bottom: 24.h),
+                //     child: SvgPicture.asset(
+                //       AppImages.basmalah,
+                //       color: AppColors.black,
+                //     ),
+                //   ),
+                // ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final int itemIndex = index ~/ 2;
+                      if (index.isEven) {
+                        VerseModel verse = box.getAt(itemIndex)!;
+                        return VerseListTile(verse: verse);
+                      }
+                      return Divider(thickness: 1.h, height: 24.h);
+                    },
+                    childCount: math.max(0, verses.length * 2 - 1),
+                  ),
                 ),
-              ),
-              SliverToBoxAdapter(child: SizedBox(height: 24.h))
-            ],
+                SliverToBoxAdapter(child: SizedBox(height: 24.h))
+              ],
+            ),
           );
         },
       ),
