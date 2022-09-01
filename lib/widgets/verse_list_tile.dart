@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
+import 'package:yaaseen/services/media_player.dart';
 
 import 'rounded_icon_button.dart';
 
@@ -17,7 +18,7 @@ class VerseListTile extends StatefulWidget {
 }
 
 class _VerseListTileState extends State<VerseListTile> {
-  final AudioPlayer _player = AudioPlayer();
+  static final AudioPlayer _player = AudioPlayer();
   AppFormatter formatter = AppFormatter();
   late final VerseModel _verse = widget.verse;
   late String number = formatter.numberFormat(_verse.verseId!);
@@ -93,12 +94,12 @@ class _VerseListTileState extends State<VerseListTile> {
                   String id = '${_verse.verseId}'.padLeft(2, '0');
                   String path = 'assets/audio/yasin$id.mp3';
                   var byteData = await rootBundle.load(path);
+
                   Uint8List bytes = byteData.buffer.asUint8List();
                   if (_isPlaying) {
                     await _player.stop();
-                  } else {
-                    await _player.play(BytesSource(bytes));
                   }
+                  await _player.play(BytesSource(bytes));
                 },
               )
             ],
