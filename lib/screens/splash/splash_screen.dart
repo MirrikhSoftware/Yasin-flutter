@@ -7,7 +7,6 @@ import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/route/app_navigator.dart';
-import 'package:yaaseen/route/app_route.dart';
 import 'package:yaaseen/route/route_names.dart';
 
 class SplashScreen extends StatefulWidget {

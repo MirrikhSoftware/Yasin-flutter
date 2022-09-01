@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/route/routes.dart';
 
 class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -8,6 +9,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       floating: true,
+      title: Text(AppStrings.app_name.tr()),
       actions: [
         _setPopupMenuButton(),
       ],
@@ -17,19 +19,19 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   PopupMenuButton _setPopupMenuButton() => PopupMenuButton(
         itemBuilder: (context) {
           return [
-            _setItem('Sozlamalar'),
+            _setItem(AppStrings.settings),
           ];
         },
         onSelected: (v) {
           switch (v) {
-            case 'Sozlamalar':
+            case AppStrings.settings:
               AppNavigator.pushNamed(RouteNames.settings);
               break;
           }
         },
       );
   PopupMenuItem _setItem(String title) => PopupMenuItem(
-        child: Text(title),
+        child: Text(title.tr()),
         value: title,
       );
 

@@ -52,7 +52,7 @@ class _VerseListTileState extends State<VerseListTile> {
           ),
           SizedBox(height: 20.h),
           Text(
-            '${_verse.verseId}. ${_verse.meaning}',
+            '${_verse.verseId}. $_getMeaning',
             style: TextStyle(fontSize: AppPrefs.meaningSize),
           ),
           SizedBox(height: 12.h),
@@ -95,6 +95,9 @@ class _VerseListTileState extends State<VerseListTile> {
       ),
     );
   }
+
+  String get _getMeaning =>
+      AppPrefs.locale == 'uz' ? _verse.meaningUz.toString() : _verse.meaning.toString();
 
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();

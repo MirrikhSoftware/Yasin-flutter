@@ -21,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double _arabicSize = AppPrefs.arabicSize;
   double _meainingSize = AppPrefs.meaningSize;
   double _trSize = AppPrefs.trSize;
+  String _locale = AppPrefs.locale;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
