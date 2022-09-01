@@ -4,7 +4,6 @@ import 'package:yaaseen/core/core.dart';
 
 class AppTheme {
   ThemeData get light => ThemeData(
-        // canvasColor: AppColors.background,
 
         primaryColor: AppColors.primary,
         iconTheme: const IconThemeData(color: AppColors.primary),
@@ -24,7 +23,7 @@ class AppTheme {
       );
 
   ThemeData get green => ThemeData(
-        // canvasColor: AppColors.background,
+        canvasColor: AppColors.background,
         primaryColor: AppColors.green,
         iconTheme: const IconThemeData(color: AppColors.green),
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),

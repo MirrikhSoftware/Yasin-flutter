@@ -1,12 +1,7 @@
-import 'dart:typed_data';
-
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/services/media_player.dart';
-
 import 'rounded_icon_button.dart';
 
 class VerseListTile extends StatefulWidget {
@@ -18,7 +13,6 @@ class VerseListTile extends StatefulWidget {
 }
 
 class _VerseListTileState extends State<VerseListTile> {
-  static AudioPlayer? _player;
   AppFormatter formatter = AppFormatter();
   late final VerseModel _verse = widget.verse;
   late String number = formatter.numberFormat(_verse.verseId!);
@@ -27,11 +21,6 @@ class _VerseListTileState extends State<VerseListTile> {
   @override
   void initState() {
     super.initState();
-    // _player.onPlayerStateChanged.listen((event) => setState(() {
-    //       _isPlaying = event == PlayerState.playing;
-    //     }));
-    // _player.onPlayerComplete
-    //     .listen((event) => setState(() => _isPlaying = false));
   }
 
   @override
@@ -90,12 +79,8 @@ class _VerseListTileState extends State<VerseListTile> {
               RoundedIconButton(
                 icon: Icons.play_arrow,
                 onPressed: () async {
-                  
                   String id = '${_verse.verseId}'.padLeft(2, '0');
                   String path = 'assets/audio/yasin$id.mp3';
-                  var byteData = await rootBundle.load(path);
-
-                  Uint8List bytes = byteData.buffer.asUint8List();
                   MediaPlayer.play(path);
                 },
               )
@@ -106,12 +91,6 @@ class _VerseListTileState extends State<VerseListTile> {
     );
   }
 
-  // Future<void> _onCopyPressed() async {
-  //   AppFormatter formatter = AppFormatter();
-  //   String clipboardText = formatter.formatClipboard(_verse);
-  //   await Clipboard.setData(ClipboardData(text: clipboardText));
-  // }
-
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();
     String clipboardText = formatter.formatClipboard(_verse);
@@ -121,6 +100,6 @@ class _VerseListTileState extends State<VerseListTile> {
   @override
   void dispose() {
     super.dispose();
-    _player?.dispose();
+    MediaPlayer.dispose();
   }
 }
