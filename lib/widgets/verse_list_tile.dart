@@ -18,21 +18,20 @@ class VerseListTile extends StatefulWidget {
 }
 
 class _VerseListTileState extends State<VerseListTile> {
-  static final AudioPlayer _player = AudioPlayer();
+  static AudioPlayer? _player;
   AppFormatter formatter = AppFormatter();
   late final VerseModel _verse = widget.verse;
   late String number = formatter.numberFormat(_verse.verseId!);
   late String formatted = '\uFD3F$number\uFD3E';
-  bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
-    _player.onPlayerStateChanged.listen((event) => setState(() {
-          _isPlaying = event == PlayerState.playing;
-        }));
-    _player.onPlayerComplete
-        .listen((event) => setState(() => _isPlaying = false));
+    // _player.onPlayerStateChanged.listen((event) => setState(() {
+    //       _isPlaying = event == PlayerState.playing;
+    //     }));
+    // _player.onPlayerComplete
+    //     .listen((event) => setState(() => _isPlaying = false));
   }
 
   @override
@@ -89,17 +88,15 @@ class _VerseListTileState extends State<VerseListTile> {
 
               // PLAY
               RoundedIconButton(
-                icon: _isPlaying ? Icons.pause : Icons.play_arrow,
+                icon: Icons.play_arrow,
                 onPressed: () async {
+                  
                   String id = '${_verse.verseId}'.padLeft(2, '0');
                   String path = 'assets/audio/yasin$id.mp3';
                   var byteData = await rootBundle.load(path);
 
                   Uint8List bytes = byteData.buffer.asUint8List();
-                  if (_isPlaying) {
-                    await _player.stop();
-                  }
-                  await _player.play(BytesSource(bytes));
+                  MediaPlayer.play(path);
                 },
               )
             ],
@@ -124,6 +121,6 @@ class _VerseListTileState extends State<VerseListTile> {
   @override
   void dispose() {
     super.dispose();
-    _player.dispose();
+    _player?.dispose();
   }
 }

@@ -5,34 +5,22 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
 
 class MediaPlayer {
-  static final AudioPlayer _player = AudioPlayer();
-  static bool _isPlaying = false;
+  static AudioPlayer? _player;
 
   static play(String path) async {
     var byteData = await rootBundle.load(path);
 
     Uint8List bytes = byteData.buffer.asUint8List();
-    print('=================$_isPlaying===============');
-    if (_isPlaying) {
-      await _player.stop();
-    } else {
-      await _player.play(BytesSource(bytes));
+    if (_player != null) {
+      _player?.stop();
+      _player?.release();
     }
+
+    _player = AudioPlayer(playerId: path);
+    await _player?.play(BytesSource(bytes));
+
   }
-
-  static Stream<PlayerState> onPlayerStateChanged() async* {
-
-    yield* _player.onPlayerStateChanged..listen((event) {
-      _isPlaying = event == PlayerState.playing;
-      print('================= $event =============');
-    });
+  static dispose() {
+    _player!.dispose();
   }
-
-  static StreamSubscription<void> onComplete() =>
-      _player.onPlayerComplete.listen((event) {
-        _isPlaying = false;
-      });
-
-  static final StreamController<PlayerState> _playerStateController =
-      StreamController<PlayerState>.broadcast();
 }
