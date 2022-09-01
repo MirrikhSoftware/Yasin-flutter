@@ -16,9 +16,9 @@ class VerseListTile extends StatefulWidget {
 }
 
 class _VerseListTileState extends State<VerseListTile> {
-  AppFormatter formatter = AppFormatter();
   AudioPlayer _player = AudioPlayer();
   late final VerseModel _verse = widget.verse;
+  AppFormatter formatter = AppFormatter();
   late String number = formatter.numberFormat(_verse.verseId!);
   late String formatted = '\uFD3F$number\uFD3E';
 
@@ -53,9 +53,7 @@ class _VerseListTileState extends State<VerseListTile> {
           SizedBox(height: 20.h),
           Text(
             '${_verse.verseId}. ${_verse.meaning}',
-            style: const TextStyle(
-              fontSize: 18,
-            ),
+            style: TextStyle(fontSize: AppPrefs.meaningSize),
           ),
           SizedBox(height: 12.h),
           Row(

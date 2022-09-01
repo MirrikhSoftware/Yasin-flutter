@@ -15,6 +15,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    HiveBoxes.prefsBox.listenable().addListener(() { 
+      setState(() {
+        
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,4 +75,5 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 }
