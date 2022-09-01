@@ -28,6 +28,6 @@ class AppLocales {
       };
   Map<String, String> _setString(String uz, String cr) => {
         "uz": uz,
-        "en": cr,
+        "cr": cr,
       };
 }

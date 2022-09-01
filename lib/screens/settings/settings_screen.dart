@@ -32,9 +32,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _setData(SizeType.arabic),
           _setData(SizeType.meainig),
           _setData(SizeType.transcription),
+          _showLocale(),
         ],
       ),
     );
+  }
+
+  Row _showLocale() => Row(
+        children: [
+          Expanded(
+            child: AppRadioListTile(
+              title: 'Lotin',
+              onChanged: _onChanged,
+              group: _locale,
+            ),
+          ),
+          Expanded(
+            child: AppRadioListTile(
+              title: 'Kirill',
+              onChanged: _onChanged,
+              group: _locale,
+            ),
+          ),
+        ],
+      );
+
+  void _onChanged(Object? value) async{
+    await AppPrefs.setLocale(value == 'Lotin' ? 'uz' : 'cr');
+    setState(() {
+      _locale = value.toString();
+    });
   }
 
   Row _setData(SizeType type) {
@@ -92,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
           ),
-        )
+        ),
       ],
     );
   }
