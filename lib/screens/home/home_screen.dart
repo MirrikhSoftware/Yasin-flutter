@@ -28,13 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _scrollController,
               physics: const BouncingScrollPhysics(),
               slivers: [
-                const SliverAppBar(
-                  floating: true,
-                  systemOverlayStyle: SystemUiOverlayStyle(
-                    statusBarColor: AppColors.green
-                  ),
-                  title: Text('Yosin'),
-                ),
+                const HomeAppBar(),
                 // SliverToBoxAdapter(
                 //   child: Padding(
                 //     padding: EdgeInsets.only(top: 24.h, bottom: 24.h),
