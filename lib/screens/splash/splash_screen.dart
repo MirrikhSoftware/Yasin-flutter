@@ -22,13 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     if (!AppPrefs.hasSaved) {
       _saveToStorage().then((value) {
-        AppNavigator.pushNamed(RouteNames.home);
+        AppNavigator.pushNamedAndRemoveUntil(RouteNames.home);
       });
     } else {
       Timer(
         const Duration(milliseconds: 500),
         () {
-          AppNavigator.pushNamed(RouteNames.home);
+          AppNavigator.pushNamedAndRemoveUntil(RouteNames.home);
         },
       );
     }

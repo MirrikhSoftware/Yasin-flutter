@@ -34,6 +34,14 @@ class AppPrefs {
   }
 
   static double get trSize => _box.get(HiveKeys.transcription_size) ?? 18;
+
+  // === APP LOCALE ================================================= //
+
+  static Future setLocale(String locale) async {
+    await _box.put(HiveKeys.locale, locale);
+  }
+
+  static String get locale => _box.get(HiveKeys.locale) ?? 'uz';
 }
 
 class HiveKeys {
@@ -41,5 +49,5 @@ class HiveKeys {
   static const String arabic_size = 'arabic_size';
   static const String meaning_size = 'meaning_size';
   static const String transcription_size = 'transcription_size';
-  
+  static const String locale = 'locale';
 }

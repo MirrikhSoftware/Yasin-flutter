@@ -31,6 +31,10 @@ class AppTheme {
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.green,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: AppColors.green,
+            statusBarIconBrightness: Brightness.light
+          )
         ),
         sliderTheme: SliderThemeData(
           trackHeight: 2.h,
