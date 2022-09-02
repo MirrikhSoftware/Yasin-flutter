@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/parser.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
@@ -17,12 +18,33 @@ class BookmarksScreen extends StatelessWidget {
         builder: (context, Box<VerseModel> box, child) {
           List<VerseModel> verses =
               box.values.where((verse) => verse.isSaved).toList();
+
+          if (verses.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppIcons.empty,
+                    width: 200.w,
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    AppStrings.empty_bookmarks.tr(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.sp,
+                    ),
+                  )
+                ],
+              ),
+            );
+          }
           return Scrollbar(
-            // controller: _scrollController,
             child: ListView.separated(
               padding: EdgeInsets.only(bottom: 24.h),
               // controller: _scrollController,
-              
+
               itemCount: verses.length,
               separatorBuilder: (ctx, i) => const Divider(),
               itemBuilder: (context, index) {

@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_colors.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
+import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/route/app_navigator.dart';
 import 'package:yaaseen/route/routes.dart';
 
@@ -16,15 +17,26 @@ class AppDrawer extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-
-             _setTitle(
+            SizedBox(height: 20.h),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: Image.asset(
+                AppIcons.app_icon,
+                height: 64.h,
+                width: 64.h,
+              ),
+            ),
+            Text(
+              AppStrings.app_name.tr(),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+            ),
+            _setTitle(
               icon: Icons.chrome_reader_mode_outlined,
               title: AppStrings.arabic_text.tr(),
               onTap: () {
                 AppNavigator.pushNamed(RouteNames.reading);
               },
             ),
-
             _setTitle(
               icon: Icons.bookmark,
               title: AppStrings.bookmarks.tr(),
@@ -45,7 +57,6 @@ class AppDrawer extends StatelessWidget {
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url);
                 }
-
               },
             ),
             _setTitle(

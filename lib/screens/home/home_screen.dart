@@ -21,6 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
     HiveBoxes.prefsBox.listenable().addListener(() {
       setState(() {});
     });
+
+    _scrollController.addListener(() { 
+      print(_scrollController.position);
+    });
   }
 
   @override
@@ -32,9 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, Box<VerseModel> box, child) {
           List<VerseModel> verses = box.values.toList();
           return CustomScrollView(
+            controller: _scrollController,
             physics: const BouncingScrollPhysics(),
             slivers: [
               const HomeAppBar(),
+              
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {

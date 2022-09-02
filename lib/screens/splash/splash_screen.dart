@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_colors.dart';
+import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/core/data/data.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
@@ -19,7 +21,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    if (!AppPrefs.hasSaved) {
+    super.initState();
+
+     if (!AppPrefs.hasSaved) {
       _saveToStorage().then((value) {
         AppNavigator.pushNamedAndRemoveUntil(RouteNames.home);
       });
@@ -31,8 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
         },
       );
     }
-
-    super.initState();
   }
 
   @override
@@ -40,7 +42,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: AppColors.green,
       body: Center(
-        child: Text('Yaseen'),
+        child: SvgPicture.asset(
+          AppIcons.logo,
+          width: 240.w,
+        ),
       ),
     );
   }

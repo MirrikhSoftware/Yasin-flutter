@@ -1,7 +1,7 @@
 name: yaaseen
 description: A new Flutter project.
 
-version: 1.4.3+5
+version: 1.4.4+6
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -19,6 +19,7 @@ dependencies:
   share_plus: ^4.0.10+1
   audioplayers: ^1.0.1
   url_launcher: ^6.1.5
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
