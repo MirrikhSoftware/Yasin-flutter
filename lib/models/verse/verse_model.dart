@@ -3,6 +3,7 @@
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/hive_helper/hive_adapters.dart';
 import 'package:yaaseen/hive_helper/hive_types.dart';
+part 'verse_model.g.dart';
 
 @HiveType(typeId: HiveTypes.verseModel, adapterName: HiveAdapters.verseModel)
 class VerseModel extends HiveObject {
@@ -39,6 +40,9 @@ class VerseModel extends HiveObject {
   @HiveField(9)
   String? _transcriptionUz;
 
+  @HiveField(10)
+  bool isSaved = false;
+
   VerseModel({
     int? id,
     int? paraNo,
@@ -50,6 +54,7 @@ class VerseModel extends HiveObject {
     String? meaningUz,
     String? transcription,
     String? transcriptionUz,
+    this.isSaved = false,
   }) {
     if (id != null) {
       _id = id;
@@ -116,6 +121,7 @@ class VerseModel extends HiveObject {
     _meaningUz = json['meaning_uz'];
     _transcription = json['transcription'];
     _transcriptionUz = json['transcription_uz'];
+    isSaved = json['is_saved'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -130,6 +136,7 @@ class VerseModel extends HiveObject {
     data['meaning_uz'] = _meaningUz;
     data['transcription'] = _transcription;
     data['transcription_uz'] = _transcriptionUz;
+    data['is_saved'] = isSaved;
     return data;
   }
 }
