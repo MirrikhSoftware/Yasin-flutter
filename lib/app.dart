@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaaseen/bloc/size/settings_bloc.dart';
+import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/theme/app_theme.dart';
@@ -14,14 +14,19 @@ class MyApp extends StatelessWidget {
       return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => SettingsBloc()),
+          BlocProvider(create: (_) => LanguageBloc()),
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: AppStrings.app_name.tr(),
-          theme: AppTheme().green,
-          navigatorKey: AppNavigator.navigatorKey,
-          initialRoute: RouteNames.initial,
-          onGenerateRoute: AppRoutes().onGenerateRoute,
+        child: BlocBuilder<LanguageBloc, LanguageState>(
+          builder: (context, state) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: AppStrings.app_name.tr(),
+              theme: AppTheme().green,
+              navigatorKey: AppNavigator.navigatorKey,
+              initialRoute: RouteNames.initial,
+              onGenerateRoute: AppRoutes().onGenerateRoute,
+            );
+          },
         ),
       );
     });

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
-import 'package:yaaseen/core/constants/app_colors.dart';
-import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/constants/constants.dart';
-import 'package:yaaseen/route/app_navigator.dart';
 import 'package:yaaseen/route/routes.dart';
 
 class AppDrawer extends StatelessWidget {

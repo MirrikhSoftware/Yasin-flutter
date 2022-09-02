@@ -11,10 +11,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   double _arabicSize = AppPrefs.arabicSize;
   double _meaingSize = AppPrefs.meaningSize;
   double _trSize = AppPrefs.trSize;
+  String _locale = AppPrefs.locale;
 
-  get arabicSize => _arabicSize;
-  get meaingSize => _meaingSize;
-  get trSize => _trSize;
+  double get arabicSize => _arabicSize;
+  double get meaingSize => _meaingSize;
+  double get trSize => _trSize;
+  String get locale => _locale;
 
   SettingsBloc() : super(SettingsInitial()) {
     on<ArabicTextSizeChanged>(_changeArabicTextSize);
@@ -27,7 +29,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter emit,
   ) async {
     _arabicSize = event.size;
-    await AppPrefs.setArabicSize(event.size);
     emit(SettingsInitial());
   }
 
@@ -36,7 +37,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter emit,
   ) async {
     _meaingSize = event.size;
-    await AppPrefs.setMeaingSize(event.size);
     emit(SettingsInitial());
   }
 
@@ -45,7 +45,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter emit,
   ) async {
     _trSize = event.size;
-    await AppPrefs.setTranscriptionSize(event.size);
     emit(SettingsInitial());
   }
 }

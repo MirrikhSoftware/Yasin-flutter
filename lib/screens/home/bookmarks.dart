@@ -35,7 +35,7 @@ class BookmarksScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       fontSize: 14.sp,
                     ),
-                  )
+                  ),
                 ],
               ),
             );

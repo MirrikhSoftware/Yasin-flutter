@@ -27,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: SimpleAppBar(title: AppStrings.settings.tr()),
-          body: Column(
+          body: ListView(
             children: [
               VerseListTile(verse: _verse),
               _setData(SizeType.arabic),
@@ -41,30 +41,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Row _showLocale() => Row(
-        children: [
-          Expanded(
-            child: AppRadioListTile(
-              value: 'uz',
-              onChanged: _onChanged,
-              group: _locale,
-            ),
-          ),
-          Expanded(
-            child: AppRadioListTile(
-              value: 'cr',
-              onChanged: _onChanged,
-              group: _locale,
-            ),
-          ),
-        ],
+  Widget _showLocale() => BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          return Row(
+            children: [
+              Expanded(
+                child: AppRadioListTile(
+                  value: 'uz',
+                  onChanged: _onChanged,
+                  group: state.locale,
+                ),
+              ),
+              Expanded(
+                child: AppRadioListTile(
+                  value: 'cr',
+                  onChanged: _onChanged,
+                  group: state.locale,
+                ),
+              ),
+            ],
+          );
+        },
       );
 
   void _onChanged(Object? value) async {
-    await AppPrefs.setLocale(value.toString());
-    setState(() {
-      _locale = value.toString();
-    });
+    LanguageBloc lBloc = BlocProvider.of(context);
+    lBloc.add(LocaleChangedEvent(value.toString()));
+    // await AppPrefs.setLocale(value.toString());
+    // setState(() {
+    //   _locale = value.toString();
+    // });
   }
 
   Row _setData(SizeType type) {
@@ -102,26 +108,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
             onChangeEnd: (v) async {
-              SettingsBloc sizeBloc = BlocProvider.of(context);
               switch (type) {
                 case SizeType.arabic:
-                  // _arabicSize = v;
-                  sizeBloc.add(ArabicTextSizeChanged(v));
-                  // await AppPrefs.setArabicSize(v);
+                  await AppPrefs.setArabicSize(v);
                   break;
 
                 case SizeType.meainig:
-                  // _meainingSize = v;
-                  sizeBloc.add(MeaningTextSizeChanged(v));
-
-                  // await AppPrefs.setMeaingSize(v);
+                  await AppPrefs.setMeaingSize(v);
                   break;
 
                 case SizeType.transcription:
-                  // _trSize = v;
-                  sizeBloc.add(TranscriptionTextSizeChanged(v));
-
-                  // await AppPrefs.setTranscriptionSize(v);
+                  await AppPrefs.setTranscriptionSize(v);
                   break;
               }
             },

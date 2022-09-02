@@ -25,7 +25,7 @@ class AppTheme {
   ThemeData get green => ThemeData(
         canvasColor: AppColors.background,
         primaryColor: AppColors.green,
-        splashColor: AppColors.green,
+        // splashColor: AppColors.,
         primaryColorLight: AppColors.green,
         iconTheme: const IconThemeData(color: AppColors.green),
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),

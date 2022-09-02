@@ -17,3 +17,4 @@ class TranscriptionTextSizeChanged extends SettingsEvent {
   final double size;
   TranscriptionTextSizeChanged(this.size);
 }
+

@@ -1,1 +1,2 @@
-export 'size/settings_bloc.dart';
+export 'settings/settings_bloc.dart';
+export 'language/language_bloc.dart';

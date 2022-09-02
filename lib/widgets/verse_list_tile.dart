@@ -7,7 +7,6 @@ import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/services/media_player.dart';
 import 'package:yaaseen/widgets/widgets.dart';
-import 'rounded_icon_button.dart';
 
 class VerseListTile extends StatefulWidget {
   final VerseModel verse;
@@ -88,9 +87,8 @@ class _VerseListTileState extends State<VerseListTile> {
                     icon: Icons.play_arrow,
                     onPressed: () async {
                       String id = '${_verse.verseId}'.padLeft(2, '0');
-                      String path = 'assets/audio/yasin.mp3';
+                      String path = 'assets/audio/yasin$id.mp3';
                       var bytes = await rootBundle.load(path);
-
                       // _player.play(BytesSource(bytes.buffer.asUint8List()));
                       MediaPlayer.play(path);
                     },
