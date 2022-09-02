@@ -31,9 +31,9 @@ class _VerseListTileState extends State<VerseListTile> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SizeBloc, SizeState>(
+    return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
-        SizeBloc sizeBloc = context.watch();
+        SettingsBloc sizeBloc = context.watch();
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaaseen/bloc/size/size_bloc.dart';
+import 'package:yaaseen/bloc/size/settings_bloc.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/theme/app_theme.dart';
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(builder: (context, w) {
       return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => SizeBloc()),
+          BlocProvider(create: (_) => SettingsBloc()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

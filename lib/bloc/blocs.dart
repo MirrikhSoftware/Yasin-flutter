@@ -1,1 +1,1 @@
-export 'size/size_bloc.dart';
+export 'size/settings_bloc.dart';

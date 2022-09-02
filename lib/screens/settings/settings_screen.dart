@@ -19,23 +19,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late String number = formatter.numberFormat(_verse.verseId!);
   late String formatted = '\uFD3F$number\uFD3E';
 
-  double _arabicSize = AppPrefs.arabicSize;
-  double _meainingSize = AppPrefs.meaningSize;
-  double _trSize = AppPrefs.trSize;
   String _locale = AppPrefs.locale;
+  late final SettingsBloc _sBloc = BlocProvider.of(context);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SimpleAppBar(title: AppStrings.settings.tr()),
-      body: Column(
-        children: [
-          _showVerse(),
-          _setData(SizeType.arabic),
-          _setData(SizeType.meainig),
-          _setData(SizeType.transcription),
-          _showLocale(),
-        ],
-      ),
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: SimpleAppBar(title: AppStrings.settings.tr()),
+          body: Column(
+            children: [
+              VerseListTile(verse: _verse),
+              _setData(SizeType.arabic),
+              _setData(SizeType.transcription),
+              _setData(SizeType.meainig),
+              _showLocale(),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -85,24 +87,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChanged: (v) async {
               switch (type) {
                 case SizeType.arabic:
-                  _arabicSize = v;
-                  // await AppPrefs.setArabicSize(v);
+                  _sBloc.add(ArabicTextSizeChanged(v));
                   break;
 
                 case SizeType.meainig:
-                  _meainingSize = v;
-                  // await AppPrefs.setMeaingSize(v);
+                  _sBloc.add(MeaningTextSizeChanged(v));
+
                   break;
 
                 case SizeType.transcription:
-                  _trSize = v;
-                  // await AppPrefs.setTranscriptionSize(v);
+                  _sBloc.add(TranscriptionTextSizeChanged(v));
+
                   break;
               }
-              setState(() {});
             },
             onChangeEnd: (v) async {
-              SizeBloc sizeBloc = BlocProvider.of(context);
+              SettingsBloc sizeBloc = BlocProvider.of(context);
               switch (type) {
                 case SizeType.arabic:
                   // _arabicSize = v;
@@ -134,11 +134,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double _getSize(SizeType type) {
     switch (type) {
       case SizeType.arabic:
-        return _arabicSize;
+        return _sBloc.arabicSize;
       case SizeType.meainig:
-        return _meainingSize;
+        return _sBloc.meaingSize;
       case SizeType.transcription:
-        return _trSize;
+        return _sBloc.trSize;
     }
   }
 
@@ -154,37 +154,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return AppStrings.transcription.tr();
     }
   }
-
-  Widget _showVerse() => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                '${_verse.arabic!.replaceFirst('\n', '')} $formatted',
-                textAlign: TextAlign.start,
-                locale: const Locale('ar'),
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  fontSize: _arabicSize,
-                  fontFamily: AppFonts.meQuran,
-                  wordSpacing: 12,
-                  height: 1.8,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SizedBox(height: 20.h),
-            Text(
-              '${_verse.verseId}. ${_verse.meaning}',
-              style: TextStyle(fontSize: _meainingSize),
-            ),
-            SizedBox(height: 12.h),
-          ],
-        ),
-      );
 }
 
 enum SizeType { arabic, meainig, transcription }

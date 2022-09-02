@@ -10,7 +10,7 @@ class ArabicText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SizeBloc, SizeState>(
+    return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return Align(
           alignment: Alignment.centerRight,
@@ -20,7 +20,7 @@ class ArabicText extends StatelessWidget {
             locale: const Locale('ar'),
             textDirection: TextDirection.rtl,
             style: TextStyle(
-              fontSize: context.watch<SizeBloc>().arabicSize,
+              fontSize: context.watch<SettingsBloc>().arabicSize,
               fontFamily: AppFonts.meQuran,
               wordSpacing: 12,
               height: 1.8,
