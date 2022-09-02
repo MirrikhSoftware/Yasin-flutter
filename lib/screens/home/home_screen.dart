@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/widgets/widgets.dart';
-import 'dart:math' as math;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.verseBox.listenable(),
         builder: (context, Box<VerseModel> box, child) {
@@ -39,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             physics: const BouncingScrollPhysics(),
             slivers: [
               const HomeAppBar(),
+
               SliverToBoxAdapter(
                 child: Scrollbar(
                   controller: _scrollController,

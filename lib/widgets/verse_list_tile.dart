@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,6 +36,8 @@ class _VerseListTileState extends State<VerseListTile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
+          // ARABIC
           Align(
             alignment: Alignment.centerRight,
             child: Text(
@@ -51,6 +55,21 @@ class _VerseListTileState extends State<VerseListTile> {
             ),
           ),
           SizedBox(height: 20.h),
+
+          // TRANSCRIPTION
+          Text(_getTranscription,
+          style: TextStyle(
+            fontSize: AppPrefs.trSize,
+            fontStyle: FontStyle.italic,
+           letterSpacing: 2
+            
+          ),
+          ),
+
+          SizedBox(height: 10.h),
+
+
+          // MEAINGS
           Text(
             '${_verse.verseId}. $_getMeaning',
             style: TextStyle(fontSize: AppPrefs.meaningSize),
@@ -98,6 +117,8 @@ class _VerseListTileState extends State<VerseListTile> {
 
   String get _getMeaning =>
       AppPrefs.locale == 'uz' ? _verse.meaningUz.toString() : _verse.meaning.toString();
+  String get _getTranscription =>
+      AppPrefs.locale == 'uz' ? _verse.transcriptionUz.toString() : _verse.transcription.toString();
 
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();

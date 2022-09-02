@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
@@ -25,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'Sozlamalar'),
+      appBar:  SimpleAppBar(title: AppStrings.settings.tr()),
       body: Column(
         children: [
           _showVerse(),
@@ -138,12 +139,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _getTitle(SizeType type) {
     switch (type) {
       case SizeType.arabic:
-        return 'Arabic';
+        return AppStrings.arabic.tr();
 
       case SizeType.meainig:
-        return 'Meaing';
+        return AppStrings.meaning.tr();
+
       case SizeType.transcription:
-        return 'Transcription';
+        return AppStrings.transcription.tr();
     }
   }
 
