@@ -6,4 +6,5 @@ class RouteNames {
   static const String sura_details = '/sura_details';
   static const String settings = '/settings';
   static const String reading = '/reading';
+  static const String bookmarks = '/bookmarks';
 }

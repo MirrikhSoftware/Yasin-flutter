@@ -17,11 +17,19 @@ class AppDrawer extends StatelessWidget {
         child: Column(
           children: [
 
+             _setTitle(
+              icon: Icons.chrome_reader_mode_outlined,
+              title: AppStrings.arabic_text.tr(),
+              onTap: () {
+                AppNavigator.pushNamed(RouteNames.reading);
+              },
+            ),
+
             _setTitle(
               icon: Icons.bookmark,
               title: AppStrings.bookmarks.tr(),
               onTap: () {
-                AppNavigator.pushNamed(RouteNames.reading);
+                AppNavigator.pushNamed(RouteNames.bookmarks);
               },
             ),
             _setTitle(

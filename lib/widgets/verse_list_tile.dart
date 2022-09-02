@@ -36,9 +36,7 @@ class _VerseListTileState extends State<VerseListTile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ARABIC
-          ArabicText(
-            arabic: '${widget.verse.arabic} $formatted',
-          ),
+          ArabicText(arabic: '${widget.verse.arabic} $formatted'),
           SizedBox(height: 20.h),
 
           // TRANSCRIPTION

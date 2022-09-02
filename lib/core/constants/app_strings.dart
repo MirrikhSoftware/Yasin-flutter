@@ -6,6 +6,7 @@ class AppStrings {
   static const String app_name = 'app_name';
   static const String settings = 'settings';
   static const String bookmarks = 'bookmarks';
+  static const String arabic_text = 'arabic_text';
   static const String arabic = 'arabic';
   static const String meaning = 'meaning';
   static const String transcription = 'transcription';
@@ -30,6 +31,7 @@ class AppLocales {
   Map<String, Map<String, String>> _locales() => {
         AppStrings.app_name: _setString('Yosin surasi', 'Ёсин сураси'),
         AppStrings.settings: _setString('Sozlamalar', 'Созламалар'),
+        AppStrings.arabic_text: _setString('Arabiy matn', 'Aрабий матн'),
         AppStrings.bookmarks: _setString('Xatcho‘plar', 'Хатчўплар'),
         AppStrings.arabic: _setString('Arabiy', 'Aрабий'),
         AppStrings.meaning: _setString("Ma'nosi", 'Маъноси'),
