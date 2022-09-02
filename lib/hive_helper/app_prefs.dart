@@ -41,7 +41,7 @@ class AppPrefs {
     await _box.put(HiveKeys.locale, locale);
   }
 
-  static String get locale => _box.get(HiveKeys.locale) ?? 'uz';
+  static String get locale => _box.get(HiveKeys.locale) ?? 'cr';
 }
 
 class HiveKeys {
