@@ -41,36 +41,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _showLocale() => BlocBuilder<LanguageBloc, LanguageState>(
-        builder: (context, state) {
-          return Row(
-            children: [
-              Expanded(
-                child: AppRadioListTile(
-                  value: 'uz',
-                  onChanged: _onChanged,
-                  group: state.locale,
-                ),
-              ),
-              Expanded(
-                child: AppRadioListTile(
-                  value: 'cr',
-                  onChanged: _onChanged,
-                  group: state.locale,
-                ),
-              ),
-            ],
-          );
-        },
+  Widget _showLocale() => Row(
+        children: [
+          Expanded(
+            child: AppRadioListTile(
+              value: 'uz',
+              onChanged: _onChanged,
+              group: _locale,
+            ),
+          ),
+          Expanded(
+            child: AppRadioListTile(
+              value: 'cr',
+              onChanged: _onChanged,
+              group: _locale,
+            ),
+          ),
+        ],
       );
 
   void _onChanged(Object? value) async {
-    LanguageBloc lBloc = BlocProvider.of(context);
-    lBloc.add(LocaleChangedEvent(value.toString()));
-    // await AppPrefs.setLocale(value.toString());
-    // setState(() {
-    //   _locale = value.toString();
-    // });
+    await AppPrefs.setLocale(value.toString());
+    setState(() {
+      _locale = value.toString();
+    });
   }
 
   Row _setData(SizeType type) {
@@ -87,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Expanded(
           flex: 7,
           child: Slider(
-            max: 24,
+            max: 32,
             min: 12,
             value: _getSize(type),
             onChanged: (v) async {

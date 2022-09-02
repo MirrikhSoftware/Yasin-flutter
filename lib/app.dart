@@ -14,19 +14,14 @@ class MyApp extends StatelessWidget {
       return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => SettingsBloc()),
-          BlocProvider(create: (_) => LanguageBloc()),
         ],
-        child: BlocBuilder<LanguageBloc, LanguageState>(
-          builder: (context, state) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: AppStrings.app_name.tr(),
-              theme: AppTheme().green,
-              navigatorKey: AppNavigator.navigatorKey,
-              initialRoute: RouteNames.initial,
-              onGenerateRoute: AppRoutes().onGenerateRoute,
-            );
-          },
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: AppStrings.app_name.tr(),
+          theme: AppTheme().green,
+          navigatorKey: AppNavigator.navigatorKey,
+          initialRoute: RouteNames.initial,
+          onGenerateRoute: AppRoutes().onGenerateRoute,
         ),
       );
     });

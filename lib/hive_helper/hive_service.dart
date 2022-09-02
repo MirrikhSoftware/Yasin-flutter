@@ -15,5 +15,6 @@ class HiveService {
 
     await Hive.openBox<VerseModel>(HiveBoxNames.verses);
     await Hive.openBox<dynamic>(HiveBoxNames.prefs);
+    await Hive.openBox<dynamic>(HiveBoxNames.language);
   }
 }

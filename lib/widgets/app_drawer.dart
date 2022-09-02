@@ -4,9 +4,14 @@ import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/route/routes.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -45,7 +50,9 @@ class AppDrawer extends StatelessWidget {
               icon: Icons.settings,
               title: AppStrings.settings.tr(),
               onTap: () {
-                AppNavigator.pushNamed(RouteNames.settings);
+                AppNavigator.pushNamed(RouteNames.settings).then(
+                  (value) => setState(() {}),
+                );
               },
             ),
             _setTitle(
