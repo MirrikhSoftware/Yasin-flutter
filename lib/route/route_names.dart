@@ -1,4 +1,3 @@
-
 // ignore_for_file: constant_identifier_names
 
 class RouteNames {
@@ -6,4 +5,5 @@ class RouteNames {
   static const String home = '/home';
   static const String sura_details = '/sura_details';
   static const String settings = '/settings';
+  static const String reading = '/reading';
 }

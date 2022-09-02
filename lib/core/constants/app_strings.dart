@@ -5,6 +5,7 @@ import 'package:yaaseen/hive_helper/app_prefs.dart';
 class AppStrings {
   static const String app_name = 'app_name';
   static const String settings = 'settings';
+  static const String bookmarks = 'bookmarks';
   static const String arabic = 'arabic';
   static const String meaning = 'meaning';
   static const String transcription = 'transcription';
@@ -29,6 +30,7 @@ class AppLocales {
   Map<String, Map<String, String>> _locales() => {
         AppStrings.app_name: _setString('Yosin surasi', 'Ёсин сураси'),
         AppStrings.settings: _setString('Sozlamalar', 'Созламалар'),
+        AppStrings.bookmarks: _setString('Xatcho‘plar', 'Хатчўплар'),
         AppStrings.arabic: _setString('Arabiy', 'Aрабий'),
         AppStrings.meaning: _setString("Ma'nosi", 'Маъноси'),
         AppStrings.transcription: _setString("Transkripsiya", 'Транскрипсия'),

@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_colors.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
+import 'package:yaaseen/route/app_navigator.dart';
+import 'package:yaaseen/route/routes.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -14,6 +16,14 @@ class AppDrawer extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
+
+            _setTitle(
+              icon: Icons.bookmark,
+              title: AppStrings.bookmarks.tr(),
+              onTap: () {
+                AppNavigator.pushNamed(RouteNames.reading);
+              },
+            ),
             _setTitle(
               icon: Icons.settings,
               title: AppStrings.settings.tr(),

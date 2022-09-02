@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +5,7 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/services/media_player.dart';
+import 'package:yaaseen/widgets/widgets.dart';
 import 'rounded_icon_button.dart';
 
 class VerseListTile extends StatefulWidget {
@@ -36,38 +35,22 @@ class _VerseListTileState extends State<VerseListTile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // ARABIC
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              '${widget.verse.arabic!.replaceFirst('\n', '')} $formatted',
-              textAlign: TextAlign.start,
-              locale: const Locale('ar'),
-              textDirection: TextDirection.rtl,
-              style: TextStyle(
-                fontSize: AppPrefs.arabicSize,
-                fontFamily: AppFonts.meQuran,
-                wordSpacing: 12,
-                height: 1.8,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+          ArabicText(
+            arabic: '${widget.verse.arabic} $formatted',
           ),
           SizedBox(height: 20.h),
 
           // TRANSCRIPTION
-          Text(_getTranscription,
-          style: TextStyle(
-            fontSize: AppPrefs.trSize,
-            fontStyle: FontStyle.italic,
-           letterSpacing: 2
-            
-          ),
+          Text(
+            _getTranscription,
+            style: TextStyle(
+                fontSize: AppPrefs.trSize,
+                fontStyle: FontStyle.italic,
+                letterSpacing: 2),
           ),
 
           SizedBox(height: 10.h),
-
 
           // MEAINGS
           Text(
@@ -115,10 +98,12 @@ class _VerseListTileState extends State<VerseListTile> {
     );
   }
 
-  String get _getMeaning =>
-      AppPrefs.locale == 'uz' ? _verse.meaningUz.toString() : _verse.meaning.toString();
-  String get _getTranscription =>
-      AppPrefs.locale == 'uz' ? _verse.transcriptionUz.toString() : _verse.transcription.toString();
+  String get _getMeaning => AppPrefs.locale == 'uz'
+      ? _verse.meaningUz.toString()
+      : _verse.meaning.toString();
+  String get _getTranscription => AppPrefs.locale == 'uz'
+      ? _verse.transcriptionUz.toString()
+      : _verse.transcription.toString();
 
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();
