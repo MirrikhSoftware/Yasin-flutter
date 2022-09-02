@@ -42,14 +42,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           Expanded(
             child: AppRadioListTile(
-              title: 'Lotin',
+              value: 'uz',
               onChanged: _onChanged,
               group: _locale,
             ),
           ),
           Expanded(
             child: AppRadioListTile(
-              title: 'Kirill',
+              value: 'cr',
               onChanged: _onChanged,
               group: _locale,
             ),
@@ -57,8 +57,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       );
 
-  void _onChanged(Object? value) async{
-    await AppPrefs.setLocale(value == 'Lotin' ? 'uz' : 'cr');
+  void _onChanged(Object? value) async {
+    await AppPrefs.setLocale(value.toString());
     setState(() {
       _locale = value.toString();
     });

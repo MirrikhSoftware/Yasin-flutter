@@ -49,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Map<int, VerseModel> entries = {};
     for (var verse in verses) {
       VerseModel verseModel = VerseModel.fromJson(verse);
+
       entries[verseModel.key] = verseModel;
     }
     await HiveBoxes.verseBox.putAll(entries);

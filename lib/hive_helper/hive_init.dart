@@ -11,7 +11,7 @@ class HiveInit {
     String path = directory.path;
     await Hive.initFlutter(path);
 
-    Hive.registerAdapter(VersionModelAdapter());
+    // Hive.registerAdapter(VerseMode());
 
     await Hive.openBox<VerseModel>(HiveBoxNames.verses);
     await Hive.openBox<dynamic>(HiveBoxNames.prefs);
