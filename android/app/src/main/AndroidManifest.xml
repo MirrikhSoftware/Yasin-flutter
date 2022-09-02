@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uz.mirrikkh.yaaseen">
    <application
-        android:label="yaaseen"
+        android:label="Yosin surasi"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

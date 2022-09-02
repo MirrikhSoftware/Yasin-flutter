@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
+import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/theme/app_theme.dart';
 import 'route/routes.dart';
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(builder: (context, w) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Yosin Surasi',
+        title: AppStrings.app_name.tr(),
         theme: AppTheme().green,
         navigatorKey: AppNavigator.navigatorKey,
         initialRoute: RouteNames.initial,
