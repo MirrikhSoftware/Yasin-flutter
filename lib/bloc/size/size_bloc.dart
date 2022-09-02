@@ -8,6 +8,14 @@ part 'size_event.dart';
 part 'size_state.dart';
 
 class SizeBloc extends Bloc<SizeEvent, SizeState> {
+  double _arabicSize = AppPrefs.arabicSize;
+  double _meaingSize = AppPrefs.meaningSize;
+  double _trSize = AppPrefs.trSize;
+
+  get arabicSize => _arabicSize;
+  get meaingSize => _meaingSize;
+  get trSize => _trSize;
+
   SizeBloc() : super(SizeInitial()) {
     on<ArabicTextSizeChanged>(_changeArabicTextSize);
     on<MeaningTextSizeChanged>(_changeMeaingTextSize);
@@ -18,6 +26,7 @@ class SizeBloc extends Bloc<SizeEvent, SizeState> {
     ArabicTextSizeChanged event,
     Emitter emit,
   ) async {
+    _arabicSize = event.size;
     await AppPrefs.setArabicSize(event.size);
     emit(SizeInitial());
   }
@@ -26,6 +35,7 @@ class SizeBloc extends Bloc<SizeEvent, SizeState> {
     MeaningTextSizeChanged event,
     Emitter emit,
   ) async {
+    _meaingSize = event.size;
     await AppPrefs.setMeaingSize(event.size);
     emit(SizeInitial());
   }
@@ -34,6 +44,7 @@ class SizeBloc extends Bloc<SizeEvent, SizeState> {
     TranscriptionTextSizeChanged event,
     Emitter emit,
   ) async {
+    _trSize = event.size;
     await AppPrefs.setTranscriptionSize(event.size);
     emit(SizeInitial());
   }

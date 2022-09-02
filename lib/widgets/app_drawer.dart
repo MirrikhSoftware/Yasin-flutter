@@ -47,7 +47,9 @@ class AppDrawer extends StatelessWidget {
             _setTitle(
               icon: Icons.settings,
               title: AppStrings.settings.tr(),
-              onTap: () {},
+              onTap: () {
+                AppNavigator.pushNamed(RouteNames.settings);
+              },
             ),
             _setTitle(
               icon: Icons.star,

@@ -4,6 +4,7 @@ import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 import 'dart:math' as math;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -17,14 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
-    HiveBoxes.prefsBox.listenable().addListener(() {
-      setState(() {});
-    });
-
-    _scrollController.addListener(() { 
-      print(_scrollController.position);
-    });
   }
 
   @override
@@ -40,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
             physics: const BouncingScrollPhysics(),
             slivers: [
               const HomeAppBar(),
-              
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {

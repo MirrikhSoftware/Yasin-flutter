@@ -18,30 +18,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
     return SliverAppBar(
       floating: true,
       title: Text(AppStrings.app_name.tr()),
-      actions: [
-        _setPopupMenuButton(),
-      ],
     );
   }
-
-  PopupMenuButton _setPopupMenuButton() => PopupMenuButton(
-        itemBuilder: (context) {
-          return [
-            _setItem(AppStrings.settings),
-          ];
-        },
-        onSelected: (v) {
-          switch (v) {
-            case AppStrings.settings:
-              AppNavigator.pushNamed(RouteNames.settings).then((value) => setState((){}));
-              break;
-          }
-        },
-      );
-
-  PopupMenuItem _setItem(String title) => PopupMenuItem(
-        child: Text(title.tr()),
-        value: title,
-      );
-
 }

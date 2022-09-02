@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaaseen/core/constants/app_strings.dart';
+import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  SimpleAppBar(title: AppStrings.settings.tr()),
+      appBar: SimpleAppBar(title: AppStrings.settings.tr()),
       body: Column(
         children: [
           _showVerse(),
@@ -102,20 +102,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
               setState(() {});
             },
             onChangeEnd: (v) async {
+              SizeBloc sizeBloc = BlocProvider.of(context);
               switch (type) {
                 case SizeType.arabic:
                   // _arabicSize = v;
-                  await AppPrefs.setArabicSize(v);
+                  sizeBloc.add(ArabicTextSizeChanged(v));
+                  // await AppPrefs.setArabicSize(v);
                   break;
 
                 case SizeType.meainig:
                   // _meainingSize = v;
-                  await AppPrefs.setMeaingSize(v);
+                  sizeBloc.add(MeaningTextSizeChanged(v));
+
+                  // await AppPrefs.setMeaingSize(v);
                   break;
 
                 case SizeType.transcription:
                   // _trSize = v;
-                  await AppPrefs.setTranscriptionSize(v);
+                  sizeBloc.add(TranscriptionTextSizeChanged(v));
+
+                  // await AppPrefs.setTranscriptionSize(v);
                   break;
               }
             },
