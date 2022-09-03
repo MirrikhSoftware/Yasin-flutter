@@ -59,24 +59,23 @@ class _AppDrawerState extends State<AppDrawer> {
               icon: Icons.star,
               title: AppStrings.rate_app.tr(),
               onTap: () async {
-                Uri url = Uri.parse('market://details?id=${AppStrings.app_id}');
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url);
-                }
+                InAppReview inAppReview = InAppReview.instance;
+                await inAppReview.openStoreListing();
               },
             ),
             _setTitle(
               icon: Icons.share,
               title: AppStrings.share_app.tr(),
               onTap: () async {
-                Share.share(
-                    '${AppStrings.download_app.tr()}\n${AppStrings.app_link}');
+                await Share.share(
+                  '${AppStrings.download_app.tr()}\n\n${AppStrings.app_link}',
+                );
               },
             ),
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
-              trailing: const Text('1.5.3'),
+              trailing: const Text('2.0.1'),
             )
           ],
         ),

@@ -20,6 +20,7 @@ dependencies:
   audioplayers: ^1.0.1
   url_launcher: ^6.1.5
   flutter_svg: ^1.0.3
+  in_app_review: ^2.0.4
 
 dev_dependencies:
   flutter_test:
