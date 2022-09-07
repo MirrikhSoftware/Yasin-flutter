@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/route/routes.dart';
+/// It's a stateful widget that displays a drawer with a list of options
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -33,21 +33,21 @@ class _AppDrawerState extends State<AppDrawer> {
               style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
             ),
             _setTitle(
-              icon: Icons.chrome_reader_mode_outlined,
+              icon: AppIcons.alif,
               title: AppStrings.arabic_text.tr(),
               onTap: () {
                 AppNavigator.pushNamed(RouteNames.reading);
               },
             ),
             _setTitle(
-              icon: Icons.bookmark,
+              icon: AppIcons.bookmark_outlined,
               title: AppStrings.bookmarks.tr(),
               onTap: () {
                 AppNavigator.pushNamed(RouteNames.bookmarks);
               },
             ),
             _setTitle(
-              icon: Icons.settings,
+              icon: AppIcons.settings,
               title: AppStrings.settings.tr(),
               onTap: () {
                 AppNavigator.pushNamed(RouteNames.settings).then(
@@ -56,7 +56,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
-              icon: Icons.star,
+              icon: AppIcons.rating,
               title: AppStrings.rate_app.tr(),
               onTap: () async {
                 InAppReview inAppReview = InAppReview.instance;
@@ -64,7 +64,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
-              icon: Icons.share,
+              icon: AppIcons.share,
               title: AppStrings.share_app.tr(),
               onTap: () async {
                 await Share.share(
@@ -83,13 +83,20 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
+  /// It returns a ListTile widget with a leading icon and a title.
+  /// 
+  /// Args:
+  ///   icon (String): The icon to be displayed on the left side of the list tile.
+  ///   title (String): The title of the list tile.
+  ///   onTap (VoidCallback): This is the function that will be called when the user taps on the list
+  /// tile.
   ListTile _setTitle({
-    required IconData icon,
+    required String icon,
     required String title,
     VoidCallback? onTap,
   }) =>
       ListTile(
-        leading: Icon(icon, color: AppColors.green),
+        leading: SvgPicture.asset(icon, color: AppColors.green),
         title: Text(title),
         onTap: onTap,
       );

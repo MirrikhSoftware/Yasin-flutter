@@ -1,3 +1,4 @@
+/// Exporting all the files in the folder to be used in other files.
 export 'rounded_icon_button.dart';
 export 'verse_list_tile.dart';
 export 'simple_app_bar.dart';

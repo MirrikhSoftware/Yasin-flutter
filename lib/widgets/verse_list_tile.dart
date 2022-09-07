@@ -1,6 +1,4 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
@@ -17,7 +15,7 @@ class VerseListTile extends StatefulWidget {
 }
 
 class _VerseListTileState extends State<VerseListTile> {
-  AudioPlayer _player = AudioPlayer();
+  // AudioPlayer _player = AudioPlayer();
   late final VerseModel _verse = widget.verse;
   AppFormatter formatter = AppFormatter();
   late String number = formatter.numberFormat(_verse.verseId!);
@@ -88,7 +86,7 @@ class _VerseListTileState extends State<VerseListTile> {
                     onPressed: () async {
                       String id = '${_verse.verseId}'.padLeft(2, '0');
                       String path = 'assets/audio/yasin$id.mp3';
-                      var bytes = await rootBundle.load(path);
+                      // var bytes = await rootBundle.load(path);
                       // _player.play(BytesSource(bytes.buffer.asUint8List()));
                       MediaPlayer.play(path);
                     },

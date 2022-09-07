@@ -8,6 +8,7 @@ import '../../hive_helper/hive_helper.dart';
 part 'language_event.dart';
 part 'language_state.dart';
 
+/// It's a Bloc that emits a LanguageState when a LocaleChangedEvent is received
 class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
   LanguageBloc() : super(LanguageState('cr')) {
     on<LocaleChangedEvent>(_changeLanguage);

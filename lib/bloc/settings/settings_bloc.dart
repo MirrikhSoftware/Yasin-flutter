@@ -11,12 +11,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   double _arabicSize = AppPrefs.arabicSize;
   double _meaingSize = AppPrefs.meaningSize;
   double _trSize = AppPrefs.trSize;
-  String _locale = AppPrefs.locale;
 
   double get arabicSize => _arabicSize;
   double get meaingSize => _meaingSize;
   double get trSize => _trSize;
-  String get locale => _locale;
 
   SettingsBloc() : super(SettingsInitial()) {
     on<ArabicTextSizeChanged>(_changeArabicTextSize);

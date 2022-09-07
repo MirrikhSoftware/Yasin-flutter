@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/parser.dart';
-import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/core.dart';
-import 'package:yaaseen/core/data/data.dart';
-import 'package:yaaseen/core/theme/theme.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class ReadingModeScreen extends StatelessWidget {

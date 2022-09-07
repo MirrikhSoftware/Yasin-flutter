@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaaseen/core/constants/app_colors.dart';
 import 'package:yaaseen/core/core.dart';
 
 class AppCheckboxListTile extends StatelessWidget {

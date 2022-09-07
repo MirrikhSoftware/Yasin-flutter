@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 
-import '../hive_helper/hive_helper.dart';
-
 class ArabicText extends StatelessWidget {
   final String arabic;
   const ArabicText({Key? key, required this.arabic}) : super(key: key);
