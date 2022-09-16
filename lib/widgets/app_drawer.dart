@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/route/routes.dart';
+
 /// It's a stateful widget that displays a drawer with a list of options
 
 class AppDrawer extends StatefulWidget {
@@ -84,7 +85,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   /// It returns a ListTile widget with a leading icon and a title.
-  /// 
+  ///
   /// Args:
   ///   icon (String): The icon to be displayed on the left side of the list tile.
   ///   title (String): The title of the list tile.
@@ -97,7 +98,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }) =>
       ListTile(
         leading: SvgPicture.asset(icon, color: AppColors.green),
-        title: Text(title),
+        title: Align(alignment: const Alignment(-1.2, 0), child: Text(title)),
         onTap: onTap,
       );
 }

@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => SettingsBloc()),
+          BlocProvider(create: (_) => PlayerBloc()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

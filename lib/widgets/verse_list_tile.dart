@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
@@ -15,15 +16,22 @@ class VerseListTile extends StatefulWidget {
 }
 
 class _VerseListTileState extends State<VerseListTile> {
-  // AudioPlayer _player = AudioPlayer();
+  // final AudioPlayer _player = AudioPlayer();
   late final VerseModel _verse = widget.verse;
   AppFormatter formatter = AppFormatter();
   late String number = formatter.numberFormat(_verse.verseId!);
   late String formatted = '\uFD3F$number\uFD3E';
 
+  // bool _isPlaying = false;
+
   @override
   void initState() {
     super.initState();
+    // _player.onPlayerStateChanged.listen((event) {
+    //   setState(() {
+    //     _isPlaying = event == PlayerState.playing;
+    //   });
+    // });
   }
 
   @override
@@ -82,12 +90,13 @@ class _VerseListTileState extends State<VerseListTile> {
 
                   // PLAY
                   RoundedIconButton(
-                    icon: Icons.play_arrow,
+                    icon:Icons.play_arrow,
                     onPressed: () async {
                       String id = '${_verse.verseId}'.padLeft(2, '0');
                       String path = 'assets/audio/yasin$id.mp3';
                       // var bytes = await rootBundle.load(path);
                       // _player.play(BytesSource(bytes.buffer.asUint8List()));
+                      // _player.play(source)
                       MediaPlayer.play(path);
                     },
                   )
