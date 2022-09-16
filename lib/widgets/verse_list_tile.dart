@@ -89,15 +89,28 @@ class _VerseListTileState extends State<VerseListTile> {
                   SizedBox(width: 12.w),
 
                   // PLAY
-                  RoundedIconButton(
-                    icon:Icons.play_arrow,
-                    onPressed: () async {
-                      String id = '${_verse.verseId}'.padLeft(2, '0');
-                      String path = 'assets/audio/yasin$id.mp3';
-                      // var bytes = await rootBundle.load(path);
-                      // _player.play(BytesSource(bytes.buffer.asUint8List()));
-                      // _player.play(source)
-                      MediaPlayer.play(path);
+                  BlocBuilder<PlayerBloc, PlayingState>(
+                    builder: (context, state) {
+                      bool isPlaying = (state is PlayerPlayingState) &&
+                          state.id == _verse.verseId;
+                      return RoundedIconButton(
+                        icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                        onPressed: () async {
+                          PlayerBloc playerBloc = BlocProvider.of(context);
+
+                          if (isPlaying) {
+                            playerBloc.add(PauseAudioEvent());
+                          } else {
+                            playerBloc.add(PlayAudioEvent(_verse.verseId!));
+                          }
+                          // String id = '${_verse.verseId}'.padLeft(2, '0');
+                          // String path = 'assets/audio/yasin.mp3';
+                          // var bytes = await rootBundle.load(path);
+                          // _player.play(BytesSource(bytes.buffer.asUint8List()));
+                          // _player.play(source)
+                          // MediaPlayer.play(path);
+                        },
+                      );
                     },
                   )
                 ],
