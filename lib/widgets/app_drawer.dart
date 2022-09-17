@@ -34,6 +34,7 @@ class _AppDrawerState extends State<AppDrawer> {
               style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
             ),
             _setTitle(
+              key: AppKeys.readingMode,
               icon: AppIcons.alif,
               title: AppStrings.arabic_text.tr(),
               onTap: () {
@@ -41,6 +42,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
+              key: AppKeys.bookmarks,
               icon: AppIcons.bookmark_outlined,
               title: AppStrings.bookmarks.tr(),
               onTap: () {
@@ -48,6 +50,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
+              key: AppKeys.settings,
               icon: AppIcons.settings,
               title: AppStrings.settings.tr(),
               onTap: () {
@@ -57,6 +60,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
+              key: AppKeys.rate,
               icon: AppIcons.rating,
               title: AppStrings.rate_app.tr(),
               onTap: () async {
@@ -65,6 +69,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
+              key: AppKeys.shareApp,
               icon: AppIcons.share,
               title: AppStrings.share_app.tr(),
               onTap: () async {
@@ -73,10 +78,16 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
+            _setTitle(
+              key: AppKeys.feedback,
+              icon: AppIcons.message,
+              title: 'Feedback',
+              onTap: () => AppNavigator.pushNamed(RouteNames.feedback)
+            ),
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
-              trailing: const Text('2.0.1'),
+              trailing: const Text('2.0.2'),
             )
           ],
         ),
@@ -95,10 +106,17 @@ class _AppDrawerState extends State<AppDrawer> {
     required String icon,
     required String title,
     VoidCallback? onTap,
+    Key? key,
   }) =>
       ListTile(
-        leading: SvgPicture.asset(icon, color: AppColors.green),
-        title: Align(alignment: const Alignment(-1.2, 0), child: Text(title)),
+        key: key,
         onTap: onTap,
+        title: Align(alignment: const Alignment(-1.2, 0), child: Text(title)),
+        leading: SvgPicture.asset(
+          icon,
+          color: AppColors.green,
+          height: 18.h,
+          width: 18.w,
+        ),
       );
 }
