@@ -1,41 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
-import 'package:yaaseen/services/media_player.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
-class VerseListTile extends StatefulWidget {
+class VerseListTile extends StatelessWidget {
   final VerseModel verse;
   const VerseListTile({Key? key, required this.verse}) : super(key: key);
 
   @override
-  State<VerseListTile> createState() => _VerseListTileState();
-}
-
-class _VerseListTileState extends State<VerseListTile> {
-  // final AudioPlayer _player = AudioPlayer();
-  late final VerseModel _verse = widget.verse;
-  AppFormatter formatter = AppFormatter();
-  late String number = formatter.numberFormat(_verse.verseId!);
-  late String formatted = '\uFD3F$number\uFD3E';
-
-  // bool _isPlaying = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // _player.onPlayerStateChanged.listen((event) {
-    //   setState(() {
-    //     _isPlaying = event == PlayerState.playing;
-    //   });
-    // });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    AppFormatter formatter = AppFormatter();
+    late String number = formatter.numberFormat(verse.verseId!);
+    late String formatted = '\uFD3F$number\uFD3E';
+
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         SettingsBloc sizeBloc = context.watch();
@@ -45,7 +24,7 @@ class _VerseListTileState extends State<VerseListTile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ARABIC
-              ArabicText(arabic: '${_verse.arabic} '),
+              ArabicText(arabic: '${verse.arabic} $formatted'),
               SizedBox(height: 20.h),
 
               // TRANSCRIPTION
@@ -62,7 +41,7 @@ class _VerseListTileState extends State<VerseListTile> {
 
               // MEAINGS
               Text(
-                '${_verse.verseId}. $_getMeaning',
+                '${verse.verseId}. $_getMeaning',
                 style: TextStyle(fontSize: sizeBloc.meaingSize),
               ),
               SizedBox(height: 12.h),
@@ -80,10 +59,10 @@ class _VerseListTileState extends State<VerseListTile> {
                   // SAVE
                   RoundedIconButton(
                     icon:
-                        _verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
+                        verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
                     onPressed: () async {
-                      widget.verse.isSaved = !_verse.isSaved;
-                      await widget.verse.save();
+                      verse.isSaved = !verse.isSaved;
+                      await verse.save();
                     },
                   ),
                   SizedBox(width: 12.w),
@@ -92,7 +71,7 @@ class _VerseListTileState extends State<VerseListTile> {
                   BlocBuilder<PlayerBloc, PlayingState>(
                     builder: (context, state) {
                       bool isPlaying = (state is PlayerPlayingState) &&
-                          state.id == _verse.verseId;
+                          state.id == verse.verseId;
                       return RoundedIconButton(
                         icon: isPlaying ? Icons.pause : Icons.play_arrow,
                         onPressed: () async {
@@ -101,14 +80,8 @@ class _VerseListTileState extends State<VerseListTile> {
                           if (isPlaying) {
                             playerBloc.add(PauseAudioEvent());
                           } else {
-                            playerBloc.add(PlayAudioEvent(_verse.verseId!));
+                            playerBloc.add(PlayAudioEvent(verse.verseId!));
                           }
-                          // String id = '${_verse.verseId}'.padLeft(2, '0');
-                          // String path = 'assets/audio/yasin.mp3';
-                          // var bytes = await rootBundle.load(path);
-                          // _player.play(BytesSource(bytes.buffer.asUint8List()));
-                          // _player.play(source)
-                          // MediaPlayer.play(path);
                         },
                       );
                     },
@@ -123,20 +96,15 @@ class _VerseListTileState extends State<VerseListTile> {
   }
 
   String get _getMeaning => AppPrefs.locale == 'uz'
-      ? _verse.meaningUz.toString()
-      : _verse.meaning.toString();
+      ? verse.meaningUz.toString()
+      : verse.meaning.toString();
   String get _getTranscription => AppPrefs.locale == 'uz'
-      ? _verse.transcriptionUz.toString()
-      : _verse.transcription.toString();
+      ? verse.transcriptionUz.toString()
+      : verse.transcription.toString();
 
   Future<void> _onShare() async {
     AppFormatter formatter = AppFormatter();
-    String clipboardText = formatter.formatClipboard(_verse);
+    String clipboardText = formatter.formatClipboard(verse);
     Share.share(clipboardText);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

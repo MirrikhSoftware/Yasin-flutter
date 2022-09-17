@@ -1,7 +1,7 @@
 name: yaaseen
 description: A new Flutter project.
 
-version: 2.0.2+6
+version: 2.0.2+7
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -22,6 +22,11 @@ dependencies:
   flutter_svg: ^1.0.3
   in_app_review: ^2.0.4
   http: ^0.13.5
+  firebase_core: ^1.22.0
+  flutter_local_notifications: ^9.4.0
+  firebase_messaging: ^13.0.2
+  firebase_auth: ^3.4.2
+  cloud_firestore: ^3.4.8
 
 dev_dependencies:
   flutter_test:

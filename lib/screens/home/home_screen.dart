@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
