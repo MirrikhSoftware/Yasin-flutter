@@ -50,6 +50,7 @@ class VerseListTile extends StatelessWidget {
                 children: [
                   // SHARE
                   RoundedIconButton(
+                    key: AppKeys.share,
                     icon: Icons.share,
                     onPressed: _onShare,
                   ),
@@ -58,6 +59,7 @@ class VerseListTile extends StatelessWidget {
 
                   // SAVE
                   RoundedIconButton(
+                    key: AppKeys.bookmark,
                     icon:
                         verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
                     onPressed: () async {
@@ -73,6 +75,7 @@ class VerseListTile extends StatelessWidget {
                       bool isPlaying = (state is PlayerPlayingState) &&
                           state.id == verse.verseId;
                       return RoundedIconButton(
+                        key: AppKeys.play,
                         icon: isPlaying ? Icons.pause : Icons.play_arrow,
                         onPressed: () async {
                           PlayerBloc playerBloc = BlocProvider.of(context);

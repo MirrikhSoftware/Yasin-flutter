@@ -16,8 +16,17 @@ class AppStrings {
   static const String rate_app = 'rate_app';
   static const String share_app = 'share_app';
   static const String download_app = 'download_app';
-  static const String app_link = 'https://play.google.com/store/apps/details?id=uz.mirrikh.yaaseen';
+  static const String app_link =
+      'https://play.google.com/store/apps/details?id=uz.mirrikh.yaaseen';
   static const String app_id = 'uz.mirrikh.yaaseen';
+  static const String feedback = 'feedback';
+  static const String new_version_body = 'new_version_body';
+  static const String ignore = 'ignore';
+  static const String later = 'later';
+  static const String update = 'update';
+  static const String promt = 'promt';
+  static const String relese_notes = 'relese_notes';
+  static const String title = 'title';
 }
 
 extension StringExtension on String {
@@ -41,7 +50,8 @@ class AppLocales {
         AppStrings.version: _setString("Talqin", 'Талқин'),
         AppStrings.rate_app: _setString("Ilovani baholash", 'Иловани баҳолаш'),
         AppStrings.share_app: _setString("Ilovani ulashish", 'Иловани улашиш'),
-        AppStrings.empty_bookmarks: _setString("Xatcho'plar yo'q", "Хатчўплар йўқ"),
+        AppStrings.empty_bookmarks:
+            _setString("Xatcho'plar yo'q", "Хатчўплар йўқ"),
         AppStrings.download_app: _setString(
           'Yosin surasi mobil ilovasini "Play Store"dan yuklab oling',
           'Ёсин сураси мобил иловасини "Play Store"дан юклаб олинг',
