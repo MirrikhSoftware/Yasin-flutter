@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/route/route_names.dart';
-import 'package:yaaseen/screens/home/bookmarks.dart';
-import 'package:yaaseen/screens/home/home_screen.dart';
-import 'package:yaaseen/screens/home/reading_mode_screen.dart';
-import 'package:yaaseen/screens/settings/settings_screen.dart';
-import 'package:yaaseen/screens/splash/splash.dart';
+import 'package:yaaseen/screens/screens.dart';
 
 class AppRoutes {
   Route? onGenerateRoute(RouteSettings settings) {
@@ -23,6 +19,9 @@ class AppRoutes {
 
       case RouteNames.bookmarks:
         return _route(const BookmarksScreen());
+
+      case RouteNames.feedback:
+        return _route(const FeedbackScreen());
     }
     return null;
   }
