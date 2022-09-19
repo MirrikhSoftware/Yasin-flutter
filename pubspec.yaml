@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^3.4.8
   upgrader: ^4.6.1
   flutter_local_notifications: ^11.0.0
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:

@@ -20,13 +20,14 @@ class FeedbackAdapter extends TypeAdapter<FeedbackModel> {
       .._id = fields[0] as String?
       .._date = fields[1] as int?
       .._isSent = fields[2] as bool?
-      .._message = fields[3] as String?;
+      .._message = fields[3] as String?
+      .._hasError = fields[4] as bool;
   }
 
   @override
   void write(BinaryWriter writer, FeedbackModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj._id)
       ..writeByte(1)
@@ -34,7 +35,9 @@ class FeedbackAdapter extends TypeAdapter<FeedbackModel> {
       ..writeByte(2)
       ..write(obj._isSent)
       ..writeByte(3)
-      ..write(obj._message);
+      ..write(obj._message)
+      ..writeByte(4)
+      ..write(obj._hasError);
   }
 
   @override

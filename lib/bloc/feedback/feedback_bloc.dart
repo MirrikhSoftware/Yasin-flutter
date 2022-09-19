@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:uuid/uuid.dart';
+import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/feedback/feedback_model.dart';
 import 'package:yaaseen/services/api_service.dart';
 import 'package:yaaseen/services/http_result.dart';
@@ -18,14 +20,18 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     SendFeedbackEvent event,
     Emitter emit,
   ) async {
-    FeedbackModel feedback = FeedbackModel(
-      date: DateTime.now().millisecondsSinceEpoch,
-      isSent: false,
-      message: event.message,
-    );
-    // await 
+    FeedbackModel feedback = event.feedback;
+    HttpResult result = await ApiService.sendFeedback(feedback.message!);
+    if (result.isSuccess) {
+      feedback
+        ..isSent = true
+        ..date = DateTime.now().millisecondsSinceEpoch;
+    } else {
+      feedback
+        ..hasError = true
+        ..date = DateTime.now().millisecondsSinceEpoch;
+    }
 
-    HttpResult result = await ApiService.sendFeedback(event.message);
-    // if ()
+    await feedback.save();
   }
 }

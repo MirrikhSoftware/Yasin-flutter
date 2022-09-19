@@ -4,7 +4,6 @@ import 'package:yaaseen/core/core.dart';
 
 class AppTheme {
   ThemeData get light => ThemeData(
-
         primaryColor: AppColors.primary,
         iconTheme: const IconThemeData(color: AppColors.primary),
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.primary),
@@ -14,7 +13,6 @@ class AppTheme {
             iconTheme: IconThemeData(color: AppColors.primary),
             systemOverlayStyle:
                 SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark)),
-
         scrollbarTheme: ScrollbarThemeData(
             interactive: true,
             crossAxisMargin: 6.w,
@@ -30,24 +28,30 @@ class AppTheme {
         iconTheme: const IconThemeData(color: AppColors.green),
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),
         appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.green,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: AppColors.green,
-            statusBarIconBrightness: Brightness.light
-          )
-        ),
+            backgroundColor: AppColors.green,
+            systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: AppColors.green,
+                statusBarIconBrightness: Brightness.light)),
         sliderTheme: SliderThemeData(
-          trackHeight: 2.h,
-          thumbColor: AppColors.green,
-          activeTrackColor: AppColors.green,
-          inactiveTrackColor: AppColors.green.withOpacity(.5),
-          showValueIndicator: ShowValueIndicator.always
-        ),
+            trackHeight: 2.h,
+            thumbColor: AppColors.green,
+            activeTrackColor: AppColors.green,
+            inactiveTrackColor: AppColors.green.withOpacity(.5),
+            showValueIndicator: ShowValueIndicator.always),
         scrollbarTheme: ScrollbarThemeData(
             interactive: true,
             crossAxisMargin: 6.w,
             radius: Radius.circular(3.r),
             thumbColor: MaterialStateProperty.all<Color>(AppColors.green)),
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: AppColors.white,
+          filled: true,
+          border: _border,
+          errorBorder: _border,
+          enabledBorder: _border,
+          focusedBorder: _border,
+          disabledBorder: _border,
+        ),
       );
 
   ThemeData get indigo => ThemeData(
@@ -70,4 +74,7 @@ class AppTheme {
             radius: Radius.circular(3.r),
             thumbColor: MaterialStateProperty.all<Color>(AppColors.indigo)),
       );
+
+  UnderlineInputBorder get _border =>
+      const UnderlineInputBorder(borderSide: BorderSide.none);
 }

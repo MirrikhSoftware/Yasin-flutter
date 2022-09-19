@@ -4,6 +4,6 @@ part of 'feedback_bloc.dart';
 abstract class FeedbackEvent {}
 
 class SendFeedbackEvent extends FeedbackEvent {
-  final String message;
-  SendFeedbackEvent(this.message);
+  final FeedbackModel feedback;
+  SendFeedbackEvent(this.feedback);
 }

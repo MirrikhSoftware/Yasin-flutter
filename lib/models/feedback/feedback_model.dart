@@ -10,8 +10,8 @@ part 'feedback_model.g.dart';
   adapterName: HiveAdapters.feedbackModel,
 )
 class FeedbackModel extends HiveObject {
-  // @override
-  // get key => _id;
+  @override
+  get key => _id;
 
   @HiveField(0)
   String? _id;
