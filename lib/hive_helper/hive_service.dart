@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as pp;
 import 'package:yaaseen/hive_helper/hive_box_names.dart';
-import 'package:yaaseen/models/feedback/feedback_model.dart';
-import 'package:yaaseen/models/verse/verse_model.dart';
+import 'package:yaaseen/models/models.dart';
 
 class HiveService {
   static Future init() async {
@@ -13,6 +12,7 @@ class HiveService {
     await Hive.initFlutter(path);
 
     Hive.registerAdapter(VerseModelAdapter());
+    Hive.registerAdapter(FeedbackAdapter());
 
     await Hive.openBox<VerseModel>(HiveBoxNames.verses);
     await Hive.openBox<dynamic>(HiveBoxNames.prefs);
