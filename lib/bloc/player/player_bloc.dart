@@ -9,7 +9,7 @@ part 'player_event.dart';
 part 'player_state.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
-  AudioPlayer _player = AudioPlayer();
+  final AudioPlayer _player = AudioPlayer();
   AudioPlayer? get player => _player;
   PlayerBloc() : super(PlayerInitial()) {
     on<PlayAudioEvent>(_playAudio);

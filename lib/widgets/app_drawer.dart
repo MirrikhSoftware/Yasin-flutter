@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
@@ -78,12 +79,13 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            _setTitle(
-              key: AppKeys.feedback,
-              icon: AppIcons.message,
-              title: 'Feedback',
-              onTap: () => AppNavigator.pushNamed(RouteNames.feedback)
-            ),
+            // _setTitle(
+            //   key: AppKeys.feedback,
+            //   icon: AppIcons.message,
+            //   title: 'Feedback',
+            //   onTap: () => AppNavigator.pushNamed(RouteNames.feedback)
+            // ),
+
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
