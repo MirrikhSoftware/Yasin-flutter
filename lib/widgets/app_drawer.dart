@@ -62,7 +62,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             _setTitle(
               key: AppKeys.rate,
-              icon: AppIcons.rating,
+              icon: AppIcons.rating_outlined,
               title: AppStrings.rate_app.tr(),
               onTap: () async {
                 InAppReview inAppReview = InAppReview.instance;

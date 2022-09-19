@@ -50,8 +50,10 @@ class AppLocales {
         AppStrings.version: _setString("Talqin", 'Талқин'),
         AppStrings.rate_app: _setString("Ilovani baholash", 'Иловани баҳолаш'),
         AppStrings.share_app: _setString("Ilovani ulashish", 'Иловани улашиш'),
-        AppStrings.empty_bookmarks:
-            _setString("Xatcho'plar yo'q", "Хатчўплар йўқ"),
+        AppStrings.empty_bookmarks: _setString(
+          "Xatcho'plar yo'q",
+          "Хатчўплар йўқ",
+        ),
         AppStrings.download_app: _setString(
           'Yosin surasi mobil ilovasini "Play Store"dan yuklab oling',
           'Ёсин сураси мобил иловасини "Play Store"дан юклаб олинг',

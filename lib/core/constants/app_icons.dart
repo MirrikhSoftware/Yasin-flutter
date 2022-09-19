@@ -19,4 +19,5 @@ class AppIcons {
   static const String share_outlined = '$_path/share_outlined.svg';
   static const String share = '$_path/share.svg';
   static const String rating = '$_path/rating.svg';
+  static const String rating_outlined = '$_path/star_outlined.svg';
 }

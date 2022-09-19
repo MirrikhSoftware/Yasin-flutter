@@ -11,29 +11,31 @@ class UpgradingScreen extends StatelessWidget {
       child: child,
       upgrader: Upgrader(
         // messages: MyUpgraderMessages(),
+
       ),
     );
   }
 }
 
-// class MyUpgraderMessages extends UpgraderMessages {
-//   @override
-//   String? message(UpgraderMessage messageKey) {
-//     switch (messageKey) {
-//       case UpgraderMessage.body:
-//         return LocaleKeys.new_version.tr(args: ['']);
-//       case UpgraderMessage.buttonTitleIgnore:
-//         return LocaleKeys.cancel.tr();
-//       case UpgraderMessage.buttonTitleLater:
-//         return LocaleKeys.later.tr();
-//       case UpgraderMessage.buttonTitleUpdate:
-//         return LocaleKeys.update.tr();
-//       case UpgraderMessage.prompt:
-//         return LocaleKeys.want_to_update.tr();
-//       case UpgraderMessage.releaseNotes:
-//         return LocaleKeys.release_notes.tr();
-//       case UpgraderMessage.title:
-//         return LocaleKeys.update_app.tr();
-//     }
-//   }
-// }
+class MyUpgraderMessages extends UpgraderMessages {
+  /// Override the message function to provide custom language localization.
+  @override
+  String message(UpgraderMessage messageKey) {
+    switch (messageKey) {
+      case UpgraderMessage.body:
+        return 'es A new version of {{appName}} is available!';
+      case UpgraderMessage.buttonTitleIgnore:
+        return 'es Ignore';
+      case UpgraderMessage.buttonTitleLater:
+        return 'es Later';
+      case UpgraderMessage.buttonTitleUpdate:
+        return 'es Update Now';
+      case UpgraderMessage.prompt:
+        return 'es Want to update?';
+      case UpgraderMessage.releaseNotes:
+        return 'es Release Notes';
+      case UpgraderMessage.title:
+        return 'es Update App?';
+    }
+  }
+}
