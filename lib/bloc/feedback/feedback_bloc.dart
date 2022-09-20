@@ -25,6 +25,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     if (result.isSuccess) {
       feedback
         ..isSent = true
+        ..hasError = false
         ..date = DateTime.now().millisecondsSinceEpoch;
     } else {
       feedback

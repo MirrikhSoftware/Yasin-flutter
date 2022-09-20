@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
@@ -80,16 +79,23 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
-              key: AppKeys.feedback,
-              icon: AppIcons.message,
-              title: 'Feedback',
-              onTap: () => AppNavigator.pushNamed(RouteNames.feedback)
-            ),
-
+                key: AppKeys.feedback,
+                icon: AppIcons.message,
+                title: 'Feedback',
+                onTap: () => AppNavigator.pushNamed(RouteNames.feedback)),
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
-              trailing: const Text('2.0.2'),
+              trailing: FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, AsyncSnapshot<PackageInfo> snap) {
+                  if (snap.hasData) {
+                    return Text(snap.requireData.version);
+                  }
+
+                  return const SizedBox();
+                },
+              ),
             )
           ],
         ),
@@ -112,8 +118,11 @@ class _AppDrawerState extends State<AppDrawer> {
   }) =>
       ListTile(
         key: key,
+        // dense: true,
+        horizontalTitleGap: 0,
+
         onTap: onTap,
-        title: Align(alignment: const Alignment(-1.2, 0), child: Text(title)),
+        title: Text(title),
         leading: SvgPicture.asset(
           icon,
           color: AppColors.green,

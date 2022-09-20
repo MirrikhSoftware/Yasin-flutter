@@ -18,7 +18,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(title: 'Fike mulohaza'),
+      appBar: const SimpleAppBar(title: 'Fikr mulohaza'),
       body: Column(
         children: [
           Expanded(
