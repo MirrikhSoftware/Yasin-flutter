@@ -12,3 +12,8 @@ class PauseAudioEvent extends PlayerEvent {
   // final int id;
   // PauseAudioEvent(this.id);
 }
+
+class AutoPlayEvent extends PlayerEvent {
+  final int id;
+  AutoPlayEvent(this.id);
+}

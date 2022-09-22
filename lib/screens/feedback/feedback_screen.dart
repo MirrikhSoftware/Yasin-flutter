@@ -26,26 +26,30 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               valueListenable: HiveBoxes.feedbackBox.listenable(),
               builder: (context, Box<FeedbackModel> box, child) {
                 if (box.isEmpty) {
-                  return Center();
+                  return const Center();
                 }
 
                 return ListView.builder(
+                  reverse: true,
                   itemCount: box.length,
                   itemBuilder: (context, index) {
                     FeedbackModel feedback = box.getAt(index)!;
-                    return Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 8.h,
+                    return Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
+                        constraints: BoxConstraints(maxWidth: 280.w),
+                        decoration: BoxDecoration(color: AppColors.white),
+                        child: Text(feedback.message.toString()),
                       ),
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 8.h,
-                      ),
-                      constraints: BoxConstraints(maxWidth: 280.w),
-                      decoration: BoxDecoration(color: AppColors.white),
-                      child: Text(feedback.message.toString()),
                     );
                   },
                 );

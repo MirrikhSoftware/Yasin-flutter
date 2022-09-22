@@ -7,7 +7,6 @@ class AppPrefs {
   static final Box<dynamic> _box = Hive.box(HiveBoxNames.prefs);
   static final Box<dynamic> _langBox = Hive.box(HiveBoxNames.language);
 
-
   // === SAVING VERSES TO STORAGE =========================================== //
 
   static Future setSaved() async => await _box.put(HiveKeys.saved, true);
@@ -52,6 +51,15 @@ class AppPrefs {
   }
 
   static double get srcollOffset => _box.get(HiveKeys.scroll_offset) ?? 0;
+
+
+  // === SCROLL POSITOIN ================================================= //
+
+  static Future setLastPlaying(int lastPlayingId) async {
+    await _box.put(HiveKeys.last_playing, lastPlayingId);
+  }
+
+  static int? get lastPlaying => _box.get(HiveKeys.last_playing);
 }
 
 class HiveKeys {
@@ -61,4 +69,5 @@ class HiveKeys {
   static const String transcription_size = 'transcription_size';
   static const String locale = 'locale';
   static const String scroll_offset = 'scroll_offset';
+  static const String last_playing = 'last_playing';
 }

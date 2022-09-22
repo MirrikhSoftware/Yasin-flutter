@@ -36,7 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     PlayerBloc playerBloc = BlocProvider.of(context);
     playerBloc.player?.onPlayerComplete.listen((event) {
-      playerBloc.add(PauseAudioEvent());
+      int id = playerBloc.playingId;
+
+      if (id < 83) {
+        playerBloc.add(PlayAudioEvent(id + 1));
+      }
     });
   }
 
@@ -67,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-      
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
