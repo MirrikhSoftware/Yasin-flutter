@@ -9,43 +9,58 @@ class PlayerTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerBloc, PlayingState>(builder: (context, state) {
-      PlayerBloc bloc = BlocProvider.of(context);
-      int id = bloc.playingId;
+      PlayerBloc playerBloc = BlocProvider.of(context);
+      int id = playerBloc.playingId;
       if (id == 0) {
         return const SizedBox();
       }
-      return SizedBox(
-        height: 70.h,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+      bool isPlaying = state is PlayerPlayingState;
+      return Container(
+        color: const Color.fromARGB(255, 255, 248, 210),
+        height: 60.h,
+        child: Row(
           children: [
-            Divider(height: 1.h, color: AppColors.green, thickness: 1.h),
-            Text(
-              'Yosin surasi $id-oyat',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            const Text(
-              'Mishary bin al-Afasy',
-              // style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            Row(
+            SizedBox(width: 12.w),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RoundedIconButton(
-                  icon: Icons.skip_previous,
-                  onPressed: () {},
+                Text(
+                  'Yosin surasi $id-oyat',
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-                SizedBox(width: 12.w),
-                RoundedIconButton(
-                  icon: Icons.play_arrow,
-                  onPressed: () {},
-                ),
-                SizedBox(width: 12.w),
-                RoundedIconButton(
-                  icon: Icons.skip_next,
-                  onPressed: () {},
+                const Text(
+                  'Mishary bin al-Afasy',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
                 ),
               ],
+            ),
+
+            const Spacer(),
+            AppIconButton(
+              icon: Icons.skip_previous,
+              onPressed: () {},
+            ),
+            // SizedBox(width: 12.w),
+            AppIconButton(
+              icon: isPlaying ? Icons.pause : Icons.play_arrow,
+              onPressed: () {
+                if (isPlaying) {
+                  playerBloc.add(PauseAudioEvent());
+                } else {
+                  playerBloc.add(PlayAudioEvent(id));
+                }
+              },
+            ),
+            // SizedBox(width: 12.w),
+            AppIconButton(
+              icon: Icons.skip_next,
+              onPressed: () {},
+            ),
+            AppIconButton(
+              icon: Icons.stop,
+              onPressed: () {},
             ),
           ],
         ),
