@@ -59,7 +59,7 @@ class AppPrefs {
     await _box.put(HiveKeys.last_playing, lastPlayingId);
   }
 
-  static int? get lastPlaying => _box.get(HiveKeys.last_playing);
+  static int get lastPlaying => _box.get(HiveKeys.last_playing) ?? 0;
 }
 
 class HiveKeys {

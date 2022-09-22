@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const AppDrawer(),
+      bottomNavigationBar: const PlayerTab(),
       body: UpgradingScreen(
         child: ValueListenableBuilder(
           valueListenable: HiveBoxes.verseBox.listenable(),

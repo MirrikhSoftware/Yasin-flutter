@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
+import 'package:yaaseen/hive_helper/hive_helper.dart';
 
 part 'player_event.dart';
 part 'player_state.dart';
@@ -11,7 +12,7 @@ part 'player_state.dart';
 class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
   final AudioPlayer _player = AudioPlayer();
   AudioPlayer? get player => _player;
-  int _playingId = 0;
+  int _playingId = AppPrefs.lastPlaying;
   int get playingId => _playingId;
 
   PlayerBloc() : super(PlayerInitial()) {
@@ -25,6 +26,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     Emitter emit,
   ) async {
     _playingId = event.id;
+    await AppPrefs.setLastPlaying(_playingId);
     String id = '${event.id}'.padLeft(2, '0');
     String path = 'assets/audio/yasin$id.mp3';
     final byteData = await rootBundle.load(path);

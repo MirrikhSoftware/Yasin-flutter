@@ -7,3 +7,4 @@ export 'app_checkbox_list_tile.dart';
 export 'app_radio_list_tile.dart';
 export 'app_drawer.dart';
 export 'arabic_text.dart';
+export 'player_tab.dart';
