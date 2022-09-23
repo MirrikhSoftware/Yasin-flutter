@@ -16,52 +16,67 @@ class PlayerTab extends StatelessWidget {
       }
 
       bool isPlaying = state is PlayerPlayingState;
-      return Container(
+      return AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOutQuad,
         color: const Color.fromARGB(255, 255, 248, 210),
         height: 60.h,
-        child: Row(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(width: 12.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+            LinearProgressIndicator(
+              value: .5,
+            ),
+            const Spacer(),
+            Row(
               children: [
-                Text(
-                  'Yosin surasi $id-oyat',
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                SizedBox(width: 12.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Yosin surasi $id-oyat',
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    const Text(
+                      'Mishary bin al-Afasy',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+                    ),
+                  ],
                 ),
-                const Text(
-                  'Mishary bin al-Afasy',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+
+                const Spacer(),
+                AppIconButton(
+                  icon: Icons.skip_previous,
+                  onPressed: () {},
+                ),
+                // SizedBox(width: 12.w),
+                AppIconButton(
+                  icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                  onPressed: () {
+                    if (isPlaying) {
+                      playerBloc.add(PauseAudioEvent());
+                    } else {
+                      playerBloc.add(PlayAudioEvent(id));
+                    }
+                  },
+                ),
+                // SizedBox(width: 12.w),
+                AppIconButton(
+                  icon: Icons.skip_next,
+                  onPressed: () {},
+                ),
+                AppIconButton(
+                  icon: Icons.stop,
+                  onPressed: () {
+                    playerBloc.add(PlayerStopEvent());
+                  },
                 ),
               ],
             ),
-
             const Spacer(),
-            AppIconButton(
-              icon: Icons.skip_previous,
-              onPressed: () {},
-            ),
-            // SizedBox(width: 12.w),
-            AppIconButton(
-              icon: isPlaying ? Icons.pause : Icons.play_arrow,
-              onPressed: () {
-                if (isPlaying) {
-                  playerBloc.add(PauseAudioEvent());
-                } else {
-                  playerBloc.add(PlayAudioEvent(id));
-                }
-              },
-            ),
-            // SizedBox(width: 12.w),
-            AppIconButton(
-              icon: Icons.skip_next,
-              onPressed: () {},
-            ),
-            AppIconButton(
-              icon: Icons.stop,
-              onPressed: () {},
-            ),
           ],
         ),
       );

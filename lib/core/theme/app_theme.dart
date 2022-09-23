@@ -52,6 +52,12 @@ class AppTheme {
           focusedBorder: _border,
           disabledBorder: _border,
         ),
+
+        progressIndicatorTheme: ProgressIndicatorThemeData(
+          color: AppColors.green,
+          
+          linearTrackColor: AppColors.green.withOpacity(.36)
+        )
       );
 
   ThemeData get indigo => ThemeData(

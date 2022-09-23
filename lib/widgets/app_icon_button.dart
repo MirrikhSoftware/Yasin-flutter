@@ -12,6 +12,7 @@ class AppIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      constraints: const BoxConstraints(),
       icon: Icon(icon),
       onPressed: onPressed,
     );

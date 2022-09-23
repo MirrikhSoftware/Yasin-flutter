@@ -78,11 +78,11 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            _setTitle(
-                key: AppKeys.feedback,
-                icon: AppIcons.message,
-                title: 'Feedback',
-                onTap: () => AppNavigator.pushNamed(RouteNames.feedback)),
+            // _setTitle(
+            //     key: AppKeys.feedback,
+            //     icon: AppIcons.message,
+            //     title: 'Feedback',
+            //     onTap: () => AppNavigator.pushNamed(RouteNames.feedback)),
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),

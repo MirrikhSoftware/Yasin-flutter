@@ -13,7 +13,9 @@ class PauseAudioEvent extends PlayerEvent {
   // PauseAudioEvent(this.id);
 }
 
-class AutoPlayEvent extends PlayerEvent {
-  final int id;
-  AutoPlayEvent(this.id);
+class PlayerStopEvent extends PlayerEvent {}
+
+class PlayerGlobalKeysEvent extends PlayerEvent {
+  final List<GlobalKey> keys;
+  PlayerGlobalKeysEvent(this.keys);
 }

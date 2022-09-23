@@ -19,9 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController =
       ScrollController(initialScrollOffset: AppPrefs.srcollOffset);
   bool _pinned = true;
+
+  final List<GlobalKey> _keys = [];
   @override
   void initState() {
     super.initState();
+
+    _keys.addAll(List.generate(83, (index) => GlobalKey()));
+
 
     _scrollController.addListener(() async {
       await AppPrefs.setScrollOffset(_scrollController.offset);
@@ -35,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HiveBoxes.langBox.listenable().addListener(() => setState(() {}));
 
     PlayerBloc playerBloc = BlocProvider.of(context);
+    playerBloc.add(PlayerGlobalKeysEvent(_keys));
     playerBloc.player?.onPlayerComplete.listen((event) {
       int id = playerBloc.playingId;
 
@@ -78,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       final int itemIndex = index ~/ 2;
                       if (index.isEven) {
                         VerseModel verse = box.getAt(itemIndex)!;
-                        return VerseListTile(verse: verse);
+                        GlobalKey key = _keys[itemIndex];
+                        return VerseListTile(key: key, verse: verse);
                       }
                       return Divider(thickness: 1.h, height: 24.h);
                     },
