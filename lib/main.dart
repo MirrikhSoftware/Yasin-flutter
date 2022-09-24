@@ -6,6 +6,7 @@ import 'package:yaaseen/hive_helper/hive_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await HiveService.init();
   await Upgrader.clearSavedSettings();
   runApp(const MyApp());

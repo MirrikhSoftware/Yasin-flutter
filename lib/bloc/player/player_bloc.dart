@@ -23,26 +23,15 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     on<PauseAudioEvent>(_onComplete);
     on<PlayerStopEvent>(_stopAudio);
     on<PlayerGlobalKeysEvent>(_setKeys);
+    on<PlayerNextEvent>(_playNext);
+    on<PlayerPrevEvent>(_playPrev);
   }
 
   FutureOr<void> _playAudio(
     PlayAudioEvent event,
     Emitter emit,
   ) async {
-    _playingId = event.id;
-    await AppPrefs.setLastPlaying(_playingId);
-    String id = '${event.id}'.padLeft(2, '0');
-    String path = 'assets/audio/yasin$id.mp3';
-    final byteData = await rootBundle.load(path);
-    final bytes = byteData.buffer.asUint8List();
-    await _player.play(BytesSource(bytes));
-    BuildContext context = _keys[_playingId - 1].currentContext!;
-    const Duration duration = Duration(milliseconds: 500);
-    Scrollable.ensureVisible(
-      context,
-      duration: duration,
-      alignment: .1
-    );
+    await _play(event.id);
     emit(PlayerPlayingState(event.id));
   }
 
@@ -64,10 +53,47 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     emit(PlayerInitial());
   }
 
+  FutureOr<void> _playNext(
+    PlayerNextEvent event,
+    Emitter emit,
+  ) async {
+    int id = (_playingId + 1) > 83 ? 1 : _playingId + 1;
+
+    await _play(id);
+    emit(PlayerPlayingState(id));
+  }
+
+  FutureOr<void> _playPrev(
+    PlayerPrevEvent event,
+    Emitter emit,
+  ) async {
+    int id = (_playingId - 1) < 1 ? 1 : _playingId - 1;
+
+    await _play(id);
+    emit(PlayerPlayingState(id));
+  }
+
   FutureOr<void> _setKeys(
     PlayerGlobalKeysEvent event,
     Emitter emit,
   ) async {
     _keys = event.keys;
+  }
+
+  Future _play(int id) async {
+    _playingId = id;
+    await AppPrefs.setLastPlaying(_playingId);
+    String no = '$id'.padLeft(2, '0');
+    String path = 'assets/audio/yasin$no.mp3';
+    final byteData = await rootBundle.load(path);
+    final bytes = byteData.buffer.asUint8List();
+    await _player.play(BytesSource(bytes));
+    try {
+      BuildContext context = _keys[_playingId - 1].currentContext!;
+      const Duration duration = Duration(milliseconds: 500);
+      Scrollable.ensureVisible(context, duration: duration, alignment: .1);
+    } catch (err) {
+      err;
+    }
   }
 }

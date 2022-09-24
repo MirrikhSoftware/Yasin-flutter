@@ -50,7 +50,7 @@ class PlayerTab extends StatelessWidget {
                 const Spacer(),
                 AppIconButton(
                   icon: Icons.skip_previous,
-                  onPressed: () {},
+                  onPressed: () => playerBloc.add(PlayerPrevEvent()),
                 ),
                 // SizedBox(width: 12.w),
                 AppIconButton(
@@ -66,7 +66,7 @@ class PlayerTab extends StatelessWidget {
                 // SizedBox(width: 12.w),
                 AppIconButton(
                   icon: Icons.skip_next,
-                  onPressed: () {},
+                  onPressed: () => playerBloc.add(PlayerNextEvent()),
                 ),
                 AppIconButton(
                   icon: Icons.stop,

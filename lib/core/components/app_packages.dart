@@ -8,3 +8,4 @@ export 'package:in_app_review/in_app_review.dart';
 export 'package:upgrader/upgrader.dart';
 export 'package:uuid/uuid.dart';
 export 'package:package_info_plus/package_info_plus.dart';
+export 'package:firebase_core/firebase_core.dart';
