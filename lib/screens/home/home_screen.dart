@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     PlayerBloc playerBloc = BlocProvider.of(context);
     playerBloc.add(PlayerGlobalKeysEvent(_keys));
-    playerBloc.player?.onPlayerComplete.listen((event) {
+    playerBloc.player.onPlayerComplete.listen((event) {
       int id = playerBloc.playingId;
 
       if (id < 83) {

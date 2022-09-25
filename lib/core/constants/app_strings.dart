@@ -27,6 +27,8 @@ class AppStrings {
   static const String promt = 'promt';
   static const String relese_notes = 'relese_notes';
   static const String title = 'title';
+  static const String verse = 'verse';
+  static const String afasy = 'afasy';
 }
 
 extension StringExtension on String {
@@ -40,6 +42,7 @@ class AppLocales {
   Map<String, Map<String, String>> get locales => _locales();
   Map<String, Map<String, String>> _locales() => {
         AppStrings.app_name: _setString('Yosin surasi', 'Ёсин сураси'),
+        AppStrings.verse: _setString('oyat', 'оят'),
         AppStrings.settings: _setString('Sozlamalar', 'Созламалар'),
         AppStrings.arabic_text: _setString('Arabiy matn', 'Aрабий матн'),
         AppStrings.bookmarks: _setString('Xatcho‘plar', 'Хатчўплар'),
@@ -53,6 +56,10 @@ class AppLocales {
         AppStrings.empty_bookmarks: _setString(
           "Xatcho'plar yo'q",
           "Хатчўплар йўқ",
+        ),
+        AppStrings.afasy: _setString(
+          'Mishary bin Rashid al-Afasy',
+          'Мишари бин Рашид ал-Aфаси',
         ),
         AppStrings.download_app: _setString(
           'Yosin surasi mobil ilovasini "Play Store"dan yuklab oling',

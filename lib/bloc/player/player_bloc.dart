@@ -11,11 +11,13 @@ part 'player_state.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
   final AudioPlayer _player = AudioPlayer();
-  AudioPlayer? get player => _player;
+  AudioPlayer get player => _player;
   int _playingId = AppPrefs.lastPlaying;
   int get playingId => _playingId;
   late List<GlobalKey> _keys;
   List<GlobalKey> get keys => _keys;
+  num _duration = 000000.1;
+  num get duration => _duration;
 
   PlayerBloc() : super(PlayerInitial()) {
     _keys = List.generate(83, (i) => GlobalKey());
@@ -88,6 +90,10 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     final byteData = await rootBundle.load(path);
     final bytes = byteData.buffer.asUint8List();
     await _player.play(BytesSource(bytes));
+    final dur = await _player.getDuration();
+    _duration = dur!.inMilliseconds;
+
+    
     try {
       BuildContext context = _keys[_playingId - 1].currentContext!;
       const Duration duration = Duration(milliseconds: 500);

@@ -47,7 +47,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           vertical: 8.h,
                         ),
                         constraints: BoxConstraints(maxWidth: 280.w),
-                        decoration: BoxDecoration(color: AppColors.white),
+                        decoration:const BoxDecoration(color: AppColors.white),
                         child: Text(feedback.message.toString()),
                       ),
                     );

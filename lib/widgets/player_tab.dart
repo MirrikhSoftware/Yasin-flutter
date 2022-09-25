@@ -11,6 +11,7 @@ class PlayerTab extends StatelessWidget {
     return BlocBuilder<PlayerBloc, PlayingState>(builder: (context, state) {
       PlayerBloc playerBloc = BlocProvider.of(context);
       int id = playerBloc.playingId;
+
       if (id == 0) {
         return const SizedBox();
       }
@@ -19,14 +20,11 @@ class PlayerTab extends StatelessWidget {
       return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOutQuad,
-        color: const Color.fromARGB(255, 255, 248, 210),
+        color: const Color.fromARGB(255, 245, 245, 245),
         height: 60.h,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            LinearProgressIndicator(
-              value: .5,
-            ),
+            Divider(height: 1.h,thickness: 1.h),
             const Spacer(),
             Row(
               children: [
@@ -36,13 +34,15 @@ class PlayerTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Yosin surasi $id-oyat',
+                      '${AppStrings.app_name.tr()} $id-${AppStrings.verse.tr()}',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
-                    const Text(
-                      'Mishary bin al-Afasy',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+                    Text(
+                      AppStrings.afasy.tr(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
