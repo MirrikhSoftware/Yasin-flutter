@@ -22,6 +22,9 @@ class AppRoutes {
 
       case RouteNames.feedback:
         return _route(const FeedbackScreen());
+      
+      case RouteNames.test:
+        return _route(const TestScreen());
     }
     return null;
   }

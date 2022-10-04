@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
-
+import 'package:yaaseen/core/core.dart';
 part 'player_event.dart';
 part 'player_state.dart';
 
@@ -87,16 +85,19 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     await AppPrefs.setLastPlaying(_playingId);
     String no = '$id'.padLeft(2, '0');
     String path = 'assets/audio/yasin$no.mp3';
-    final byteData = await rootBundle.load(path);
-    final bytes = byteData.buffer.asUint8List();
-    await _player.play(BytesSource(bytes));
-    final dur = await _player.getDuration();
+    // final byteData = await rootBundle.load(path);
+    // final bytes = byteData.buffer.asUint8List();
+    await _player.setAsset(path);
+    await _player.play();
+    
+    final dur =  _player.duration;
     _duration = dur!.inMilliseconds;
 
     
     try {
       BuildContext context = _keys[_playingId - 1].currentContext!;
       const Duration duration = Duration(milliseconds: 500);
+      // ignore: use_build_context_synchronously
       Scrollable.ensureVisible(context, duration: duration, alignment: .1);
     } catch (err) {
       err;

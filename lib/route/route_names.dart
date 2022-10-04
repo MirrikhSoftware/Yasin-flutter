@@ -8,4 +8,5 @@ class RouteNames {
   static const String reading = '/reading';
   static const String bookmarks = '/bookmarks';
   static const String feedback = '/feedback';
+  static const String test = '/test';
 }

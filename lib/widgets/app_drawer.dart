@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
@@ -83,6 +84,15 @@ class _AppDrawerState extends State<AppDrawer> {
             //     icon: AppIcons.message,
             //     title: 'Feedback',
             //     onTap: () => AppNavigator.pushNamed(RouteNames.feedback)),
+
+            Visibility(
+              visible: kDebugMode,
+              child: _setTitle(
+                icon: AppIcons.book,
+                title: 'Test',
+                onTap: () => AppNavigator.pushNamed(RouteNames.test)
+              ),
+            ),
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),

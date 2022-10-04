@@ -3,12 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:yaaseen/app.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/hive_helper/hive_service.dart';
-
+import 'package:yaaseen/services/app_audio_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await HiveService.init();
-  await Upgrader.clearSavedSettings();
+
+  await AppAudioService.init();
+
+
+  
   runApp(const MyApp());
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
