@@ -1,8 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:tiin_cashback/hive_helper/hive_helper.dart';
+import 'package:yaaseen/hive_helper/hive_helper.dart';
+import 'package:yaaseen/hive_helper/hive_types.dart';
 part 'news_model.g.dart';
 
-@HiveType(typeId: HiveTypes.NEWS, adapterName: HiveAdapters.NEWS)
+@HiveType(typeId: HiveTypes.news, adapterName: HiveAdapters.newsAdapter)
 class NewsModel extends HiveObject {
   @HiveField(0)
   String? _sId;
