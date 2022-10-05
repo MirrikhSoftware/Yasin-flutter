@@ -1,2 +1,3 @@
 export 'feedback/feedback_model.dart';
 export 'verse/verse_model.dart';
+export 'news/news_model.dart';
