@@ -37,16 +37,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     HiveBoxes.langBox.listenable().addListener(() => setState(() {}));
 
-    // PlayerBloc playerBloc = BlocProvider.of(context);
-    // playerBloc.add(PlayerGlobalKeysEvent(_keys));
-    // playerBloc.player.onPlayerComplete.listen((event) {
-    //   int id = playerBloc.playingId;
+    PlayerBloc playerBloc = BlocProvider.of(context);
+    playerBloc.add(PlayerGlobalKeysEvent(_keys));
+    playerBloc.player.onPlayerComplete.listen((event) {
+      int id = playerBloc.playingId;
 
-    //   if (id < 83) {
-    //     playerBloc.add(PlayAudioEvent(id + 1));
-    //   }
-    // });
-    // playerBloc.player.
+      if (id < 83) {
+        playerBloc.add(PlayAudioEvent(id + 1));
+      }
+    });
+    
   }
 
   @override

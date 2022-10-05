@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
-import 'package:yaaseen/core/core.dart';
+
 part 'player_event.dart';
 part 'player_state.dart';
 
@@ -85,12 +87,11 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     await AppPrefs.setLastPlaying(_playingId);
     String no = '$id'.padLeft(2, '0');
     String path = 'assets/audio/yasin$no.mp3';
-    // final byteData = await rootBundle.load(path);
-    // final bytes = byteData.buffer.asUint8List();
-    await _player.setAsset(path);
-    await _player.play();
+    final byteData = await rootBundle.load(path);
+    final bytes = byteData.buffer.asUint8List();
+    await _player.play(BytesSource(bytes));
     
-    final dur =  _player.duration;
+    final dur = await _player.getDuration();
     _duration = dur!.inMilliseconds;
 
     

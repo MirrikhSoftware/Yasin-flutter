@@ -8,6 +8,7 @@ export 'package:uuid/uuid.dart';
 export 'package:package_info_plus/package_info_plus.dart';
 export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_auth/firebase_auth.dart';
+export 'package:firebase_database/firebase_database.dart';
 // export 'package:audioplayers/audioplayers.dart';
 export 'package:audio_service/audio_service.dart';
 export 'package:just_audio/just_audio.dart';
