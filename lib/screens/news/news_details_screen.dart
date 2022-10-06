@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:yaaseen/bloc/news/news_bloc.dart';
+import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
 

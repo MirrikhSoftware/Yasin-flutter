@@ -29,6 +29,7 @@ class AppStrings {
   static const String title = 'title';
   static const String verse = 'verse';
   static const String afasy = 'afasy';
+  static const String news = 'news';
 }
 
 extension StringExtension on String {
@@ -53,6 +54,7 @@ class AppLocales {
         AppStrings.version: _setString("Talqin", 'Талқин'),
         AppStrings.rate_app: _setString("Ilovani baholash", 'Иловани баҳолаш'),
         AppStrings.share_app: _setString("Ilovani ulashish", 'Иловани улашиш'),
+        AppStrings.news: _setString('Yangiliklar', 'Янгиликлар'),
         AppStrings.empty_bookmarks: _setString(
           "Xatcho'plar yo'q",
           "Хатчўплар йўқ",

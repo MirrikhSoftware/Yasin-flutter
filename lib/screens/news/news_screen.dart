@@ -38,7 +38,7 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: SimpleAppBar(title: 'AppStrings.news.tr()'),
+      appBar: SimpleAppBar(title: AppStrings.news.tr()),
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.newsBox.listenable(),
         builder: (context, Box<NewsModel> box, child) {
