@@ -68,7 +68,7 @@ class _NewsScreenState extends State<NewsScreen> {
         margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         // decoration: AppShape.simple(color: AppColors.white),
         // padding: EdgeInsets.only(bottom: 11.h),
-        shape: AppShapes.circularBorder(radius: 10),
+        // shape: AppShapes.circularBorder(radius: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,11 +80,11 @@ class _NewsScreenState extends State<NewsScreen> {
                 topLeft: Radius.circular(10.r),
                 topRight: Radius.circular(10.r),
               ),
-              child: AppImage(
-                image: news.images!.first,
-                height: 410.h,
-                width: 410.w,
-              ),
+              // child: AppImage(
+              //   image: news.images!.first,
+              //   height: 410.h,
+              //   width: 410.w,
+              // ),
             ),
 
             Column(
@@ -101,30 +101,32 @@ class _NewsScreenState extends State<NewsScreen> {
 
                 // _setText(_getDescription(news), maxLines: 2),
               ],
-            ).symmetricPadding(h: 14)
+            )
+            // .symmetricPadding(h: 14)
           ],
         ),
-      ).onClick(() {
-        NewsBloc newsBloc = BlocProvider.of(context);
-        newsBloc.add(NewsSelectedEvent(news));
-        // AppNavigator.pushNamed(RouteNames.NEWS_DETAILS);
-        showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            context: context,
-            builder: (_) => const NewsDetailsScreen());
-      });
-
+      )
+      // .onClick(() {
+      //   NewsBloc newsBloc = BlocProvider.of(context);
+      //   newsBloc.add(NewsSelectedEvent(news));
+      //   // AppNavigator.pushNamed(RouteNames.NEWS_DETAILS);
+      //   showModalBottomSheet(
+      //       isScrollControlled: true,
+      //       backgroundColor: Colors.transparent,
+      //       context: context,
+      //       builder: (_) => const NewsDetailsScreen());
+      // });
+;
   Text _setTitle(String title, {double size = 18}) {
     return Text(
       title,
-      style: AppTextStyle.medium(size: size),
+      // style: AppTextStyle.medium(size: size),
     );
   }
 
   Text _setText(String data, {int? maxLines}) => Text(data, maxLines: maxLines);
 
   Text _setDate(num date) => _setText(
-        AppFormatter.formatDateFromMills(date, pattern: '##.##'),
+        "AppFormatter.formatDateFromMills(date, pattern: '##.##')",
       );
 }

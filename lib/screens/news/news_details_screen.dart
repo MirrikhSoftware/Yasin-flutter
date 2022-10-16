@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
@@ -45,20 +46,21 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      AppFormatter.formatDateFromMills(
-                        news.date ?? DateTime.now().millisecondsSinceEpoch,
-                        pattern: '##.##',
-                      ),
-                    ),
+                    // Text(
+                    //   AppFormatter.formatDateFromMills(
+                    //     news.date ?? DateTime.now().millisecondsSinceEpoch,
+                    //     pattern: '##.##',
+                    //   ),
+                    // ),
                     SizedBox(height: 12.h),
-                    Text(
-                      news.title.toString(),
-                      style: AppTextStyle.medium(size: 22),
-                    ),
+                    // Text(
+                    //   news.title.toString(),
+                    //   style: AppTextStyle.medium(size: 22),
+                    // ),
                     SizedBox(height: 12.h),
                   ],
-                ).symmetricPadding(h: 8),
+                ),
+                // .symmetricPadding(h: 8),
                 Html(data: news.hTMLText),
               ],
             ),
@@ -87,11 +89,12 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                             topLeft: Radius.circular(10.r),
                             topRight: Radius.circular(10.r),
                           ),
-                          child: AppImage(
-                            image: e,
-                            height: 410.h,
-                            width: 410.w,
-                          ),
+                          // child:
+                          //  AppImage(
+                          //   image: e,
+                          //   height: 410.h,
+                          //   width: 410.w,
+                          // ),
                         ),
                       )
                       .toList(),
@@ -106,15 +109,17 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                     horizontal: 16.w,
                     vertical: 8.h,
                   ),
-                  decoration: AppShape.simple(
-                    color: Colors.black26,
-                    radius: 24.r,
-                  ),
-                  child: Text(
-                    '${state.index + 1}/${news.images!.length}',
-                    style: AppTextStyle.medium(color: AppColors.white),
-                  ),
-                ).visibility(visible: news.images!.length > 1),
+                  // decoration: AppShape.simple(
+                  //   color: Colors.black26,
+                  //   radius: 24.r,
+                  // ),
+                  // child: Text(
+                  //   '${state.index + 1}/${news.images!.length}',
+                  //   style: AppTextStyle.medium(color: AppColors.white),
+                  // ),
+                )
+                
+                // .visibility(visible: news.images!.length > 1),
               )
             ],
           );
