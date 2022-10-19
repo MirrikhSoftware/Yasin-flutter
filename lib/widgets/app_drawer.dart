@@ -15,6 +15,11 @@ class AppDrawer extends StatefulWidget {
 
 class _AppDrawerState extends State<AppDrawer> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: AppColors.white,
@@ -48,6 +53,14 @@ class _AppDrawerState extends State<AppDrawer> {
               title: AppStrings.bookmarks.tr(),
               onTap: () {
                 AppNavigator.pushNamed(RouteNames.bookmarks);
+              },
+            ),
+
+            _setTitle(
+              icon: AppIcons.alert,
+              title: AppStrings.news.tr(),
+              onTap: () {
+                AppNavigator.pushNamed(RouteNames.news);
               },
             ),
             _setTitle(
@@ -88,10 +101,9 @@ class _AppDrawerState extends State<AppDrawer> {
             Visibility(
               visible: kDebugMode,
               child: _setTitle(
-                icon: AppIcons.book,
-                title: 'Test',
-                onTap: () => AppNavigator.pushNamed(RouteNames.test)
-              ),
+                  icon: AppIcons.book,
+                  title: 'Test',
+                  onTap: () => AppNavigator.pushNamed(RouteNames.test)),
             ),
             const Spacer(),
             ListTile(

@@ -5,6 +5,7 @@ import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/screens/test/auth_service.dart';
+import 'package:yaaseen/services/services.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 import 'dart:math' as math;
 
@@ -24,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    AnalyticsService.analytics.log(name: 'HomeScreen');
 
     TestAuth.anonymously();
 

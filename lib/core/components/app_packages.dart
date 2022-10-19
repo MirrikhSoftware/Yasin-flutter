@@ -15,3 +15,4 @@ export 'package:audio_service/audio_service.dart';
 export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:firebase_analytics/firebase_analytics.dart';
 export 'package:just_audio/just_audio.dart';
+export 'package:flutter_html/flutter_html.dart';

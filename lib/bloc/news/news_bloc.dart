@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
+import 'package:yaaseen/screens/test/firestore_service.dart';
 import 'package:yaaseen/services/services.dart';
 
 part 'news_event.dart';
@@ -9,8 +10,7 @@ part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   late NewsModel _news;
-  final List<NewsModel> _newsList = [];
-  late List<NewsModel> _oldNews;
+
   NewsBloc() : super(NewsInitial()) {
     // _oldNews = NewsHelper.newsList;
     on<NewsLoadedEvent>(_getNews);
@@ -21,7 +21,9 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   FutureOr<void> _getNews(
     NewsLoadedEvent event,
     Emitter<NewsState> emit,
-  ) async {}
+  ) async {
+    
+  }
 
   FutureOr<void> _getNewsById(
     NewsGetByIdEvent event,

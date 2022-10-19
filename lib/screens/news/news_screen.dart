@@ -15,7 +15,8 @@ import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/models.dart';
-import 'package:yaaseen/screens/news/news.dart';
+import 'package:yaaseen/screens/test/firestore_service.dart';
+import 'package:yaaseen/types.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -37,31 +38,54 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: SimpleAppBar(title: AppStrings.news.tr()),
-      body: ValueListenableBuilder(
-        valueListenable: HiveBoxes.newsBox.listenable(),
-        builder: (context, Box<NewsModel> box, child) {
-          List<NewsModel> newsList =
-              box.values.where((news) => news.status == 'active').toList();
-          return RefreshIndicator(
-            onRefresh: () async {
-              NewsBloc newsBloc = BlocProvider.of(context);
-              newsBloc.add(NewsLoadedEvent());
-            },
-            child: ListView.builder(
-              itemCount: newsList.length,
-              // itemCount: MockData.mockNewsList.length,
+      body: StreamBuilder(
+        stream: FirestoreService().getNews(),
+        builder: (context, AsyncSnapshot<QueryMap> snapshot) {
+          if (snapshot.hasData) {
+            QueryMap query = snapshot.requireData;
+            return ListView.builder(
+              itemCount: query.docs.length,
               itemBuilder: (context, index) {
-                NewsModel news = newsList[index];
-                // NewsModel news = MockData.mockNewsList[index];
-                return _showNews(news);
+                QueryDoc doc = query.docs[index];
+    
+                return  ListTile(
+                  title: Text(doc.data().toString()),
+                );
               },
-            ),
-          );
+            );
+          }
+    
+          return const SizedBox();
         },
       ),
     );
+
+    // Scaffold(
+    //   backgroundColor: AppColors.white,
+    //   appBar: SimpleAppBar(title: AppStrings.news.tr()),
+    //   body: ValueListenableBuilder(
+    //     valueListenable: HiveBoxes.newsBox.listenable(),
+    //     builder: (context, Box<NewsModel> box, child) {
+    //       List<NewsModel> newsList =
+    //           box.values.where((news) => news.status == 'active').toList();
+    //       return RefreshIndicator(
+    //         onRefresh: () async {
+    //           NewsBloc newsBloc = BlocProvider.of(context);
+    //           newsBloc.add(NewsLoadedEvent());
+    //         },
+    //         child: ListView.builder(
+    //           itemCount: newsList.length,
+    //           // itemCount: MockData.mockNewsList.length,
+    //           itemBuilder: (context, index) {
+    //             NewsModel news = newsList[index];
+    //             // NewsModel news = MockData.mockNewsList[index];
+    //             return _showNews(news);
+    //           },
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // );
   }
 
   Widget _showNews(NewsModel news) => Card(
@@ -116,7 +140,7 @@ class _NewsScreenState extends State<NewsScreen> {
       //       context: context,
       //       builder: (_) => const NewsDetailsScreen());
       // });
-;
+      ;
   Text _setTitle(String title, {double size = 18}) {
     return Text(
       title,
