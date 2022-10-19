@@ -1,129 +1,84 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
-import 'package:yaaseen/hive_helper/hive_types.dart';
+
 part 'news_model.g.dart';
 
 @HiveType(typeId: HiveTypes.news, adapterName: HiveAdapters.newsAdapter)
-class NewsModel extends HiveObject {
+class NewsModel {
   @HiveField(0)
-  String? _sId;
+  String? _id;
   @HiveField(1)
-  String? _status;
+  String? _body;
   @HiveField(2)
-  String? _type;
+  String? _newsType;
   @HiveField(3)
-  String? _title;
-  @HiveField(4)
-  String? _hTMLText;
-  @HiveField(5)
-  int? _date;
-  @HiveField(6)
-  String? _image;
-  @HiveField(7)
-  List<String>? _images;
-  @HiveField(8)
   String? _createdAt;
-  @HiveField(9)
-  String? _updatedAt;
-  @HiveField(10)
-  int? _iV;
-  @HiveField(11)
-  String? _describtion;
+  @HiveField(4)
+  bool? _isActive;
+  @HiveField(5)
+  List<String>? _images;
+  @HiveField(6)
+  List<String>? _shown;
 
   NewsModel({
-    String? sId,
-    String? status,
-    String? type,
-    String? title,
-    String? hTMLText,
-    int? date,
-    String? image,
-    List<String>? images,
+    String? body,
+    String? id,
+    String? newsType,
     String? createdAt,
-    String? updatedAt,
-    int? iV,
-    String? describtion,
+    bool? isActive,
+    List<String>? images,
+    List<String>? shown,
   }) {
-    if (sId != null) {
-      _sId = sId;
+    if (body != null) {
+      _body = body;
     }
-    if (status != null) {
-      _status = status;
+    if (id != null) {
+      _id = id;
     }
-    if (type != null) {
-      _type = type;
-    }
-    if (title != null) {
-      _title = title;
-    }
-    if (hTMLText != null) {
-      _hTMLText = hTMLText;
-    }
-    if (date != null) {
-      _date = date;
-    }
-    if (image != null) {
-      _image = image;
-    }
-    if (images != null) {
-      _images = images;
+    if (newsType != null) {
+      _newsType = newsType;
     }
     if (createdAt != null) {
       _createdAt = createdAt;
     }
-    if (updatedAt != null) {
-      _updatedAt = updatedAt;
+    if (isActive != null) {
+      _isActive = isActive;
     }
-    if (iV != null) {
-      _iV = iV;
+    if (images != null) {
+      _images = images;
     }
-    if (describtion != null) {
-      _describtion = describtion;
+    if (shown != null) {
+      _shown = shown;
     }
   }
 
-  String? get sId => _sId;
-  String? get status => _status;
-  String? get type => _type;
-  String? get title => _title;
-  String? get hTMLText => _hTMLText;
-  int? get date => _date;
-  String? get image => _image;
-  List<String>? get images => _images;
+  String? get body => _body;
+  String? get id => _id;
+  String? get newsType => _newsType;
   String? get createdAt => _createdAt;
-  String? get updatedAt => _updatedAt;
-  int? get iV => _iV;
-  String? get describtion => _describtion;
+  bool? get isActive => _isActive;
+  List<String>? get images => _images;
+  List<String>? get shown => _shown;
 
   NewsModel.fromJson(Map<String, dynamic> json) {
-    _sId = json['_id'];
-    _status = json['status'];
-    _type = json['type'];
-    _title = json['title'];
-    _hTMLText = json['HTML_text'];
-    _date = json['date'];
-    _image = json['image'];
+    _body = json['body'];
+    _id = json['id'];
+    _newsType = json['news_type'];
+    _createdAt = json['created_at'];
+    _isActive = json['is_active'];
     _images = json['images'].cast<String>();
-    _createdAt = json['createdAt'];
-    _updatedAt = json['updatedAt'];
-    _iV = json['__v'];
-    _describtion = json['describtion'];
+    _shown = json['shown'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = _sId;
-    data['status'] = _status;
-    data['type'] = _type;
-    data['title'] = _title;
-    data['HTML_text'] = _hTMLText;
-    data['date'] = _date;
-    data['image'] = _image;
+    data['body'] = _body;
+    data['id'] = _id;
+    data['news_type'] = _newsType;
+    data['created_at'] = _createdAt;
+    data['is_active'] = _isActive;
     data['images'] = _images;
-    data['createdAt'] = _createdAt;
-    data['updatedAt'] = _updatedAt;
-    data['__v'] = _iV;
-    data['describtion'] = _describtion;
+    data['shown'] = _shown;
     return data;
   }
 }

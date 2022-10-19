@@ -16,7 +16,8 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/models.dart';
 import 'package:yaaseen/screens/test/firestore_service.dart';
-import 'package:yaaseen/types.dart';
+import 'package:yaaseen/app_types.dart';
+import 'package:yaaseen/services/notification_service.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -32,60 +33,58 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
     NewsBloc newsBloc = BlocProvider.of(context);
     newsBloc.add(NewsLoadedEvent());
+    NotificationService.hasNotification = false;
     // AppPrefs.setNotification(false);
   }
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   body: StreamBuilder(
+    //     stream: FirestoreService().getNews(),
+    //     builder: (context, AsyncSnapshot<QueryMap> snapshot) {
+    //       if (snapshot.hasData) {
+    //         QueryMap query = snapshot.requireData;
+    //         return ListView.builder(
+    //           itemCount: query.docs.length,
+    //           itemBuilder: (context, index) {
+    //             QueryDoc doc = query.docs[index];
+
+    //             return  ListTile(
+    //               title: Text(doc.data().toString()),
+    //             );
+    //           },
+    //         );
+    //       }
+
+    //       return const SizedBox();
+    //     },
+    //   ),
+    // );
+
     return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: SimpleAppBar(title: AppStrings.news.tr()),
       body: StreamBuilder(
         stream: FirestoreService().getNews(),
-        builder: (context, AsyncSnapshot<QueryMap> snapshot) {
-          if (snapshot.hasData) {
-            QueryMap query = snapshot.requireData;
+        builder: (context, AsyncSnapshot<QueryMap> snap) {
+          if (snap.hasData) {
+            List<QueryDoc> docs = snap.requireData.docs;
             return ListView.builder(
-              itemCount: query.docs.length,
+              itemCount: docs.length,
+              // itemCount: MockData.mockNewsList.length,
               itemBuilder: (context, index) {
-                QueryDoc doc = query.docs[index];
-    
-                return  ListTile(
-                  title: Text(doc.data().toString()),
-                );
+                QueryDoc doc = docs[index];
+                NewsModel news = NewsModel.fromJson(doc.data());
+                // NewsModel news = MockData.mockNewsList[index];
+                return _showNews(news);
               },
             );
           }
-    
           return const SizedBox();
         },
       ),
     );
-
-    // Scaffold(
-    //   backgroundColor: AppColors.white,
-    //   appBar: SimpleAppBar(title: AppStrings.news.tr()),
-    //   body: ValueListenableBuilder(
-    //     valueListenable: HiveBoxes.newsBox.listenable(),
-    //     builder: (context, Box<NewsModel> box, child) {
-    //       List<NewsModel> newsList =
-    //           box.values.where((news) => news.status == 'active').toList();
-    //       return RefreshIndicator(
-    //         onRefresh: () async {
-    //           NewsBloc newsBloc = BlocProvider.of(context);
-    //           newsBloc.add(NewsLoadedEvent());
-    //         },
-    //         child: ListView.builder(
-    //           itemCount: newsList.length,
-    //           // itemCount: MockData.mockNewsList.length,
-    //           itemBuilder: (context, index) {
-    //             NewsModel news = newsList[index];
-    //             // NewsModel news = MockData.mockNewsList[index];
-    //             return _showNews(news);
-    //           },
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 
   Widget _showNews(NewsModel news) => Card(
@@ -115,11 +114,11 @@ class _NewsScreenState extends State<NewsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 12.h),
-                _setDate(news.date ?? DateTime.now().millisecondsSinceEpoch),
+                // _setDate(news.date ?? DateTime.now().millisecondsSinceEpoch),
 
                 SizedBox(height: 12.h),
                 // TITLE
-                _setTitle(news.title.toString()),
+                // _setTitle(news.title.toString()),
 
                 SizedBox(height: 7.h),
 

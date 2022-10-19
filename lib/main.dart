@@ -12,7 +12,7 @@ void main() async {
 
   // await AppAudioService.init();
 
-  // await NotificationService.init();
+  await NotificationService.init();
   runApp(const MyApp());
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

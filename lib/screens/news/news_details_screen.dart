@@ -61,7 +61,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   ],
                 ),
                 // .symmetricPadding(h: 8),
-                Html(data: news.hTMLText),
+                Html(data: news.body),
               ],
             ),
           );

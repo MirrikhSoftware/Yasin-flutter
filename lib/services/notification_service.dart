@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:yaaseen/core/core.dart';
-import 'package:yaaseen/hive_helper/hive_helper.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  NotificationService.hasNotification = true;
   if (message.notification != null) {
     if (message.data['type'] == 'news') {}
   }
 }
 
 class NotificationService {
+  static bool hasNotification = false;
   static late AndroidNotificationChannel _channel;
   static late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
@@ -93,6 +94,7 @@ class NotificationService {
   }
 
   static Future<void> _handleMessage(RemoteMessage message) async {
+    hasNotification = true;
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = notification?.android;
     AppleNotification? apple = notification?.apple;
@@ -122,22 +124,26 @@ class NotificationService {
   }
 
   static Future _requestPermission() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    try {
+      FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      announcement: true,
-      badge: true,
-      carPlay: true,
-      criticalAlert: true,
-      provisional: true,
-      sound: true,
-    );
+      NotificationSettings settings = await messaging.requestPermission(
+        alert: true,
+        announcement: true,
+        badge: true,
+        carPlay: true,
+        criticalAlert: true,
+        provisional: true,
+        sound: true,
+      );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-    } else {}
+      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      } else if (settings.authorizationStatus ==
+          AuthorizationStatus.provisional) {
+      } else {}
+    } catch (err) {
+      err.error(name: 'NotificationService');
+    }
   }
 
   static Future _getToken() async {
