@@ -17,3 +17,4 @@ export 'package:firebase_analytics/firebase_analytics.dart';
 export 'package:just_audio/just_audio.dart';
 export 'package:flutter_html/flutter_html.dart';
 export 'package:badges/badges.dart';
+export 'package:on_click/on_click.dart';

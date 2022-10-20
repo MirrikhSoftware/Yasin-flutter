@@ -10,11 +10,14 @@
 
 */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
-import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/models.dart';
+import 'package:yaaseen/route/route_names.dart';
+import 'package:yaaseen/route/routes.dart';
+import 'package:yaaseen/screens/news/news.dart';
 import 'package:yaaseen/screens/test/firestore_service.dart';
 import 'package:yaaseen/app_types.dart';
 import 'package:yaaseen/services/notification_service.dart';
@@ -28,40 +31,18 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
+  final AppFormatter _formatter = AppFormatter();
   @override
   void initState() {
     super.initState();
-    NewsBloc newsBloc = BlocProvider.of(context);
-    newsBloc.add(NewsLoadedEvent());
+    // NewsBloc newsBloc = BlocProvider.of(context);
+    // newsBloc.add(NewsLoadedEvent());
     NotificationService.hasNotification = false;
     // AppPrefs.setNotification(false);
   }
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   body: StreamBuilder(
-    //     stream: FirestoreService().getNews(),
-    //     builder: (context, AsyncSnapshot<QueryMap> snapshot) {
-    //       if (snapshot.hasData) {
-    //         QueryMap query = snapshot.requireData;
-    //         return ListView.builder(
-    //           itemCount: query.docs.length,
-    //           itemBuilder: (context, index) {
-    //             QueryDoc doc = query.docs[index];
-
-    //             return  ListTile(
-    //               title: Text(doc.data().toString()),
-    //             );
-    //           },
-    //         );
-    //       }
-
-    //       return const SizedBox();
-    //     },
-    //   ),
-    // );
-
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: SimpleAppBar(title: AppStrings.news.tr()),
@@ -95,7 +76,6 @@ class _NewsScreenState extends State<NewsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // SizedBox(height: 7.h),
 
             // IMAGE
             ClipRRect(
@@ -103,53 +83,58 @@ class _NewsScreenState extends State<NewsScreen> {
                 topLeft: Radius.circular(10.r),
                 topRight: Radius.circular(10.r),
               ),
-              // child: AppImage(
-              //   image: news.images!.first,
-              //   height: 410.h,
-              //   width: 410.w,
-              // ),
+              child: AppImage(
+                image: news.images!.first,
+                height: 220.h,
+                width: 375.w,
+              ),
             ),
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 12.h),
-                // _setDate(news.date ?? DateTime.now().millisecondsSinceEpoch),
-
-                SizedBox(height: 12.h),
-                // TITLE
-                // _setTitle(news.title.toString()),
-
-                SizedBox(height: 7.h),
-
-                // _setText(_getDescription(news), maxLines: 2),
-              ],
-            )
-            // .symmetricPadding(h: 14)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    news.title.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  Row(
+                    children: [
+                      _setText(
+                        _formatter.formatDate(DateTime.parse(news.createdAt!)),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Icons.remove_red_eye,
+                        color: Colors.grey,
+                        size: 16.0,
+                      ),
+                      SizedBox(width: 4.w),
+                      _setText(news.shown!.length.toString())
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
-      )
-      // .onClick(() {
-      //   NewsBloc newsBloc = BlocProvider.of(context);
-      //   newsBloc.add(NewsSelectedEvent(news));
-      //   // AppNavigator.pushNamed(RouteNames.NEWS_DETAILS);
-      //   showModalBottomSheet(
-      //       isScrollControlled: true,
-      //       backgroundColor: Colors.transparent,
-      //       context: context,
-      //       builder: (_) => const NewsDetailsScreen());
-      // });
-      ;
-  Text _setTitle(String title, {double size = 18}) {
-    return Text(
-      title,
-      // style: AppTextStyle.medium(size: size),
-    );
-  }
+      ).onClick(() {
+        NewsBloc newsBloc = BlocProvider.of(context);
+        newsBloc.add(NewsSelectedEvent(news));
+        AppNavigator.push(const NewsDetailsScreen());
+      });
 
-  Text _setText(String data, {int? maxLines}) => Text(data, maxLines: maxLines);
-
-  Text _setDate(num date) => _setText(
-        "AppFormatter.formatDateFromMills(date, pattern: '##.##')",
+  Text _setText(String text) => Text(
+        text,
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+        ),
       );
 }

@@ -1,4 +1,3 @@
-
 import 'package:yaaseen/models/verse/verse_model.dart';
 
 class AppFormatter {
@@ -24,7 +23,6 @@ class AppFormatter {
   }
 
   String formatClipboard(VerseModel verse) {
-
     int verseId = verse.verseId!;
     String arabic = verse.arabic!;
     String meaning = verse.meaning!;
@@ -33,4 +31,14 @@ class AppFormatter {
     return formatted;
   }
 
+  String formatDate(DateTime date) {
+    int year = date.year;
+    String month = date.month.toString().padLeft(2, '0');
+    String day = date.day.toString().padLeft(2, '0');
+    String hour = date.hour.toString().padLeft(2, '0');
+    String minute = date.minute.toString().padLeft(2, '0');
+    String formatted = '$day.$month.$year $hour:$minute';
+
+    return formatted;
+  }
 }

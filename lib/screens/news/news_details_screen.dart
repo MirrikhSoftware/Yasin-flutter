@@ -1,10 +1,10 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter/services.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
+import 'package:yaaseen/screens/test/firestore_service.dart';
+import 'package:yaaseen/widgets/widgets.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
   const NewsDetailsScreen({Key? key}) : super(key: key);
@@ -15,57 +15,74 @@ class NewsDetailsScreen extends StatefulWidget {
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   late NewsModel news;
+
+
+
+  final AppFormatter _formatter = AppFormatter();
+
   @override
   void initState() {
     super.initState();
     news = BlocProvider.of<NewsBloc>(context).news;
+    FirestoreService().setShowList(news);
   }
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-        expand: true,
-        initialChildSize: .7,
-        minChildSize: .6,
-        maxChildSize: 1.0,
-        
-        builder: (context, controller) {
-          return Material(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10.r),
-              topRight: Radius.circular(10.r),
+  
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: AppColors.green,
+            pinned: true,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
             ),
-            color: AppColors.white,
-            child: ListView(
-              padding: EdgeInsets.zero,
-              controller: controller,
-              physics: const ClampingScrollPhysics(),
-              children: [
-                _showImages(),
-                SizedBox(height: 12.h),
-                Column(
+            expandedHeight: 220.h - kToolbarHeight,
+            toolbarHeight: kToolbarHeight,
+            flexibleSpace: _showImages(),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text(
-                    //   AppFormatter.formatDateFromMills(
-                    //     news.date ?? DateTime.now().millisecondsSinceEpoch,
-                    //     pattern: '##.##',
-                    //   ),
-                    // ),
+                    Text(
+                      news.title.toString(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16.sp,
+                      ),
+                    ),
                     SizedBox(height: 12.h),
-                    // Text(
-                    //   news.title.toString(),
-                    //   style: AppTextStyle.medium(size: 22),
-                    // ),
-                    SizedBox(height: 12.h),
+                    Row(
+                      children: [
+                        _setText(
+                          _formatter
+                              .formatDate(DateTime.parse(news.createdAt!)),
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.remove_red_eye,
+                          color: Colors.grey,
+                          size: 16.0,
+                        ),
+                        SizedBox(width: 4.w),
+                        _setText(news.shown!.length.toString())
+                      ],
+                    ),
                   ],
                 ),
-                // .symmetricPadding(h: 8),
-                Html(data: news.body),
-              ],
-            ),
-          );
-        });
+              ),
+              Html(data: news.body)
+            ]),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _showImages() {
@@ -77,7 +94,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           return Stack(
             children: [
               SizedBox(
-                height: 410.h,
+                height: 220.h,
                 child: PageView(
                   physics: const ClampingScrollPhysics(),
                   onPageChanged: (i) =>
@@ -89,12 +106,11 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                             topLeft: Radius.circular(10.r),
                             topRight: Radius.circular(10.r),
                           ),
-                          // child:
-                          //  AppImage(
-                          //   image: e,
-                          //   height: 410.h,
-                          //   width: 410.w,
-                          // ),
+                          child: AppImage(
+                            image: e,
+                            height: 220.h,
+                            width: 375.w,
+                          ),
                         ),
                       )
                       .toList(),
@@ -109,17 +125,15 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                     horizontal: 16.w,
                     vertical: 8.h,
                   ),
-                  // decoration: AppShape.simple(
-                  //   color: Colors.black26,
-                  //   radius: 24.r,
-                  // ),
-                  // child: Text(
-                  //   '${state.index + 1}/${news.images!.length}',
-                  //   style: AppTextStyle.medium(color: AppColors.white),
-                  // ),
-                )
-                
-                // .visibility(visible: news.images!.length > 1),
+                  decoration: AppShape.simple(
+                    color: Colors.black26,
+                    radius: 24.r,
+                  ),
+                  child: Text(
+                    '${state.index + 1}/${news.images!.length}',
+                    style: const TextStyle(color: AppColors.white),
+                  ),
+                ).visibility(visible: news.images!.length > 1),
               )
             ],
           );
@@ -127,4 +141,13 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
       ),
     );
   }
+
+  Text _setText(String text) => Text(
+        text,
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+        ),
+      );
 }

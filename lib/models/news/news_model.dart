@@ -19,6 +19,8 @@ class NewsModel {
   List<String>? _images;
   @HiveField(6)
   List<String>? _shown;
+  @HiveField(7)
+  String? _title;
 
   NewsModel({
     String? body,
@@ -28,6 +30,7 @@ class NewsModel {
     bool? isActive,
     List<String>? images,
     List<String>? shown,
+    String? title,
   }) {
     if (body != null) {
       _body = body;
@@ -50,12 +53,16 @@ class NewsModel {
     if (shown != null) {
       _shown = shown;
     }
+    if(title != null) {
+      _title =title;
+    }
   }
 
   String? get body => _body;
   String? get id => _id;
   String? get newsType => _newsType;
   String? get createdAt => _createdAt;
+  String? get title => _title;
   bool? get isActive => _isActive;
   List<String>? get images => _images;
   List<String>? get shown => _shown;
@@ -66,6 +73,7 @@ class NewsModel {
     _newsType = json['news_type'];
     _createdAt = json['created_at'];
     _isActive = json['is_active'];
+    _title = json['title'];
     _images = json['images'].cast<String>();
     _shown = json['shown'].cast<String>();
   }
@@ -79,6 +87,7 @@ class NewsModel {
     data['is_active'] = _isActive;
     data['images'] = _images;
     data['shown'] = _shown;
+    data['title'] = _title;
     return data;
   }
 }
