@@ -90,18 +90,21 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     final byteData = await rootBundle.load(path);
     final bytes = byteData.buffer.asUint8List();
     await _player.play(BytesSource(bytes));
-    
+
     final dur = await _player.getDuration();
     _duration = dur!.inMilliseconds;
 
-    
     try {
       BuildContext context = _keys[_playingId - 1].currentContext!;
       const Duration duration = Duration(milliseconds: 500);
       // ignore: use_build_context_synchronously
       Scrollable.ensureVisible(context, duration: duration, alignment: .1);
     } catch (err) {
-      err;
+      LogHelper.addLog(
+        err.toString(),
+        file: 'player_bloc.dart',
+        function: '_play(int id)',
+      );
     }
   }
 }

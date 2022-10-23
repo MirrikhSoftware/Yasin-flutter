@@ -16,10 +16,7 @@ class LogHelper {
     String message, {
     String file = '',
     String type = 'FAIL',
-    String method = 'POST',
-    String path = '/',
-    String url = '',
-    int statusCode = 200,
+    String function = '/',
   }) async {
     User? user = FirebaseAuth.instance.currentUser;
 
@@ -28,6 +25,7 @@ class LogHelper {
       message: message,
       type: 'FAIL',
       file: file,
+      function: function,
       userId: user?.uid,
       openedTime: AppPrefs.counter,
     );
@@ -46,6 +44,7 @@ class LogService {
       Uri url = Uri.parse('${DotEnv.telegramLink}$message');
 
       http.Response response = await http.get(url);
+      response.body.printf();
 
       if (response.statusCode == 200) {
         return HttpResult(statusCode: 200, isSuccess: true, response: '');
@@ -57,21 +56,21 @@ class LogService {
   }
 
   static Future<String> _logToString(LogModel log) async {
-    const versionUrl =
-        'https://github.com/Invan-Soft/tiin-cashback-v2.0/tree/7376b0839357d265b578fc92a7ca1f26c40e575a';
+    const versionUrl = '';
     final String platform = Platform.isAndroid ? 'Android' : 'iOS';
     const String mode = kDebugMode ? 'debug' : 'release';
     final String type = log.type == 'FAIL' ? 'Error' : 'Message';
-    String userData = '';
+    
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
 
     final String logString = """
 <b>${log.date}</b>
-$userData
+<b>User id:</b> ${log.userId}
 <b>Platform:</b> $platform
 <b>File:</b> ${log.file}
+<b>Function: </b>${log.function},
 <b>$type:</b> ${log.message}
 <b>Opened time</b> ${AppPrefs.counter}
 <b>Version</b> <a href = "$versionUrl">$version $buildNumber $mode</a>

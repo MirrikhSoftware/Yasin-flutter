@@ -5,25 +5,42 @@ part 'log_model.g.dart';
 
 @HiveType(typeId: HiveTypes.log, adapterName: HiveAdapters.logAdapter)
 class LogModel extends HiveObject {
+  
+  @HiveField(0)
   String? _file;
-  String? _tpye;
+  
+  @HiveField(1)
+  String? _function;
+  
+  @HiveField(2)
+  String? _type;
+  
+  @HiveField(3)
   String? _date;
+  
+  @HiveField(4)
   String? _userId;
+  
+  @HiveField(5)
   String? _message;
+  
+  @HiveField(6)
   int? _openedTime;
 
-  LogModel(
-      {String? file,
-      String? type,
-      String? date,
-      String? userId,
-      String? message,
-      int? openedTime}) {
+  LogModel({
+    String? file,
+    String? type,
+    String? date,
+    String? userId,
+    String? message,
+    int? openedTime,
+    String? function,
+  }) {
     if (file != null) {
       _file = file;
     }
     if (type != null) {
-      _tpye = type;
+      _type = type;
     }
     if (date != null) {
       _date = date;
@@ -37,11 +54,15 @@ class LogModel extends HiveObject {
     if (openedTime != null) {
       _openedTime = openedTime;
     }
+
+    if (function != null) {
+      _function = function;
+    }
   }
 
   String? get file => _file;
   // set file(String? file) => _file = file;
-  String? get type => _tpye;
+  String? get type => _type;
   // set tpye(String? tpye) => _tpye = tpye;
   String? get date => _date;
   // set date(String? date) => _date = date;
@@ -51,24 +72,27 @@ class LogModel extends HiveObject {
   // set message(String? message) => _message = message;
   int? get openedTime => _openedTime;
   // set openedTime(String? openedTime) => _openedTime = openedTime;
+  String? get function => _function;
 
   LogModel.fromJson(Map<String, dynamic> json) {
     _file = json['file'];
-    _tpye = json['type'];
+    _type = json['type'];
     _date = json['date'];
     _userId = json['user_id'];
     _message = json['message'];
     _openedTime = json['opened_time'];
+    _function = json['function'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['file'] = _file;
-    data['type'] = _tpye;
+    data['type'] = _type;
     data['date'] = _date;
     data['user_id'] = _userId;
     data['message'] = _message;
     data['opened_time'] = _openedTime;
+    data['function'] = _function;
     return data;
   }
 }
