@@ -23,13 +23,14 @@ class NewsAdapter extends TypeAdapter<NewsModel> {
       .._createdAt = fields[3] as String?
       .._isActive = fields[4] as bool?
       .._images = (fields[5] as List?)?.cast<String>()
-      .._shown = (fields[6] as List?)?.cast<String>();
+      .._shown = (fields[6] as List?)?.cast<String>()
+      .._title = fields[7] as String?;
   }
 
   @override
   void write(BinaryWriter writer, NewsModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj._id)
       ..writeByte(1)
@@ -43,7 +44,9 @@ class NewsAdapter extends TypeAdapter<NewsModel> {
       ..writeByte(5)
       ..write(obj._images)
       ..writeByte(6)
-      ..write(obj._shown);
+      ..write(obj._shown)
+      ..writeByte(7)
+      ..write(obj._title);
   }
 
   @override

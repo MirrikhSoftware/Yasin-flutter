@@ -55,6 +55,7 @@ class AppLocales {
         AppStrings.rate_app: _setString("Ilovani baholash", 'Иловани баҳолаш'),
         AppStrings.share_app: _setString("Ilovani ulashish", 'Иловани улашиш'),
         AppStrings.news: _setString('Yangiliklar', 'Янгиликлар'),
+        AppStrings.feedback: _setString('Fikr-mulohaza', 'Фикр-мулоҳаза'),
         AppStrings.empty_bookmarks: _setString(
           "Xatcho'plar yo'q",
           "Хатчўплар йўқ",

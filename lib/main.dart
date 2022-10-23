@@ -10,10 +10,12 @@ void main() async {
   await Firebase.initializeApp();
   await HiveService.init();
 
+  runApp(const MyApp());
+
+  
   // await AppAudioService.init();
 
   await NotificationService.init();
-  runApp(const MyApp());
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(

@@ -56,10 +56,9 @@ class _AppDrawerState extends State<AppDrawer> {
                 AppNavigator.pushNamed(RouteNames.bookmarks);
               },
             ),
-
             Badge(
               showBadge: NotificationService.hasNotification,
-              position: BadgePosition(top: 8.h,start: 8.w),
+              position: BadgePosition(top: 8.h, start: 8.w),
               child: _setTitle(
                 icon: AppIcons.alert,
                 title: AppStrings.news.tr(),
@@ -98,12 +97,17 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            // _setTitle(
-            //     key: AppKeys.feedback,
-            //     icon: AppIcons.message,
-            //     title: 'Feedback',
-            //     onTap: () => AppNavigator.pushNamed(RouteNames.feedback)),
-
+            Badge(
+              showBadge: NotificationService.hasNotification,
+              position: BadgePosition(top: 8.h, start: 8.w),
+              child: _setTitle(
+                icon: AppIcons.message,
+                title: AppStrings.feedback.tr(),
+                onTap: () {
+                  AppNavigator.pushNamed(RouteNames.feedback);
+                },
+              ),
+            ),
             Visibility(
               visible: kDebugMode,
               child: _setTitle(

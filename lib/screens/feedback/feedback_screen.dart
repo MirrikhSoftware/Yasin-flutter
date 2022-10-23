@@ -61,8 +61,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             textCapitalization: TextCapitalization.sentences,
             textInputAction: TextInputAction.newline,
             
-            maxLength: null,
-            // keyboardType: TextInputType.multiline,
+            maxLines: null,
+            keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: 'Message',
 
