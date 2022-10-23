@@ -12,26 +12,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: (context, w) {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => SettingsBloc()),
-          BlocProvider(create: (_) => PlayerBloc()),
-          BlocProvider(create: (_) => NewsBloc()),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: AppStrings.app_name.tr(),
-          theme: AppTheme().green,
-          navigatorKey: AppNavigator.navigatorKey,
-          initialRoute: RouteNames.initial,
-          onGenerateRoute: AppRoutes().onGenerateRoute,
-          navigatorObservers: [
-            AnalyticsService.getAnalyticsObserver(),
-          ],
-        ),
-      );
-    });
+        designSize: const Size(375, 812),
+        builder: (context, w) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => SettingsBloc()),
+              BlocProvider(create: (_) => PlayerBloc()),
+              BlocProvider(create: (_) => NewsBloc()),
+            ],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: AppStrings.app_name.tr(),
+              theme: AppTheme().green,
+              navigatorKey: AppNavigator.navigatorKey,
+              initialRoute: RouteNames.initial,
+              onGenerateRoute: AppRoutes().onGenerateRoute,
+              navigatorObservers: [
+                AnalyticsService.getAnalyticsObserver(),
+              ],
+            ),
+          );
+        });
   }
 }

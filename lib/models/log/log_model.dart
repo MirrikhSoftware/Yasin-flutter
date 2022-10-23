@@ -4,7 +4,7 @@ import 'package:yaaseen/hive_helper/hive_helper.dart';
 part 'log_model.g.dart';
 
 @HiveType(typeId: HiveTypes.log, adapterName: HiveAdapters.logAdapter)
-class LogModel {
+class LogModel extends HiveObject {
   String? _file;
   String? _tpye;
   String? _date;
@@ -14,7 +14,7 @@ class LogModel {
 
   LogModel(
       {String? file,
-      String? tpye,
+      String? type,
       String? date,
       String? userId,
       String? message,
@@ -22,8 +22,8 @@ class LogModel {
     if (file != null) {
       _file = file;
     }
-    if (tpye != null) {
-      _tpye = tpye;
+    if (type != null) {
+      _tpye = type;
     }
     if (date != null) {
       _date = date;
@@ -41,7 +41,7 @@ class LogModel {
 
   String? get file => _file;
   // set file(String? file) => _file = file;
-  String? get tpye => _tpye;
+  String? get type => _tpye;
   // set tpye(String? tpye) => _tpye = tpye;
   String? get date => _date;
   // set date(String? date) => _date = date;
@@ -54,7 +54,7 @@ class LogModel {
 
   LogModel.fromJson(Map<String, dynamic> json) {
     _file = json['file'];
-    _tpye = json['tpye'];
+    _tpye = json['type'];
     _date = json['date'];
     _userId = json['user_id'];
     _message = json['message'];
@@ -64,7 +64,7 @@ class LogModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['file'] = _file;
-    data['tpye'] = _tpye;
+    data['type'] = _tpye;
     data['date'] = _date;
     data['user_id'] = _userId;
     data['message'] = _message;

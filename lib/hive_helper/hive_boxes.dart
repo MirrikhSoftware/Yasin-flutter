@@ -9,5 +9,5 @@ class HiveBoxes {
   static Box<dynamic> get langBox => Hive.box(HiveBoxNames.language);
   static Box<FeedbackModel> get feedbackBox => Hive.box(HiveBoxNames.feedbacks);
   static Box<NewsModel> get newsBox => Hive.box(HiveBoxNames.news);
- 
+  static Box<LogModel> get logBox => Hive.box(HiveBoxNames.log);
 }

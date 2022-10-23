@@ -15,26 +15,26 @@ class AppPrefs {
   // === ARABIC SIZE ======================================================== //
 
   static Future setArabicSize(double size) async {
-    await _box.put(HiveKeys.arabic_size, size);
+    await _box.put(HiveKeys.arabicSize, size);
   }
 
-  static double get arabicSize => _box.get(HiveKeys.arabic_size) ?? 24;
+  static double get arabicSize => _box.get(HiveKeys.arabicSize) ?? 24;
 
   // === MEANING SIZE ======================================================= //
 
   static Future setMeaingSize(double size) async {
-    await _box.put(HiveKeys.meaning_size, size);
+    await _box.put(HiveKeys.meaningSize, size);
   }
 
-  static double get meaningSize => _box.get(HiveKeys.meaning_size) ?? 18;
+  static double get meaningSize => _box.get(HiveKeys.meaningSize) ?? 18;
 
   // === TRANSCRIPTION SIZE ================================================= //
 
   static Future setTranscriptionSize(double size) async {
-    await _box.put(HiveKeys.transcription_size, size);
+    await _box.put(HiveKeys.transcriptionSize, size);
   }
 
-  static double get trSize => _box.get(HiveKeys.transcription_size) ?? 18;
+  static double get trSize => _box.get(HiveKeys.transcriptionSize) ?? 18;
 
   // === APP LOCALE ================================================= //
 
@@ -47,27 +47,33 @@ class AppPrefs {
   // === SCROLL POSITOIN ================================================= //
 
   static Future setScrollOffset(double offset) async {
-    await _box.put(HiveKeys.scroll_offset, offset);
+    await _box.put(HiveKeys.scrollOffset, offset);
   }
 
-  static double get srcollOffset => _box.get(HiveKeys.scroll_offset) ?? 0;
-
+  static double get srcollOffset => _box.get(HiveKeys.scrollOffset) ?? 0;
 
   // === SCROLL POSITOIN ================================================= //
 
   static Future setLastPlaying(int lastPlayingId) async {
-    await _box.put(HiveKeys.last_playing, lastPlayingId);
+    await _box.put(HiveKeys.lastPlaying, lastPlayingId);
   }
 
-  static int get lastPlaying => _box.get(HiveKeys.last_playing) ?? 0;
+  static int get lastPlaying => _box.get(HiveKeys.lastPlaying) ?? 0;
+
+  static Future setCounter() async {
+    await _box.put(HiveKeys.counter, counter + 1);
+  }
+
+  static int get counter => _box.get(HiveKeys.counter) ?? 0;
 }
 
 class HiveKeys {
   static const String saved = 'saved';
-  static const String arabic_size = 'arabic_size';
-  static const String meaning_size = 'meaning_size';
-  static const String transcription_size = 'transcription_size';
+  static const String arabicSize = 'arabic_size';
+  static const String meaningSize = 'meaning_size';
+  static const String transcriptionSize = 'transcription_size';
   static const String locale = 'locale';
-  static const String scroll_offset = 'scroll_offset';
-  static const String last_playing = 'last_playing';
+  static const String scrollOffset = 'scroll_offset';
+  static const String lastPlaying = 'last_playing';
+  static const String counter = 'counter';
 }

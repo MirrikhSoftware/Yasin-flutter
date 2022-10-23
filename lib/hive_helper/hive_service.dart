@@ -14,11 +14,13 @@ class HiveService {
     Hive.registerAdapter(VerseModelAdapter());
     Hive.registerAdapter(FeedbackAdapter());
     Hive.registerAdapter(NewsAdapter());
+    Hive.registerAdapter(LogAdapter());
 
     await Hive.openBox<VerseModel>(HiveBoxNames.verses);
     await Hive.openBox<dynamic>(HiveBoxNames.prefs);
     await Hive.openBox<dynamic>(HiveBoxNames.language);
     await Hive.openBox<FeedbackModel>(HiveBoxNames.feedbacks);
     await Hive.openBox<NewsModel>(HiveBoxNames.news);
+    await Hive.openBox<LogModel>(HiveBoxNames.log);
   }
 }
