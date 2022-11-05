@@ -7,9 +7,10 @@ import 'package:yaaseen/widgets/widgets.dart';
 
 class AppSearchDelegate extends SearchDelegate {
   @override
+  String? get searchFieldLabel => AppStrings.search.tr();
+  @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      platform: TargetPlatform.iOS,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.green,
       ),
@@ -48,6 +49,9 @@ class AppSearchDelegate extends SearchDelegate {
   }
 
   Widget _showFoundVerses() {
+    if (query.trim().isEmpty) {
+      return const SizedBox();
+    }
     String lang = AppPrefs.locale;
     List<VerseModel> verses = HiveBoxes.verseBox.values.where((verse) {
       if (lang == 'uz') {
@@ -69,11 +73,12 @@ class AppSearchDelegate extends SearchDelegate {
       }
       return false;
     }).toList();
-    return ListView.builder(
+    return ListView.separated(
       itemCount: verses.length,
+      separatorBuilder: (context, index) => Divider(),
       itemBuilder: (context, index) {
         VerseModel verse = verses[index];
-        return VerseListTile(verse: verse);
+        return FoundedVerseTile(query: query, verse: verse);
       },
     );
   }

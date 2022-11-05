@@ -12,3 +12,4 @@ export 'app_icon_button.dart';
 export 'app_image.dart';
 export 'app_shape.dart';
 export 'app_search_delegate.dart';
+export 'founded_verse_tile.dart';
