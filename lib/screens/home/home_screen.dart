@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
@@ -71,6 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 floating: true,
                 pinned: _pinned,
                 title: Text(AppStrings.app_name.tr()),
+                actions: [
+                  AppIconButton(
+                    icon: CupertinoIcons.search,
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: AppSearchDelegate(),
+                      );
+                    },
+                  )
+                ],
               ),
               SliverToBoxAdapter(
                 child: Padding(
