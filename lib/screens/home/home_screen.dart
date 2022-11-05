@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
         playerBloc.add(PlayAudioEvent(id + 1));
       }
     });
-    
   }
 
   @override

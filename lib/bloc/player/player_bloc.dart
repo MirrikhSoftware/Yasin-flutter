@@ -100,11 +100,11 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
       // ignore: use_build_context_synchronously
       Scrollable.ensureVisible(context, duration: duration, alignment: .1);
     } catch (err) {
-      LogHelper.addLog(
-        err.toString(),
-        file: 'player_bloc.dart',
-        function: '_play(int id)',
-      );
+      // LogHelper.addLog(
+      //   err.toString(),
+      //   file: 'player_bloc.dart',
+      //   function: '_play(int id)',
+      // );
     }
   }
 }

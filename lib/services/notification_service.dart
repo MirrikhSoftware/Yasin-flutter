@@ -3,22 +3,28 @@ import 'package:yaaseen/core/core.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  NotificationService.hasNotification = true;
   if (message.notification != null) {
     if (message.data['type'] == 'news') {}
   }
 }
 
 class NotificationService {
-  static bool hasNotification = false;
-  static late AndroidNotificationChannel _channel;
-  static late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  static NotificationService? _instance;
 
-  static const AndroidInitializationSettings _androidSettings =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+  NotificationService._internal() {
+    _instance = this;
+  }
 
-  static const DarwinInitializationSettings _iOSSettings =
-      DarwinInitializationSettings(
+  factory NotificationService() => _instance ?? NotificationService._internal();
+
+  late AndroidNotificationChannel _channel;
+  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+
+  final AndroidInitializationSettings _androidSettings =
+      const AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  final DarwinInitializationSettings _iOSSettings =
+      const DarwinInitializationSettings(
     defaultPresentAlert: true,
     requestAlertPermission: true,
     requestBadgePermission: true,
@@ -27,7 +33,7 @@ class NotificationService {
     defaultPresentBadge: true,
   );
 
-  static Future init() async {
+  Future init() async {
     await _requestPermission();
 
     await _loadFCM();
@@ -37,7 +43,7 @@ class NotificationService {
     await _getToken();
   }
 
-  static Future _loadFCM() async {
+  Future _loadFCM() async {
     if (!kIsWeb) {
       _channel = const AndroidNotificationChannel(
         'high_importance_channel', // id
@@ -56,7 +62,7 @@ class NotificationService {
           ?.createNotificationChannel(_channel);
 
       await _flutterLocalNotificationsPlugin.initialize(
-        const InitializationSettings(
+        InitializationSettings(
           android: _androidSettings,
           iOS: _iOSSettings,
         ),
@@ -75,7 +81,7 @@ class NotificationService {
     }
   }
 
-  static Future _listenFCM() async {
+  Future _listenFCM() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     FirebaseMessaging.onMessage.listen(_handleMessage);
@@ -93,8 +99,7 @@ class NotificationService {
     await messaging.subscribeToTopic('news');
   }
 
-  static Future<void> _handleMessage(RemoteMessage message) async {
-    hasNotification = true;
+  Future<void> _handleMessage(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = notification?.android;
     AppleNotification? apple = notification?.apple;
@@ -106,7 +111,7 @@ class NotificationService {
     }
   }
 
-  static Future<void> _showNotification(RemoteNotification notification) async {
+  Future<void> _showNotification(RemoteNotification notification) async {
     return _flutterLocalNotificationsPlugin.show(
       notification.hashCode,
       notification.title,
@@ -123,7 +128,7 @@ class NotificationService {
     );
   }
 
-  static Future _requestPermission() async {
+  Future _requestPermission() async {
     try {
       FirebaseMessaging messaging = FirebaseMessaging.instance;
 

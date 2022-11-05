@@ -10,4 +10,5 @@ class RouteNames {
   static const String feedback = '/feedback';
   static const String test = '/test';
   static const String news = '/news';
+  static const String about = '/about';
 }

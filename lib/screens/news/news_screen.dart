@@ -10,17 +10,14 @@
 
 */
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
-import 'package:yaaseen/route/route_names.dart';
 import 'package:yaaseen/route/routes.dart';
 import 'package:yaaseen/screens/news/news.dart';
 import 'package:yaaseen/screens/test/firestore_service.dart';
 import 'package:yaaseen/app_types.dart';
-import 'package:yaaseen/services/notification_service.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -37,7 +34,7 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
     // NewsBloc newsBloc = BlocProvider.of(context);
     // newsBloc.add(NewsLoadedEvent());
-    NotificationService.hasNotification = false;
+    // NotificationService.hasNotification = false;
     // AppPrefs.setNotification(false);
   }
 

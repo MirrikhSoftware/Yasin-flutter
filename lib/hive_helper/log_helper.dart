@@ -56,7 +56,7 @@ class LogService {
   }
 
   static Future<String> _logToString(LogModel log) async {
-    const versionUrl = '';
+    const versionUrl = 'https://github.com/MSOpenSources/Yasin-flutter/tree/103ef924577360a0d5e15cd5a4dfa2bc5364bc35';
     final String platform = Platform.isAndroid ? 'Android' : 'iOS';
     const String mode = kDebugMode ? 'debug' : 'release';
     final String type = log.type == 'FAIL' ? 'Error' : 'Message';

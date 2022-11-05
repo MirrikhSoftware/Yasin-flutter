@@ -1,7 +1,7 @@
 name: yaaseen
 description: Yasin sura.
 
-version: 2.2.2+15
+version: 2.2.3+16
 
 environment:
   sdk: ">=2.17.6 <3.0.0"

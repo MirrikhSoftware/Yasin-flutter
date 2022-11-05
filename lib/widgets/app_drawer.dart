@@ -57,7 +57,7 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             Badge(
-              showBadge: NotificationService.hasNotification,
+              showBadge: false,
               position: BadgePosition(top: 8.h, start: 8.w),
               child: _setTitle(
                 icon: AppIcons.alert,
@@ -79,6 +79,13 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
+              icon: AppIcons.book,
+              title: 'Ilova haqida',
+              onTap: () {
+                AppNavigator.pushNamed(RouteNames.about);
+              }
+            ),
+            _setTitle(
               key: AppKeys.rate,
               icon: AppIcons.rating_outlined,
               title: AppStrings.rate_app.tr(),
@@ -97,24 +104,24 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            Badge(
-              showBadge: NotificationService.hasNotification,
-              position: BadgePosition(top: 8.h, start: 8.w),
-              child: _setTitle(
-                icon: AppIcons.message,
-                title: AppStrings.feedback.tr(),
-                onTap: () {
-                  AppNavigator.pushNamed(RouteNames.feedback);
-                },
-              ),
-            ),
-            Visibility(
-              visible: kDebugMode,
-              child: _setTitle(
-                  icon: AppIcons.book,
-                  title: 'Test',
-                  onTap: () => AppNavigator.pushNamed(RouteNames.test)),
-            ),
+            // Badge(
+            //   showBadge: NotificationService.hasNotification,
+            //   position: BadgePosition(top: 8.h, start: 8.w),
+            //   child: _setTitle(
+            //     icon: AppIcons.message,
+            //     title: AppStrings.feedback.tr(),
+            //     onTap: () {
+            //       AppNavigator.pushNamed(RouteNames.feedback);
+            //     },
+            //   ),
+            // ),
+            // Visibility(
+            //   visible: kDebugMode,
+            //   child: _setTitle(
+            //       icon: AppIcons.book,
+            //       title: 'Test',
+            //       onTap: () => AppNavigator.pushNamed(RouteNames.test)),
+            // ),
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
