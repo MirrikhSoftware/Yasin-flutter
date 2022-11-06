@@ -147,7 +147,7 @@ class NotificationService {
           AuthorizationStatus.provisional) {
       } else {}
     } catch (err) {
-      err.error(name: 'NotificationService');
+      err.printf(name: 'NotificationService', isError: true);
     }
   }
 
