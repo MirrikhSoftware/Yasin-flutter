@@ -3,11 +3,13 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
+import 'package:yaaseen/route/app_navigator.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class AppSearchDelegate extends SearchDelegate {
   @override
   String? get searchFieldLabel => AppStrings.search.tr();
+
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
@@ -30,7 +32,18 @@ class AppSearchDelegate extends SearchDelegate {
 
   @override
   List<Widget>? buildActions(BuildContext context) {
-    return null;
+    return [
+      AppIconButton(
+        icon: Icons.clear,
+        onPressed: () {
+          if (query.isEmpty) {
+            AppNavigator.pop();
+          } else {
+            query = '';
+          }
+        },
+      )
+    ];
   }
 
   @override
@@ -50,7 +63,7 @@ class AppSearchDelegate extends SearchDelegate {
 
   Widget _showFoundVerses() {
     if (query.trim().isEmpty) {
-      return const SizedBox();
+      return Container(color: AppColors.background);
     }
     String lang = AppPrefs.locale;
     List<VerseModel> verses = HiveBoxes.verseBox.values.where((verse) {
@@ -73,13 +86,31 @@ class AppSearchDelegate extends SearchDelegate {
       }
       return false;
     }).toList();
-    return ListView.separated(
-      itemCount: verses.length,
-      separatorBuilder: (context, index) => Divider(),
-      itemBuilder: (context, index) {
-        VerseModel verse = verses[index];
-        return FoundedVerseTile(query: query, verse: verse);
-      },
+    if (verses.isEmpty) {
+      return Container(
+        color: AppColors.background,
+        alignment: Alignment.center,
+        child: Text(
+          AppStrings.notFound.tr(),
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w500,
+          ),
+        
+        ),
+      );
+    }
+    return Material(
+      color: AppColors.background,
+      child: ListView.separated(
+        padding: EdgeInsets.all(16.r),
+        itemCount: verses.length,
+        separatorBuilder: (context, index) => const Divider(thickness: 1),
+        itemBuilder: (context, index) {
+          VerseModel verse = verses[index];
+          return FoundedVerseTile(query: query, verse: verse);
+        },
+      ),
     );
   }
 }

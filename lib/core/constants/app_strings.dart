@@ -31,6 +31,7 @@ class AppStrings {
   static const String afasy = 'afasy';
   static const String news = 'news';
   static const String search = 'search';
+  static const String notFound = 'not_found';
 }
 
 extension StringExtension on String {
@@ -58,6 +59,7 @@ class AppLocales {
         AppStrings.news: _setString('Yangiliklar', 'Янгиликлар'),
         AppStrings.feedback: _setString('Fikr-mulohaza', 'Фикр-мулоҳаза'),
         AppStrings.search: _setString('Qidirish', 'Қидириш'),
+        AppStrings.notFound: _setString('Natija topilmadi', 'Натижа топилмади'),
         AppStrings.empty_bookmarks: _setString(
           "Xatcho'plar yo'q",
           "Хатчўплар йўқ",

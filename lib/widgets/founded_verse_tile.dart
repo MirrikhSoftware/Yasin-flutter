@@ -20,86 +20,76 @@ class FoundedVerseTile extends StatelessWidget {
     late String number = formatter.numberFormat(verse.verseId!);
     late String formatted = '\uFD3F$number\uFD3E';
 
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, state) {
-        SettingsBloc sizeBloc = context.watch();
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ARABIC
-              ArabicText(arabic: '${verse.arabic} $formatted'),
-              SizedBox(height: 20.h),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ARABIC
+        ArabicText(arabic: '${verse.arabic} $formatted'),
+        SizedBox(height: 20.h),
 
-              // TRANSCRIPTION
-              Text(
-                _getTranscription,
-                style: TextStyle(
-                  fontSize: sizeBloc.trSize,
-                  fontStyle: FontStyle.italic,
-                  letterSpacing: 2,
-                ),
-              ),
-
-              SizedBox(height: 10.h),
-
-              // MEAINGS
-              Text(
-                '${verse.verseId}. $_getMeaning',
-                style: TextStyle(fontSize: sizeBloc.meaingSize),
-              ),
-              SizedBox(height: 12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // SHARE
-                  RoundedIconButton(
-                    key: AppKeys.share,
-                    icon: Icons.share,
-                    onPressed: _onShare,
-                  ),
-
-                  SizedBox(width: 12.w),
-
-                  // SAVE
-                  RoundedIconButton(
-                    key: AppKeys.bookmark,
-                    icon:
-                        verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
-                    onPressed: () async {
-                      verse.isSaved = !verse.isSaved;
-                      await verse.save();
-                    },
-                  ),
-                  SizedBox(width: 12.w),
-
-                  // PLAY
-                  BlocBuilder<PlayerBloc, PlayingState>(
-                    builder: (context, state) {
-                      bool isPlaying = (state is PlayerPlayingState) &&
-                          state.id == verse.verseId;
-                      return RoundedIconButton(
-                        key: AppKeys.play,
-                        icon: isPlaying ? Icons.pause : Icons.play_arrow,
-                        onPressed: () async {
-                          PlayerBloc playerBloc = BlocProvider.of(context);
-
-                          if (isPlaying) {
-                            playerBloc.add(PauseAudioEvent());
-                          } else {
-                            playerBloc.add(PlayAudioEvent(verse.verseId!));
-                          }
-                        },
-                      );
-                    },
-                  )
-                ],
-              )
-            ],
+        // TRANSCRIPTION
+        Text.rich(
+          TextSpan(
+            children: _highlightOccurrences(_getTranscription),
           ),
-        );
-      },
+        ),
+
+        SizedBox(height: 10.h),
+
+        // MEANINGS
+        Text.rich(
+          TextSpan(
+            // text: ,
+            children: _highlightOccurrences('${verse.verseId}. $_getMeaning'),
+          ),
+        ),
+        SizedBox(height: 12.h),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // SHARE
+            RoundedIconButton(
+              key: AppKeys.share,
+              icon: Icons.share,
+              onPressed: _onShare,
+            ),
+
+            SizedBox(width: 12.w),
+
+            // SAVE
+            RoundedIconButton(
+              key: AppKeys.bookmark,
+              icon: verse.isSaved ? Icons.bookmark : Icons.bookmark_border,
+              onPressed: () async {
+                verse.isSaved = !verse.isSaved;
+                await verse.save();
+              },
+            ),
+            SizedBox(width: 12.w),
+
+            // PLAY
+            BlocBuilder<PlayerBloc, PlayingState>(
+              builder: (context, state) {
+                bool isPlaying =
+                    (state is PlayerPlayingState) && state.id == verse.verseId;
+                return RoundedIconButton(
+                  key: AppKeys.play,
+                  icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                  onPressed: () async {
+                    PlayerBloc playerBloc = BlocProvider.of(context);
+
+                    if (isPlaying) {
+                      playerBloc.add(PauseAudioEvent());
+                    } else {
+                      playerBloc.add(PlayAudioEvent(verse.verseId!));
+                    }
+                  },
+                );
+              },
+            )
+          ],
+        )
+      ],
     );
   }
 
@@ -116,11 +106,17 @@ class FoundedVerseTile extends StatelessWidget {
     Share.share(clipboardText);
   }
 
-  List<TextSpan> _highlightOccurrences() {
-    TextStyle simpleStyle = TextStyle();
-    TextStyle highlightedStyle = TextStyle(fontWeight: FontWeight.w600);
-
-    String source = _getSource();
+  List<TextSpan> _highlightOccurrences(
+    String source, {
+    TextType type = TextType.meaning,
+  }) {
+    double textSize =
+        type == TextType.meaning ? AppPrefs.meaningSize : AppPrefs.trSize;
+    TextStyle simpleStyle = TextStyle(fontSize: textSize);
+    TextStyle highlightedStyle = TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: textSize,
+    );
 
     if (!source.toLowerCase().contains(query.toLowerCase())) {
       return [
@@ -164,10 +160,6 @@ class FoundedVerseTile extends StatelessWidget {
     }
     return children;
   }
-
-  String _getSource() {
-    String uz = '${verse.transcriptionUz}\n\n${verse.meaningUz}';
-    String cr = '${verse.transcription}\n\n${verse.meaning}';
-    return AppPrefs.locale == 'uz' ? uz : cr;
-  }
 }
+
+enum TextType { arabic, meaning, transcription }
