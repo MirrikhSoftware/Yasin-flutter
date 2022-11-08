@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-
-import '../../hive_helper/hive_helper.dart';
+import 'package:yaaseen/core/components/components.dart';
+import 'package:yaaseen/hive_helper/hive_helper.dart';
 
 part 'language_event.dart';
 part 'language_state.dart';

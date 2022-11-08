@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
-import 'package:yaaseen/screens/test/firestore_service.dart';
+// import 'package:yaaseen/screens/test/firestore_service.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   void initState() {
     super.initState();
     news = BlocProvider.of<NewsBloc>(context).news;
-    FirestoreService().setShowList(news);
+    // FirestoreService().setShowList(news);
   }
 
   @override

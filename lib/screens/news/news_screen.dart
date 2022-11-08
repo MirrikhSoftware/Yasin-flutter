@@ -16,7 +16,6 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
 import 'package:yaaseen/route/routes.dart';
 import 'package:yaaseen/screens/news/news.dart';
-import 'package:yaaseen/screens/test/firestore_service.dart';
 import 'package:yaaseen/app_types.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
@@ -44,7 +43,7 @@ class _NewsScreenState extends State<NewsScreen> {
       backgroundColor: AppColors.white,
       appBar: SimpleAppBar(title: AppStrings.news.tr()),
       body: StreamBuilder(
-        stream: FirestoreService().getNews(),
+        // stream: FirestoreService().getNews(),
         builder: (context, AsyncSnapshot<QueryMap> snap) {
           if (snap.hasData) {
             List<QueryDoc> docs = snap.requireData.docs;

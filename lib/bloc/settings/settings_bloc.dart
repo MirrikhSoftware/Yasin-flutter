@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 
 part 'settings_event.dart';

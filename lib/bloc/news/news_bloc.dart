@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/models.dart';
-import 'package:yaaseen/screens/test/firestore_service.dart';
-import 'package:yaaseen/services/services.dart';
 
 part 'news_event.dart';
 part 'news_state.dart';
