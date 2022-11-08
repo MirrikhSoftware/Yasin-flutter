@@ -4,7 +4,6 @@ import 'package:yaaseen/core/core.dart';
 Future<void> _backgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   if (message.notification != null) {
-    if (message.data['type'] == 'news') {}
   }
 }
 
@@ -96,7 +95,7 @@ class NotificationService {
       }
     });
 
-    await messaging.subscribeToTopic('news');
+    await messaging.subscribeToTopic('topic');
   }
 
   Future<void> _handleMessage(RemoteMessage message) async {

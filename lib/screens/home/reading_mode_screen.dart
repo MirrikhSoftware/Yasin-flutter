@@ -8,10 +8,14 @@ class ReadingModeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
-        child: ArabicText(
-          arabic: _getText(),
+      
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          child: ArabicText(
+            
+            arabic: _getText(),
+          ),
         ),
       ),
     );

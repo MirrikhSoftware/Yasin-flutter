@@ -77,12 +77,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            _setTitle(
-                icon: AppIcons.book,
-                title: 'Ilova haqida',
-                onTap: () {
-                  AppNavigator.pushNamed(RouteNames.about);
-                }),
+            // _setTitle(
+            //     icon: AppIcons.book,
+            //     title: 'Ilova haqida',
+            //     onTap: () {
+            //       AppNavigator.pushNamed(RouteNames.about);
+            //     }),
             _setTitle(
               key: AppKeys.rate,
               icon: AppIcons.rating_outlined,

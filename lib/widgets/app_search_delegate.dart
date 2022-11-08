@@ -13,21 +13,21 @@ class AppSearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.green,
-      ),
-      textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: AppColors.white,
-      ),
-      textTheme: const TextTheme(
-        headline6: TextStyle(color: AppColors.white),
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        hintStyle: TextStyle(color: AppColors.white),
-        border: InputBorder.none,
-        helperStyle: TextStyle(),
-      ),
-    );
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.green,
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: AppColors.white,
+        ),
+        textTheme: const TextTheme(
+          headline6: TextStyle(color: AppColors.white),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: AppColors.white),
+          border: InputBorder.none,
+          helperStyle: TextStyle(),
+        ),
+        iconTheme: const IconThemeData(color: AppColors.green));
   }
 
   @override
@@ -96,7 +96,6 @@ class AppSearchDelegate extends SearchDelegate {
             fontSize: 18.sp,
             fontWeight: FontWeight.w500,
           ),
-        
         ),
       );
     }
