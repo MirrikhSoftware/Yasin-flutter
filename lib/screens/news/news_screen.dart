@@ -103,7 +103,7 @@ class _NewsScreenState extends State<NewsScreen> {
                   Row(
                     children: [
                       _setText(
-                        _formatter.formatDate(DateTime.parse(news.createdAt!)),
+                        _formatter.formatDate(news.createdAt!.toDate()),
                       ),
                       const Spacer(),
                       const Icon(

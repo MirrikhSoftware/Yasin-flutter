@@ -16,9 +16,13 @@ class AppCheckboxListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CheckboxListTile(
       value: value,
-      title: Text(title, style: TextStyle(
-        fontSize: 12.sp
-      )),
+      title: Transform.translate(
+        offset:  Offset(-15.w, 0),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 12.sp),
+        ),
+      ),
       onChanged: onChanged,
       contentPadding: EdgeInsets.zero,
       controlAffinity: ListTileControlAffinity.leading,

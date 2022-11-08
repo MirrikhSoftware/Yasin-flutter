@@ -62,7 +62,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                       children: [
                         _setText(
                           _formatter
-                              .formatDate(DateTime.parse(news.createdAt!)),
+                              .formatDate(news.createdAt!.toDate()),
                         ),
                         const Spacer(),
                         const Icon(

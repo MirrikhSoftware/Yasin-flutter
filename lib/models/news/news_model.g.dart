@@ -20,7 +20,7 @@ class NewsAdapter extends TypeAdapter<NewsModel> {
       .._id = fields[0] as String?
       .._body = fields[1] as String?
       .._newsType = fields[2] as String?
-      .._createdAt = fields[3] as String?
+      .._createdAt = fields[3] as Timestamp?
       .._isActive = fields[4] as bool?
       .._images = (fields[5] as List?)?.cast<String>()
       .._shown = (fields[6] as List?)?.cast<String>()

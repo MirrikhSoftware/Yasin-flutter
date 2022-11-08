@@ -27,13 +27,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: SimpleAppBar(title: AppStrings.settings.tr()),
-          body: ListView(
+          body: Column(
             children: [
-              VerseListTile(verse: _verse),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: VerseListTile(verse: _verse),
+                ),
+              ),
+              _showLocale(),
               _setData(SizeType.arabic),
               _setData(SizeType.transcription),
               _setData(SizeType.meainig),
-              _showLocale(),
             ],
           ),
         );

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 
@@ -12,7 +13,7 @@ class NewsModel {
   @HiveField(2)
   String? _newsType;
   @HiveField(3)
-  String? _createdAt;
+  Timestamp? _createdAt;
   @HiveField(4)
   bool? _isActive;
   @HiveField(5)
@@ -26,7 +27,7 @@ class NewsModel {
     String? body,
     String? id,
     String? newsType,
-    String? createdAt,
+    Timestamp? createdAt,
     bool? isActive,
     List<String>? images,
     List<String>? shown,
@@ -53,15 +54,15 @@ class NewsModel {
     if (shown != null) {
       _shown = shown;
     }
-    if(title != null) {
-      _title =title;
+    if (title != null) {
+      _title = title;
     }
   }
 
   String? get body => _body;
   String? get id => _id;
   String? get newsType => _newsType;
-  String? get createdAt => _createdAt;
+  Timestamp? get createdAt => _createdAt;
   String? get title => _title;
   bool? get isActive => _isActive;
   List<String>? get images => _images;

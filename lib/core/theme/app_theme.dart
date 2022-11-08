@@ -21,44 +21,42 @@ class AppTheme {
       );
 
   ThemeData get green => ThemeData(
-        canvasColor: AppColors.background,
-        primaryColor: AppColors.green,
-        // splashColor: AppColors.,
-        primaryColorLight: AppColors.green,
-        iconTheme: const IconThemeData(color: AppColors.green),
-        buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),
-        appBarTheme: const AppBarTheme(
-            backgroundColor: AppColors.green,
-            systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: AppColors.green,
-                statusBarIconBrightness: Brightness.light)),
-        sliderTheme: SliderThemeData(
-            trackHeight: 2.h,
-            thumbColor: AppColors.green,
-            activeTrackColor: AppColors.green,
-            inactiveTrackColor: AppColors.green.withOpacity(.5),
-            showValueIndicator: ShowValueIndicator.always),
-        scrollbarTheme: ScrollbarThemeData(
-            interactive: true,
-            crossAxisMargin: 6.w,
-            radius: Radius.circular(3.r),
-            thumbColor: MaterialStateProperty.all<Color>(AppColors.green)),
-        inputDecorationTheme: InputDecorationTheme(
-          fillColor: AppColors.white,
-          filled: true,
-          border: _border,
-          errorBorder: _border,
-          enabledBorder: _border,
-          focusedBorder: _border,
-          disabledBorder: _border,
-        ),
-
-        progressIndicatorTheme: ProgressIndicatorThemeData(
+      canvasColor: AppColors.background,
+      primaryColor: AppColors.green,
+      // splashColor: AppColors.,
+      primaryColorLight: AppColors.green,
+      iconTheme: const IconThemeData(color: AppColors.green),
+      buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),
+      appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.green,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: AppColors.green,
+              statusBarIconBrightness: Brightness.light)),
+      sliderTheme: SliderThemeData(
+          trackHeight: 2.h,
+          // trackShape: CustomTrackShape(),
+          overlayShape: SliderComponentShape.noOverlay,
+          thumbColor: AppColors.green,
+          activeTrackColor: AppColors.green,
+          inactiveTrackColor: AppColors.green.withOpacity(.5),
+          showValueIndicator: ShowValueIndicator.always),
+      scrollbarTheme: ScrollbarThemeData(
+          interactive: true,
+          crossAxisMargin: 6.w,
+          radius: Radius.circular(3.r),
+          thumbColor: MaterialStateProperty.all<Color>(AppColors.green)),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: AppColors.white,
+        filled: true,
+        border: _border,
+        errorBorder: _border,
+        enabledBorder: _border,
+        focusedBorder: _border,
+        disabledBorder: _border,
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
           color: AppColors.green,
-          
-          linearTrackColor: AppColors.green.withOpacity(.36)
-        )
-      );
+          linearTrackColor: AppColors.green.withOpacity(.36)));
 
   ThemeData get indigo => ThemeData(
         // canvasColor: AppColors.background,
@@ -81,6 +79,24 @@ class AppTheme {
             thumbColor: MaterialStateProperty.all<Color>(AppColors.indigo)),
       );
 
-  UnderlineInputBorder get _border =>
-      const UnderlineInputBorder(borderSide: BorderSide.none);
+  UnderlineInputBorder get _border => const UnderlineInputBorder(
+        borderSide: BorderSide.none,
+      );
+}
+
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight ?? 0;
+    final double trackLeft = offset.dx;
+    final double trackTop = offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+  }
 }

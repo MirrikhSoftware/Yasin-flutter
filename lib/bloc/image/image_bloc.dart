@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yaaseen/services/services.dart';
@@ -16,10 +14,6 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
     ImageLoadedEvent event,
     Emitter emit,
   ) async {
-    if (event.url.startsWith('#')) {
-      emit(ImageFailedState(''));
-      return;
-    }
     emit(ImageLoadingState());
     try {
       String path = await ApiService.downloadFiles(event.url);

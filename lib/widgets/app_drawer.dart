@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/route/routes.dart';
-import 'package:yaaseen/services/notification_service.dart';
 
 /// It's a stateful widget that displays a drawer with a list of options
 
@@ -56,18 +54,19 @@ class _AppDrawerState extends State<AppDrawer> {
                 AppNavigator.pushNamed(RouteNames.bookmarks);
               },
             ),
-            Badge(
-              showBadge: false,
-              position: BadgePosition(top: 8.h, start: 8.w),
-              child: _setTitle(
-                icon: AppIcons.alert,
-                title: AppStrings.news.tr(),
-                onTap: () {
-                  AppNavigator.pushNamed(RouteNames.news)
-                      .then((value) => setState(() {}));
-                },
-              ),
-            ),
+            // Badge(
+            //   showBadge: false,
+            //   position: BadgePosition(top: 8.h, start: 8.w),
+            //   child: _setTitle(
+            //     icon: AppIcons.alert,
+            //     title: AppStrings.news.tr(),
+            //     onTap: () {
+            //       AppNavigator.pushNamed(RouteNames.news).then(
+            //         (value) => setState(() {}),
+            //       );
+            //     },
+            //   ),
+            // ),
             _setTitle(
               key: AppKeys.settings,
               icon: AppIcons.settings,
@@ -79,12 +78,11 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             _setTitle(
-              icon: AppIcons.book,
-              title: 'Ilova haqida',
-              onTap: () {
-                AppNavigator.pushNamed(RouteNames.about);
-              }
-            ),
+                icon: AppIcons.book,
+                title: 'Ilova haqida',
+                onTap: () {
+                  AppNavigator.pushNamed(RouteNames.about);
+                }),
             _setTitle(
               key: AppKeys.rate,
               icon: AppIcons.rating_outlined,
@@ -104,24 +102,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            // Badge(
-            //   showBadge: NotificationService.hasNotification,
-            //   position: BadgePosition(top: 8.h, start: 8.w),
-            //   child: _setTitle(
-            //     icon: AppIcons.message,
-            //     title: AppStrings.feedback.tr(),
-            //     onTap: () {
-            //       AppNavigator.pushNamed(RouteNames.feedback);
-            //     },
-            //   ),
-            // ),
-            // Visibility(
-            //   visible: kDebugMode,
-            //   child: _setTitle(
-            //       icon: AppIcons.book,
-            //       title: 'Test',
-            //       onTap: () => AppNavigator.pushNamed(RouteNames.test)),
-            // ),
+      
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
