@@ -1,0 +1,101 @@
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Flutter CI CD
+
+on:
+  push:
+    branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+env:
+  FLUTTER_CHANNEL: 'stable' # 'stable', 'beta', or 'master', default to: 'stable'
+  FLUTTER_VERSION: '3.3.5'
+  PATH_TO_AAB: 'build/app/outputs/bundle/release/app-release.aab'
+  PATH_TO_APK: 'buidl/app/outputs/apk/release/*apk'
+  ANDROID_PACKAGE_NAME: 'cashback.in1.uz'
+  PATH_TO_IPA: 'build/ios/ipa/flutter_github_actions_basics.ipa'
+
+jobs:
+  code-analysis-and-testing:
+    if: true
+    name: Code analysis and testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: ${{ env.FLUTTER_CHANNEL }}
+        flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
+      
+    - name: Flutter version
+      run: flutter --version
+
+    - name: Get pub dependencies
+      run: flutter pub get
+
+    # - name: Flutter analyze
+    #   run: flutter analyze
+
+    # - name: Flutter test
+    #   run: flutter test test
+
+  android:
+    if: false
+    name: Android CI/CD
+    needs: code-analysis-and-testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Prepare key.jks & key.properties files
+      env:
+        KEYSTORE_FILE_BASE64: ${{ secrets.SIGNING_KEY_ALIAS }}
+        KEY_PROPERTIES_FILE: ${{ secrets.KEY_PROPERTIES }}
+      run: |
+        echo "Convert key base64 string to a file"
+        echo "$KEYSTORE_FILE_BASE64" >> key.jks.base64
+        base64 --decode key.jks.base64 > key.jks
+        echo "Convert key.properties secret string to a file"
+        echo "$KEY_PROPERTIES_FILE" >> key.properties
+        pwd
+        ls
+      working-directory: 'android/'
+    
+  
+     
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: ${{ env.FLUTTER_CHANNEL }}
+        flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
+    
+    - name: Flutter doctor
+      run: flutter doctor # this is an optional step and can be removed
+    
+    - name: Build AAB
+      run: |
+        flutter build appbundle --release
+        echo "Removing signing files for extra security"
+        rm android/key.*
+    
+    - name: Upload AAB artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-aab
+        path: ${{ env.PATH_TO_AAB }}
+
+    - name: Upload to Play Store
+      run: |
+        fastlane supply --aab ${{ env.PATH_TO_AAB }} --json_key_data '${{ secrets.PLAY_CONSOLE_JSON }}' --package_name '${{ env.ANDROID_PACKAGE_NAME }}' --track 'internal'
+  
