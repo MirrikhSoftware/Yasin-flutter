@@ -49,7 +49,7 @@ jobs:
     #   run: flutter test test
 
   android:
-    if: false
+    if: true
     name: Android CI/CD
     needs: code-analysis-and-testing
     runs-on: ubuntu-latest
@@ -68,8 +68,7 @@ jobs:
         base64 --decode key.jks.base64 > key.jks
         echo "Convert key.properties secret string to a file"
         echo "$KEY_PROPERTIES_FILE" >> key.properties
-        pwd
-        ls
+
       working-directory: 'android/'
     
   
@@ -83,6 +82,23 @@ jobs:
     - name: Flutter doctor
       run: flutter doctor # this is an optional step and can be removed
     
+    - name: Build APK
+      run: flutter buidl apk --split-per-abi
+    
+    - name: Send build version to Telegram
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_CHAT_ID }}
+        token : ${{ secrets.TELEGRAM_TOKEN }}
+        message: | 
+          ${{ env.PATH_TO_APK }}
+          ${{ github.actor }} created commit:
+          Commit message: ${{ github.event.commits[0].message }}
+          Repository: ${{ github.repository }}
+          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}} 
+        
+        message_file: ${{ env.PATH_TO_APK }}
+           
     - name: Build AAB
       run: |
         flutter build appbundle --release
