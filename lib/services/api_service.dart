@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart' as pp;
 
 class ApiService {
   static Future<HttpResult> sendFeedback(String message) async {
-    Uri url = Uri.parse(AppSecure.TELEGRAM_BOT_LINK + message);
+    Uri url = Uri.parse(DotEnv.telegramLink + message);
     try {
       http.Response response = await http.get(url);
 

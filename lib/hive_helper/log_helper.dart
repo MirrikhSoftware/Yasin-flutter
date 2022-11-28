@@ -6,7 +6,6 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/models/models.dart';
-import 'package:yaaseen/screens/test/app_secure.dart';
 import 'package:yaaseen/services/services.dart';
 
 class LogHelper {
@@ -56,11 +55,12 @@ class LogService {
   }
 
   static Future<String> _logToString(LogModel log) async {
-    const versionUrl = 'https://github.com/MSOpenSources/Yasin-flutter/tree/103ef924577360a0d5e15cd5a4dfa2bc5364bc35';
+    const versionUrl =
+        'https://github.com/MSOpenSources/Yasin-flutter/tree/103ef924577360a0d5e15cd5a4dfa2bc5364bc35';
     final String platform = Platform.isAndroid ? 'Android' : 'iOS';
     const String mode = kDebugMode ? 'debug' : 'release';
     final String type = log.type == 'FAIL' ? 'Error' : 'Message';
-    
+
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
