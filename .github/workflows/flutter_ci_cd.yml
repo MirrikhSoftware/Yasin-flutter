@@ -83,7 +83,7 @@ jobs:
       run: flutter doctor # this is an optional step and can be removed
     
     - name: Build APK
-      run: flutter buidl apk --split-per-abi
+      run: flutter build apk --split-per-abi
     
     - name: Send build version to Telegram
       uses: appleboy/telegram-action@master
