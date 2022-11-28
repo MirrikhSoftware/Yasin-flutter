@@ -55,13 +55,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+
+
     - name: Checkout repository
       uses: actions/checkout@v3
     
-    - name: Prepare key.jks & key.properties files
+    - name: Prepare key.jks & key.properties files 
       env:
         KEYSTORE_FILE_BASE64: ${{ secrets.SIGNING_KEY_ALIAS }}
         KEY_PROPERTIES_FILE: ${{ secrets.KEY_PROPERTIES }}
+
       run: |
         echo "Convert key base64 string to a file"
         echo "$KEYSTORE_FILE_BASE64" >> key.jks.base64
@@ -71,7 +74,26 @@ jobs:
 
       working-directory: 'android/'
     
-  
+    - name: Prepare google-services.json file
+      env: 
+        GOOGOLE_SERVICE_JSON: ${{ secrets.GOOGOLE_SERVICE_JSON }}
+      
+      run: |
+        echo "Secret to file"
+        touch app/google-services.json
+        echo "$GOOGOLE_SERVICE_JSON" > app/google-services.json
+
+      working-directory: 'android/'
+    
+    - name: Set Dot Env
+      env:
+        DOT_ENV: ${{ secrets.DOT_ENV }}
+      
+      run: |
+        echo "Dot env" 
+        touch lib/core/constants/app_secure.dart
+        echo "$DOT_ENV" > lib/core/constants/app_secure.dart
+        
      
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
