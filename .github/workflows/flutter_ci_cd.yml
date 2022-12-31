@@ -49,7 +49,7 @@ jobs:
     #   run: flutter test test
 
   android:
-    if: true
+    if: false
     name: Android CI/CD
     needs: code-analysis-and-testing
     runs-on: ubuntu-latest

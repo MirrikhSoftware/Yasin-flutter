@@ -3,8 +3,7 @@ import 'package:yaaseen/core/core.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  if (message.notification != null) {
-  }
+  if (message.notification != null) {}
 }
 
 class NotificationService {
@@ -153,7 +152,7 @@ class NotificationService {
   static Future _getToken() async {
     FirebaseMessaging.instance.getToken().then((value) {
       '================== token ================='.printf();
-      value.printf();
+      value.printf(name: 'NotificationService');
     });
   }
 }

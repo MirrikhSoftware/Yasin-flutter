@@ -12,8 +12,6 @@ void main() async {
 
   runApp(const MyApp());
 
-  // await AppAudioService.init();
-
   await NotificationService().init();
 
   AppPrefs.setCounter();

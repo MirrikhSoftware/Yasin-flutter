@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
+import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
@@ -11,13 +12,14 @@ class VerseListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsBloc sizeBloc = context.watch();
     AppFormatter formatter = AppFormatter();
     late String number = formatter.numberFormat(verse.verseId!);
     late String formatted = '\uFD3F$number\uFD3E';
 
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, state) {
-        SettingsBloc sizeBloc = context.watch();
+    return ValueListenableBuilder(
+      valueListenable: HiveBoxes.verseBox.listenable(keys: [verse.key]),
+      builder: (context, box, w) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
