@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider(create: (_) => SettingsBloc()),
               BlocProvider(create: (_) => PlayerBloc()),
-              BlocProvider(create: (_) => NewsBloc()),
               BlocProvider(
                   create: (_) => NetworkBloc()..add(ListenConnection()))
             ],

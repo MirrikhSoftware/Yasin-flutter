@@ -40,7 +40,7 @@ class LogService {
   static Future<HttpResult> _sendToTelegram(LogModel log) async {
     try {
       String message = await _logToString(log);
-      Uri url = Uri.parse('${DotEnv.telegramLink}$message');
+      Uri url = Uri.parse('{DotEnv.telegramLink}$message');
 
       http.Response response = await http.get(url);
       response.body.printf();

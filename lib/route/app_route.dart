@@ -19,13 +19,10 @@ class AppRoutes {
 
       case RouteNames.bookmarks:
         return _route(const BookmarksScreen());
-      
-      case RouteNames.news:
-        return _route(const NewsScreen());
-      
+
       case RouteNames.about:
         return _route(const AboutScreen());
-      
+
       // case RouteNames.test:
       //   return _route(const TestScreen());
     }

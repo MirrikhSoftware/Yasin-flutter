@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:yaaseen/core/core.dart';
 
-
 part 'network_event.dart';
 part 'network_state.dart';
 
@@ -10,11 +9,11 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
   StreamSubscription? _subscription;
 
   NetworkBloc() : super(NetworkInitial()) {
-    on<NetworkEvent>(_checkNetwork);
+    on<ListenConnection>(_checkNetwork);
   }
 
   FutureOr<void> _checkNetwork(
-    NetworkEvent event,
+    ListenConnection event,
     Emitter<NetworkState> state,
   ) {
     _subscription = Connectivity().onConnectivityChanged.listen((status) {

@@ -1,4 +1,3 @@
-import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/services/http_result.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -6,7 +5,7 @@ import 'package:path_provider/path_provider.dart' as pp;
 
 class ApiService {
   static Future<HttpResult> sendFeedback(String message) async {
-    Uri url = Uri.parse(DotEnv.telegramLink + message);
+    Uri url = Uri.parse('DotEnv.telegramLink + message');
     try {
       http.Response response = await http.get(url);
 
@@ -26,7 +25,7 @@ class ApiService {
     }
   }
 
-   static Future<String> downloadFiles(String uri) async {
+  static Future<String> downloadFiles(String uri) async {
     try {
       Uri url = Uri.parse(uri);
       final fileName = uri.split('/').last;
