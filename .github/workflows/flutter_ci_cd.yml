@@ -9,6 +9,7 @@ name: Flutter CI CD
 on:
   push:
     branches: [ "main" ]
+
   # pull_request:
   #   branches: [ "main" ]
 
@@ -104,22 +105,22 @@ jobs:
     - name: Flutter doctor
       run: flutter doctor # this is an optional step and can be removed
     
-    - name: Build APK
-      run: flutter build apk --split-per-abi
+    # - name: Build APK
+    #   run: flutter build apk --split-per-abi
     
-    - name: Send build version to Telegram
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_CHAT_ID }}
-        token : ${{ secrets.TELEGRAM_TOKEN }}
-        message: | 
-          ${{ env.PATH_TO_APK }}
-          ${{ github.actor }} created commit:
-          Commit message: ${{ github.event.commits[0].message }}
-          Repository: ${{ github.repository }}
-          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}} 
+    # - name: Send build version to Telegram
+    #   uses: appleboy/telegram-action@master
+    #   with:
+    #     to: ${{ secrets.TELEGRAM_CHAT_ID }}
+    #     token : ${{ secrets.TELEGRAM_TOKEN }}
+    #     message: | 
+    #       ${{ env.PATH_TO_APK }}
+    #       ${{ github.actor }} created commit:
+    #       Commit message: ${{ github.event.commits[0].message }}
+    #       Repository: ${{ github.repository }}
+    #       See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}} 
         
-        message_file: ${{ env.PATH_TO_APK }}
+    #     message_file: ${{ env.PATH_TO_APK }}
            
     - name: Build AAB
       run: |
