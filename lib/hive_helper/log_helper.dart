@@ -17,15 +17,13 @@ class LogHelper {
     String type = 'FAIL',
     String function = '/',
   }) async {
-    User? user = FirebaseAuth.instance.currentUser;
-
     LogModel log = LogModel(
       date: AppFormatter().formatDate(DateTime.now()),
       message: message,
       type: 'FAIL',
       file: file,
       function: function,
-      userId: user?.uid,
+      userId: '',
       openedTime: AppPrefs.counter,
     );
     HttpResult result = await LogService._sendToTelegram(log);

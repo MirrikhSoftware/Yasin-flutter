@@ -20,7 +20,7 @@ class AppSearchDelegate extends SearchDelegate {
           cursorColor: AppColors.white,
         ),
         textTheme: const TextTheme(
-          headline6: TextStyle(color: AppColors.white),
+          titleLarge: TextStyle(color: AppColors.white),
         ),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(color: AppColors.white),
