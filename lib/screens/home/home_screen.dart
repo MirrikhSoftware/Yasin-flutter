@@ -41,6 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (id < 83) {
         playerBloc.add(PlayAudioEvent(id + 1));
+      } else {
+        _scrollController.animateTo(
+          0.0,
+          duration: const Duration(seconds: 3),
+          curve: Curves.easeIn,
+        );
+
+        playerBloc.add(PlayerStopEvent());
       }
     });
   }

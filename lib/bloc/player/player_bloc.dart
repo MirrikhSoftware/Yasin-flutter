@@ -85,8 +85,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
   Future _play(int id) async {
     _playingId = id;
     await AppPrefs.setLastPlaying(_playingId);
-    String no = '$id'.padLeft(2, '0');
-    String path = 'assets/audio/yasin$no.mp3';
+    String path = 'assets/audio/$id.mp3';
     final byteData = await rootBundle.load(path);
     final bytes = byteData.buffer.asUint8List();
     await _player.play(BytesSource(bytes));

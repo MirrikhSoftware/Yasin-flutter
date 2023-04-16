@@ -6,11 +6,9 @@ version: 2.2.4+17
 environment:
   sdk: ">=2.18.2 <3.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.2
   hive_flutter: ^1.1.0
@@ -42,31 +40,26 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
+
   integration_test:
     sdk: flutter
-
 
   flutter_lints: ^2.0.1
   hive_generator: ^2.0.0
   build_runner: ^2.2.0
 
-
 flutter:
-
-
   uses-material-design: true
 
   assets:
     - assets/audio/
     - assets/icons/
 
-
   fonts:
     - family: Me-Quran
       fonts:
         - asset: assets/fonts/arabic/Me-Quran-Regular.ttf
-    
+
     - family: Al-Qalam
       fonts:
         - asset: assets/fonts/arabic/al-qalam-kitab.ttf
@@ -85,5 +78,3 @@ flutter:
           weight: 600
         - asset: assets/fonts/poppins/Poppins-Bold.ttf
           weight: 700
-
-
