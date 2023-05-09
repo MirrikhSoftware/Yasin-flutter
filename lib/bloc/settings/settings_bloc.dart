@@ -7,9 +7,9 @@ part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  double _arabicSize = AppPrefs.arabicSize;
-  double _meaingSize = AppPrefs.meaningSize;
-  double _trSize = AppPrefs.trSize;
+  double _arabicSize = AppPref.arabicSize;
+  double _meaingSize = AppPref.meaningSize;
+  double _trSize = AppPref.trSize;
 
   double get arabicSize => _arabicSize;
   double get meaingSize => _meaingSize;

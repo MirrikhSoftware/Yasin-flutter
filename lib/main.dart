@@ -14,7 +14,7 @@ void main() async {
 
   await NotificationService().init();
 
-  AppPrefs.setCounter();
+  AppPref.setCounter();
 
   // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(

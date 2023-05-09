@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController =
-      ScrollController(initialScrollOffset: AppPrefs.srcollOffset);
+      ScrollController(initialScrollOffset: AppPref.srcollOffset);
 
   final List<GlobalKey> _keys = [];
   final List<VerseModel> verses = HiveBoxes.verseBox.values.toList();
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _keys.addAll(List.generate(83, (index) => GlobalKey()));
 
     _scrollController.addListener(() async {
-      await AppPrefs.setScrollOffset(_scrollController.offset);
+      await AppPref.setScrollOffset(_scrollController.offset);
     });
 
     PlayerBloc playerBloc = BlocProvider.of(context);

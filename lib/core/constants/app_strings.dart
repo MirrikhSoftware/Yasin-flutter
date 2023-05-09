@@ -37,7 +37,7 @@ class AppStrings {
 extension StringExtension on String {
   String tr() {
     AppLocales locales = AppLocales();
-    return locales.locales[this]![AppPrefs.locale].toString();
+    return locales.locales[this]![AppPref.locale].toString();
   }
 }
 

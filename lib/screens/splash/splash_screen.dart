@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    if (!AppPrefs.hasSaved) {
+    if (!AppPref.hasSaved) {
       _saveToStorage().then((value) {
         AppNavigator.pushNamedAndRemoveUntil(RouteNames.home);
       });
@@ -57,6 +57,6 @@ class _SplashScreenState extends State<SplashScreen> {
       entries[verseModel.key] = verseModel;
     }
     await HiveBoxes.verseBox.putAll(entries);
-    await AppPrefs.setSaved();
+    await AppPref.setSaved();
   }
 }

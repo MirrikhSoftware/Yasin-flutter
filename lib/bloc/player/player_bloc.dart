@@ -14,7 +14,7 @@ part 'player_state.dart';
 class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
   final AudioPlayer _player = AudioPlayer();
   AudioPlayer get player => _player;
-  int _playingId = AppPrefs.lastPlaying;
+  int _playingId = AppPref.lastPlaying;
   int get playingId => _playingId;
   late List<GlobalKey> _keys;
   List<GlobalKey> get keys => _keys;
@@ -44,7 +44,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
     Emitter emit,
   ) async {
     _playingId = 0;
-    await AppPrefs.setLastPlaying(0);
+    await AppPref.setLastPlaying(0);
     await _player.stop();
     emit(PlayerInitial());
   }
@@ -86,7 +86,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayingState> {
 
   Future _play(int id) async {
     _playingId = id;
-    await AppPrefs.setLastPlaying(_playingId);
+    await AppPref.setLastPlaying(_playingId);
     String path = 'assets/audio/$id.mp3';
     final byteData = await rootBundle.load(path);
     final bytes = byteData.buffer.asUint8List();

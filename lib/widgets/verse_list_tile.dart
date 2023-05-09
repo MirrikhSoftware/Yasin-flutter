@@ -14,7 +14,7 @@ class VerseListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     SettingsBloc sizeBloc = context.watch();
     AppFormatter formatter = AppFormatter();
-    late String number = formatter.numberFormat(verse.verseId!);
+    late String number = formatter.numberFormat(verse.verseId);
     late String formatted = '\uFD3F$number\uFD3E';
 
     return ValueListenableBuilder(
@@ -88,7 +88,7 @@ class VerseListTile extends StatelessWidget {
                           if (isPlaying) {
                             playerBloc.add(PauseAudioEvent());
                           } else {
-                            playerBloc.add(PlayAudioEvent(verse.verseId!));
+                            playerBloc.add(PlayAudioEvent(verse.verseId));
                           }
                         },
                       );
@@ -103,10 +103,10 @@ class VerseListTile extends StatelessWidget {
     );
   }
 
-  String get _getMeaning => AppPrefs.locale == 'uz'
+  String get _getMeaning => AppPref.locale == 'uz'
       ? verse.meaningUz.toString()
       : verse.meaning.toString();
-  String get _getTranscription => AppPrefs.locale == 'uz'
+  String get _getTranscription => AppPref.locale == 'uz'
       ? verse.transcriptionUz.toString()
       : verse.transcription.toString();
 

@@ -5,10 +5,12 @@ import 'package:yaaseen/core/core.dart';
 class ArabicText extends StatelessWidget {
   final String arabic;
   final TextAlign textAlign;
+  final String? target;
   const ArabicText({
     Key? key,
     required this.arabic,
     required this.textAlign,
+    this.target,
   }) : super(key: key);
 
   @override

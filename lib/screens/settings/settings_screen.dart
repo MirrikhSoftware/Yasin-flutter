@@ -16,10 +16,10 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final VerseModel _verse = HiveBoxes.verseBox.getAt(27)!;
   AppFormatter formatter = AppFormatter();
-  late String number = formatter.numberFormat(_verse.verseId!);
+  late String number = formatter.numberFormat(_verse.verseId);
   late String formatted = '\uFD3F$number\uFD3E';
 
-  String _locale = AppPrefs.locale;
+  String _locale = AppPref.locale;
   late final SettingsBloc _sBloc = BlocProvider.of(context);
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
 
   void _onChanged(Object? value) async {
-    await AppPrefs.setLocale(value.toString());
+    await AppPref.setLocale(value.toString());
     setState(() {
       _locale = value.toString();
     });
@@ -108,15 +108,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChangeEnd: (v) async {
               switch (type) {
                 case SizeType.arabic:
-                  await AppPrefs.setArabicSize(v);
+                  await AppPref.setArabicSize(v);
                   break;
 
                 case SizeType.meainig:
-                  await AppPrefs.setMeaingSize(v);
+                  await AppPref.setMeaingSize(v);
                   break;
 
                 case SizeType.transcription:
-                  await AppPrefs.setTranscriptionSize(v);
+                  await AppPref.setTranscriptionSize(v);
                   break;
               }
             },

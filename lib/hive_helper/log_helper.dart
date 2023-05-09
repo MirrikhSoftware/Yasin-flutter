@@ -24,7 +24,7 @@ class LogHelper {
       file: file,
       function: function,
       userId: '',
-      openedTime: AppPrefs.counter,
+      openedTime: AppPref.counter,
     );
     HttpResult result = await LogService._sendToTelegram(log);
 
@@ -70,7 +70,7 @@ class LogService {
 <b>File:</b> ${log.file}
 <b>Function: </b>${log.function},
 <b>$type:</b> ${log.message}
-<b>Opened time</b> ${AppPrefs.counter}
+<b>Opened time</b> ${AppPref.counter}
 <b>Version</b> <a href = "$versionUrl">$version $buildNumber $mode</a>
 """;
     return logString;

@@ -65,22 +65,26 @@ class AppSearchDelegate extends SearchDelegate {
     if (query.trim().isEmpty) {
       return Container(color: AppColors.background);
     }
-    String lang = AppPrefs.locale;
+    String lang = AppPref.locale;
+    final q = query.toLowerCase();
     List<VerseModel> verses = HiveBoxes.verseBox.values.where((verse) {
+      String arabic = verse.plain;
       if (lang == 'uz') {
-        String transcription = verse.transcriptionUz!.toLowerCase();
-        String meaning = verse.meaningUz!.toLowerCase();
+        String transcription = verse.transcriptionUz.toLowerCase();
+        String meaning = verse.meaningUz.toLowerCase();
 
-        if (transcription.contains(query.trim().toLowerCase()) ||
-            meaning.contains(query.toLowerCase())) {
+        if (arabic.contains(q) ||
+            transcription.contains(q) ||
+            meaning.contains(q)) {
           return true;
         }
       } else {
-        String transcription = verse.transcription!.toLowerCase();
-        String meaning = verse.meaning!.toLowerCase();
+        String transcription = verse.transcription.toLowerCase();
+        String meaning = verse.meaning.toLowerCase();
 
-        if (transcription.contains(query.trim().toLowerCase()) ||
-            meaning.contains(query.toLowerCase())) {
+        if (arabic.contains(q) ||
+            transcription.contains(q) ||
+            meaning.contains(q)) {
           return true;
         }
       }

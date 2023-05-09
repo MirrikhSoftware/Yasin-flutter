@@ -17,17 +17,19 @@ class FoundedVerseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppFormatter formatter = AppFormatter();
-    late String number = formatter.numberFormat(verse.verseId!);
+    late String number = formatter.numberFormat(verse.verseId);
     late String formatted = '\uFD3F$number\uFD3E';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // ARABIC
+
         ArabicText(
           arabic: '${verse.arabic} $formatted',
           textAlign: TextAlign.start,
         ),
+
         const SizedBox(height: 20.0),
 
         // TRANSCRIPTION
@@ -84,7 +86,7 @@ class FoundedVerseTile extends StatelessWidget {
                     if (isPlaying) {
                       playerBloc.add(PauseAudioEvent());
                     } else {
-                      playerBloc.add(PlayAudioEvent(verse.verseId!));
+                      playerBloc.add(PlayAudioEvent(verse.verseId));
                     }
                   },
                 );
@@ -96,10 +98,10 @@ class FoundedVerseTile extends StatelessWidget {
     );
   }
 
-  String get _getMeaning => AppPrefs.locale == 'uz'
+  String get _getMeaning => AppPref.locale == 'uz'
       ? verse.meaningUz.toString()
       : verse.meaning.toString();
-  String get _getTranscription => AppPrefs.locale == 'uz'
+  String get _getTranscription => AppPref.locale == 'uz'
       ? verse.transcriptionUz.toString()
       : verse.transcription.toString();
 
@@ -114,7 +116,7 @@ class FoundedVerseTile extends StatelessWidget {
     TextType type = TextType.meaning,
   }) {
     double textSize =
-        type == TextType.meaning ? AppPrefs.meaningSize : AppPrefs.trSize;
+        type == TextType.meaning ? AppPref.meaningSize : AppPref.trSize;
     TextStyle simpleStyle = TextStyle(fontSize: textSize);
     TextStyle highlightedStyle = TextStyle(
       fontWeight: FontWeight.w600,

@@ -16,7 +16,7 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     LocaleChangedEvent event,
     Emitter emit,
   ) async {
-    await AppPrefs.setLocale(event.locale);
+    await AppPref.setLocale(event.locale);
     emit(LanguageState(event.locale));
   }
 }

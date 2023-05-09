@@ -6,7 +6,10 @@ import 'package:yaaseen/hive_helper/hive_adapters.dart';
 import 'package:yaaseen/hive_helper/hive_types.dart';
 part 'verse_model.g.dart';
 
-@HiveType(typeId: HiveTypes.verseModel, adapterName: HiveAdapters.verseModel)
+@HiveType(
+  typeId: HiveTypes.verseModel,
+  adapterName: HiveAdapters.verseModel,
+)
 class VerseModel extends HiveObject {
   @override
   get key => _verseId;
@@ -89,25 +92,25 @@ class VerseModel extends HiveObject {
     }
   }
 
-  int? get id => _id;
+  int get id => _id ?? 0;
   set id(int? id) => _id = id;
-  int? get paraNo => _paraNo;
+  int get paraNo => _paraNo ?? 0;
   set paraNo(int? paraNo) => _paraNo = paraNo;
-  int? get suraId => _suraId;
+  int get suraId => _suraId ?? 0;
   set suraId(int? suraId) => _suraId = suraId;
-  int? get verseId => _verseId;
+  int get verseId => _verseId ?? 0;
   set verseId(int? verseId) => _verseId = verseId;
-  String? get plain => _plain;
+  String get plain => _plain ?? '';
   set plain(String? plain) => _plain = plain;
-  String? get arabic => _arabic;
+  String get arabic => _arabic ?? '';
   set arabic(String? arabic) => _arabic = arabic;
-  String? get meaning => _meaning;
+  String get meaning => _meaning ?? '';
   set meaning(String? meaning) => _meaning = meaning;
-  String? get meaningUz => _meaningUz;
+  String get meaningUz => _meaningUz ?? '';
   set meaningUz(String? meaningUz) => _meaningUz = meaningUz;
-  String? get transcription => _transcription;
+  String get transcription => _transcription ?? '';
   set transcription(String? transcription) => _transcription = transcription;
-  String? get transcriptionUz => _transcriptionUz;
+  String get transcriptionUz => _transcriptionUz ?? '';
   set transcriptionUz(String? transcriptionUz) =>
       _transcriptionUz = transcriptionUz;
 

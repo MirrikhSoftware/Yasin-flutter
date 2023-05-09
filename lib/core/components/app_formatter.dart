@@ -23,9 +23,9 @@ class AppFormatter {
   }
 
   String formatClipboard(VerseModel verse) {
-    int verseId = verse.verseId!;
-    String arabic = verse.arabic!;
-    String meaning = verse.meaning!;
+    int verseId = verse.verseId;
+    String arabic = verse.arabic;
+    String meaning = verse.meaning;
     // String sura = getSuraById(verse.suraId!);
     String formatted = '$arabic\n\n$meaning\n\n(Yosin surasi, $verseId-oyat)';
     return formatted;
