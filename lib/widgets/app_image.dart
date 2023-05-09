@@ -40,7 +40,7 @@ class AppImage extends StatelessWidget {
       width: width,
       // alignment: Alignment.center,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius.r),
+        borderRadius: BorderRadius.circular(radius),
         child: BlocProvider(
           create: (_) => ImageBloc()..add(ImageLoadedEvent(image)),
           child: BlocBuilder<ImageBloc, ImageState>(

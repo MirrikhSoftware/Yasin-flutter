@@ -12,35 +12,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        builder: (context, w) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (_) => SettingsBloc()),
-              BlocProvider(create: (_) => PlayerBloc()),
-              BlocProvider(
-                  create: (_) => NetworkBloc()..add(ListenConnection()))
-            ],
-            child: BlocListener<NetworkBloc, NetworkState>(
-              listener: (context, state) {
-                if (state is NetworkSuccess) {
-                  LogService.sendFromStorage();
-                }
-              },
-              child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: AppStrings.app_name.tr(),
-                theme: AppTheme().green,
-                navigatorKey: AppNavigator.navigatorKey,
-                initialRoute: RouteNames.initial,
-                onGenerateRoute: AppRoutes().onGenerateRoute,
-                navigatorObservers: [
-                  AnalyticsService.getAnalyticsObserver(),
-                ],
-              ),
-            ),
-          );
-        });
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => SettingsBloc()),
+        BlocProvider(create: (_) => PlayerBloc()),
+        BlocProvider(create: (_) => NetworkBloc()..add(ListenConnection()))
+      ],
+      child: BlocListener<NetworkBloc, NetworkState>(
+        listener: (context, state) {
+          if (state is NetworkSuccess) {
+            LogService.sendFromStorage();
+          }
+        },
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: AppStrings.app_name.tr(),
+          theme: AppTheme().green,
+          navigatorKey: AppNavigator.navigatorKey,
+          initialRoute: RouteNames.initial,
+          onGenerateRoute: AppRoutes().onGenerateRoute,
+          navigatorObservers: [
+            AnalyticsService.getAnalyticsObserver(),
+          ],
+        ),
+      ),
+    );
   }
 }

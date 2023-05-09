@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(top: 20.h),
+              padding: const EdgeInsets.only(top: 20.0),
               child: SvgPicture.asset(
                 AppIcons.basmalah,
                 color: AppColors.black,
@@ -95,12 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   GlobalKey key = _keys[itemIndex];
                   return VerseListTile(key: key, verse: verse);
                 }
-                return Divider(thickness: 1.h, height: 24.h);
+                return const Divider(thickness: 1.0, height: 24.0);
               },
               childCount: math.max(0, verses.length * 2 - 1),
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 24.h))
+          const SliverToBoxAdapter(child: SizedBox(height: 24.0))
         ],
       ),
     );

@@ -1,5 +1,4 @@
 export 'package:hive_flutter/hive_flutter.dart';
-export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:share_plus/share_plus.dart';
 export 'package:flutter_svg/flutter_svg.dart';
@@ -12,7 +11,7 @@ export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:audio_service/audio_service.dart';
 export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:firebase_analytics/firebase_analytics.dart';
-export 'package:just_audio/just_audio.dart';
+// export 'package:just_audio/just_audio.dart';
 export 'package:badges/badges.dart';
 export 'package:on_click/on_click.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';

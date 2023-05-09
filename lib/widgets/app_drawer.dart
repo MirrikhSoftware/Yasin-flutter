@@ -5,18 +5,8 @@ import 'package:yaaseen/route/routes.dart';
 
 /// It's a stateful widget that displays a drawer with a list of options
 
-class AppDrawer extends StatefulWidget {
+class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
-
-  @override
-  State<AppDrawer> createState() => _AppDrawerState();
-}
-
-class _AppDrawerState extends State<AppDrawer> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +15,19 @@ class _AppDrawerState extends State<AppDrawer> {
       child: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 20.h),
+            const SizedBox(height: 20.0),
             ClipRRect(
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(16.0),
               child: Image.asset(
                 AppIcons.app_icon,
-                height: 64.h,
-                width: 64.h,
+                height: 64.0,
+                width: 64.0,
               ),
             ),
             Text(
               AppStrings.app_name.tr(),
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+              style:
+                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
             ),
             _setTitle(
               key: AppKeys.readingMode,
@@ -56,7 +47,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             // Badge(
             //   showBadge: false,
-            //   position: BadgePosition(top: 8.h, start: 8.w),
+            //   position: BadgePosition(top: 8.0, start: 8.w),
             //   child: _setTitle(
             //     icon: AppIcons.alert,
             //     title: AppStrings.news.tr(),
@@ -72,9 +63,7 @@ class _AppDrawerState extends State<AppDrawer> {
               icon: AppIcons.settings,
               title: AppStrings.settings.tr(),
               onTap: () {
-                AppNavigator.pushNamed(RouteNames.settings).then(
-                  (value) => setState(() {}),
-                );
+                AppNavigator.pushNamed(RouteNames.settings);
               },
             ),
             // _setTitle(
@@ -102,7 +91,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-      
+
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
@@ -146,8 +135,8 @@ class _AppDrawerState extends State<AppDrawer> {
         leading: SvgPicture.asset(
           icon,
           color: AppColors.green,
-          height: 18.h,
-          width: 18.w,
+          height: 18.0,
+          width: 18.0,
         ),
       );
 }

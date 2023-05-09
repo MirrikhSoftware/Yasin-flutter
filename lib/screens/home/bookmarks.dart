@@ -24,14 +24,14 @@ class BookmarksScreen extends StatelessWidget {
                 children: [
                   Image.asset(
                     AppIcons.empty,
-                    width: 200.w,
+                    width: 200.0,
                   ),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12.0),
                   Text(
                     AppStrings.empty_bookmarks.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontSize: 14.sp,
+                      fontSize: 14.0,
                     ),
                   ),
                 ],
@@ -40,7 +40,7 @@ class BookmarksScreen extends StatelessWidget {
           }
           return Scrollbar(
             child: ListView.separated(
-              padding: EdgeInsets.only(bottom: 24.h),
+              padding: const EdgeInsets.only(bottom: 24.0),
               // controller: _scrollController,
 
               itemCount: verses.length,

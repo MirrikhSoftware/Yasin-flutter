@@ -24,8 +24,11 @@ class FoundedVerseTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // ARABIC
-        ArabicText(arabic: '${verse.arabic} $formatted'),
-        SizedBox(height: 20.h),
+        ArabicText(
+          arabic: '${verse.arabic} $formatted',
+          textAlign: TextAlign.start,
+        ),
+        const SizedBox(height: 20.0),
 
         // TRANSCRIPTION
         Text.rich(
@@ -34,7 +37,7 @@ class FoundedVerseTile extends StatelessWidget {
           ),
         ),
 
-        SizedBox(height: 10.h),
+        const SizedBox(height: 10.0),
 
         // MEANINGS
         Text.rich(
@@ -43,7 +46,7 @@ class FoundedVerseTile extends StatelessWidget {
             children: _highlightOccurrences('${verse.verseId}. $_getMeaning'),
           ),
         ),
-        SizedBox(height: 12.h),
+        const SizedBox(height: 12.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -54,7 +57,7 @@ class FoundedVerseTile extends StatelessWidget {
               onPressed: _onShare,
             ),
 
-            SizedBox(width: 12.w),
+            const SizedBox(width: 12.0),
 
             // SAVE
             RoundedIconButton(
@@ -65,7 +68,7 @@ class FoundedVerseTile extends StatelessWidget {
                 await verse.save();
               },
             ),
-            SizedBox(width: 12.w),
+            const SizedBox(width: 12.0),
 
             // PLAY
             BlocBuilder<PlayerBloc, PlayingState>(

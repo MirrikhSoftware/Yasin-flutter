@@ -92,8 +92,8 @@ class AppSearchDelegate extends SearchDelegate {
         alignment: Alignment.center,
         child: Text(
           AppStrings.notFound.tr(),
-          style: TextStyle(
-            fontSize: 18.sp,
+          style: const TextStyle(
+            fontSize: 18.0,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -102,7 +102,7 @@ class AppSearchDelegate extends SearchDelegate {
     return Material(
       color: AppColors.background,
       child: ListView.separated(
-        padding: EdgeInsets.all(16.r),
+        padding: const EdgeInsets.all(16.0),
         itemCount: verses.length,
         separatorBuilder: (context, index) => const Divider(thickness: 1),
         itemBuilder: (context, index) {

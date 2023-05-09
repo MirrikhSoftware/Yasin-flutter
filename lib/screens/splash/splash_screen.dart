@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-     if (!AppPrefs.hasSaved) {
+    if (!AppPrefs.hasSaved) {
       _saveToStorage().then((value) {
         AppNavigator.pushNamedAndRemoveUntil(RouteNames.home);
       });
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: SvgPicture.asset(
           AppIcons.logo,
-          width: 240.w,
+          width: 240.0,
         ),
       ),
     );

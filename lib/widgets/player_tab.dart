@@ -21,14 +21,14 @@ class PlayerTab extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOutQuad,
         color: const Color.fromARGB(255, 245, 245, 245),
-        height: 60.h,
+        height: 60.0,
         child: Column(
           children: [
-            Divider(height: 1.h,thickness: 1.h),
+            const Divider(height: 1.0, thickness: 1.0),
             const Spacer(),
             Row(
               children: [
-                SizedBox(width: 12.w),
+                const SizedBox(width: 12.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,

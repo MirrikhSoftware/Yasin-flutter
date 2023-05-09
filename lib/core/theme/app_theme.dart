@@ -15,8 +15,8 @@ class AppTheme {
                 SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark)),
         scrollbarTheme: ScrollbarThemeData(
             interactive: true,
-            crossAxisMargin: 6.w,
-            radius: Radius.circular(3.r),
+            crossAxisMargin: 6.0,
+            radius: const Radius.circular(3.0),
             thumbColor: MaterialStateProperty.all<Color>(AppColors.primary)),
       );
 
@@ -33,7 +33,7 @@ class AppTheme {
               statusBarColor: AppColors.green,
               statusBarIconBrightness: Brightness.light)),
       sliderTheme: SliderThemeData(
-          trackHeight: 2.h,
+          trackHeight: 2.0,
           // trackShape: CustomTrackShape(),
           overlayShape: SliderComponentShape.noOverlay,
           thumbColor: AppColors.green,
@@ -42,8 +42,8 @@ class AppTheme {
           showValueIndicator: ShowValueIndicator.always),
       scrollbarTheme: ScrollbarThemeData(
           interactive: true,
-          crossAxisMargin: 6.w,
-          radius: Radius.circular(3.r),
+          crossAxisMargin: 6.0,
+          radius: const Radius.circular(3.0),
           thumbColor: MaterialStateProperty.all<Color>(AppColors.green)),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColors.white,
@@ -74,8 +74,8 @@ class AppTheme {
 
         scrollbarTheme: ScrollbarThemeData(
             interactive: true,
-            crossAxisMargin: 6.w,
-            radius: Radius.circular(3.r),
+            crossAxisMargin: 6.0,
+            radius: const Radius.circular(3.0),
             thumbColor: MaterialStateProperty.all<Color>(AppColors.indigo)),
       );
 
@@ -95,7 +95,8 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
   }) {
     final double trackHeight = sliderTheme.trackHeight ?? 0;
     final double trackLeft = offset.dx;
-    final double trackTop = offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }

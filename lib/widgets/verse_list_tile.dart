@@ -21,13 +21,16 @@ class VerseListTile extends StatelessWidget {
       valueListenable: HiveBoxes.verseBox.listenable(keys: [verse.key]),
       builder: (context, box, w) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ARABIC
-              ArabicText(arabic: '${verse.arabic} $formatted'),
-              SizedBox(height: 20.h),
+              ArabicText(
+                arabic: '${verse.arabic} $formatted',
+                textAlign: TextAlign.start,
+              ),
+              const SizedBox(height: 20.0),
 
               // TRANSCRIPTION
               Text(
@@ -39,14 +42,14 @@ class VerseListTile extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 10.h),
+              const SizedBox(height: 10.0),
 
               // MEAINGS
               Text(
                 '${verse.verseId}. $_getMeaning',
                 style: TextStyle(fontSize: sizeBloc.meaingSize),
               ),
-              SizedBox(height: 12.h),
+              const SizedBox(height: 12.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -57,7 +60,7 @@ class VerseListTile extends StatelessWidget {
                     onPressed: _onShare,
                   ),
 
-                  SizedBox(width: 12.w),
+                  const SizedBox(width: 12.0),
 
                   // SAVE
                   RoundedIconButton(
@@ -69,7 +72,7 @@ class VerseListTile extends StatelessWidget {
                       await verse.save();
                     },
                   ),
-                  SizedBox(width: 12.w),
+                  const SizedBox(width: 12.0),
 
                   // PLAY
                   BlocBuilder<PlayerBloc, PlayingState>(

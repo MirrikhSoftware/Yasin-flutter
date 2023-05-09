@@ -17,10 +17,10 @@ class AppCheckboxListTile extends StatelessWidget {
     return CheckboxListTile(
       value: value,
       title: Transform.translate(
-        offset:  Offset(-15.w, 0),
+        offset: const Offset(-15.0, 0),
         child: Text(
           title,
-          style: TextStyle(fontSize: 12.sp),
+          style: const TextStyle(fontSize: 12.0),
         ),
       ),
       onChanged: onChanged,

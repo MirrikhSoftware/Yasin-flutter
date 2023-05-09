@@ -1,9 +1,11 @@
 import 'dart:async';
 
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 
 part 'player_event.dart';

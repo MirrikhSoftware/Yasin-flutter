@@ -4,7 +4,12 @@ import 'package:yaaseen/core/core.dart';
 
 class ArabicText extends StatelessWidget {
   final String arabic;
-  const ArabicText({Key? key, required this.arabic}) : super(key: key);
+  final TextAlign textAlign;
+  const ArabicText({
+    Key? key,
+    required this.arabic,
+    required this.textAlign,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class ArabicText extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: Text(
             arabic,
-            textAlign: TextAlign.start,
+            textAlign: textAlign,
             locale: const Locale('ar'),
             textDirection: TextDirection.rtl,
             style: TextStyle(

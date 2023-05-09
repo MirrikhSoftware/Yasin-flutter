@@ -1,3 +1,4 @@
+import 'package:just_audio/just_audio.dart';
 import 'package:yaaseen/core/core.dart';
 
 class AppAudioService {
@@ -24,7 +25,8 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     artist: "Bu Artist name",
     duration: const Duration(milliseconds: 5739820),
     artUri: Uri.parse(
-        'https://cdn.pixabay.com/photo/2022/09/28/05/53/squirrel-7484292_960_720.jpg'),
+      'https://cdn.pixabay.com/photo/2022/09/28/05/53/squirrel-7484292_960_720.jpg',
+    ),
   );
 
   final _player = AudioPlayer();
