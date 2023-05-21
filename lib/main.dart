@@ -9,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await HiveService.init();
+  await AppAudioService.init();
 
   runApp(const MyApp());
 

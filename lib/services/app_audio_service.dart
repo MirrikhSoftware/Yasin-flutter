@@ -3,7 +3,7 @@ import 'package:yaaseen/core/core.dart';
 
 class AppAudioService {
   static late AudioHandler _handler;
-  static AudioHandler get hendler => _handler;
+  static AudioHandler get handler => _handler;
   static Future init() async {
     _handler = await AudioService.init(
       builder: () => AudioPlayerHandler(),
@@ -14,34 +14,56 @@ class AppAudioService {
       ),
     );
   }
+
+  static Future<void> play() async {
+    _handler.play();
+  }
 }
 
 /// An [AudioHandler] for playing a single item.
 class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
-  static final _item = MediaItem(
-    id: 'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
-    album: "Alobomaaa",
-    title: "Title vha",
-    artist: "Bu Artist name",
-    duration: const Duration(milliseconds: 5739820),
-    artUri: Uri.parse(
-      'https://cdn.pixabay.com/photo/2022/09/28/05/53/squirrel-7484292_960_720.jpg',
-    ),
-  );
-
   final _player = AudioPlayer();
 
-  /// Initialise our audio handler.
+  final source = ConcatenatingAudioSource(
+    children: List.generate(
+      83,
+      (index) {
+        int verse = index + 1;
+        final id = 'asset:///assets/audio/$verse.mp3';
+        return AudioSource.uri(
+          Uri.parse(id),
+          tag: MediaItem(
+            id: id,
+            title: 'Yosin sursi $verse-oyat',
+            displayTitle: 'Yosin sursi $verse-oyat',
+            displaySubtitle: 'Mishary bin al-Afasy',
+            album: "Qur'oni Karim",
+            artist: 'Mishary bin al-Afasy',
+            artUri: Uri.parse(
+                'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cXVyYW58ZW58MHx8MHx8fDA%3D&w=1000&q=80'),
+          ),
+        );
+      },
+    ),
+  );
   AudioPlayerHandler() {
-    // So that our clients (the Flutter UI and the system notification) know
-    // what state to display, here we set up our audio handler to broadcast all
-    // playback state changes as they happen via playbackState...
     _player.playbackEventStream.map(_transformEvent).pipe(playbackState);
-    // ... and also the current media item via mediaItem.
-    mediaItem.add(_item);
+    const id = 'asset:///assets/audio/0.mp3';
 
-    // Load the player.
-    _player.setAudioSource(AudioSource.uri(Uri.parse(_item.id)));
+    _player.setAudioSource(AudioSource.uri(
+      Uri.parse(id),
+      tag: MediaItem(
+        id: id,
+        title: 'Yosin sursi -oyat',
+        displayTitle: 'Yosin sursi 7===-oyat',
+        displaySubtitle: 'Mishary bin al-Afasy',
+        album: "Qur'oni Karim",
+        artist: 'Mishary bin al-Afasy',
+        artUri: Uri.parse(
+            'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cXVyYW58ZW58MHx8MHx8fDA%3D&w=1000&q=80'),
+      ),
+    ));
+    // _player.setAudioSource(AudioSource.uri(Uri.parse(_item.id)));
   }
 
   // In this simple example, we handle only 4 actions: play, pause, seek and
@@ -69,10 +91,10 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
   PlaybackState _transformEvent(PlaybackEvent event) {
     return PlaybackState(
       controls: [
-        MediaControl.rewind,
+        MediaControl.skipToPrevious,
         if (_player.playing) MediaControl.pause else MediaControl.play,
         MediaControl.stop,
-        MediaControl.fastForward,
+        MediaControl.skipToNext,
       ],
       systemActions: const {
         MediaAction.seek,

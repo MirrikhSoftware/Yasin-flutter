@@ -4,6 +4,7 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
+import 'package:yaaseen/widgets/highlight_text.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class VerseListTile extends StatelessWidget {
@@ -45,9 +46,20 @@ class VerseListTile extends StatelessWidget {
               const SizedBox(height: 10.0),
 
               // MEAINGS
-              Text(
-                '${verse.verseId}. $_getMeaning',
-                style: TextStyle(fontSize: sizeBloc.meaingSize),
+              // Text(
+              //   '${verse.verseId}. $_getMeaning',
+              //   style: TextStyle(fontSize: sizeBloc.meaingSize),
+              // ),
+
+              HighlightText(
+                source: '${verse.verseId}. $_getMeaning',
+                target: '${verse.verseId} - oyat',
+                pattern: RegExp(r'\(.*\)'),
+                simpleStyle: TextStyle(
+                  fontSize: sizeBloc.meaningSize,
+                  fontWeight: FontWeight.w600,
+                ),
+                highlightStyle: TextStyle(fontSize: sizeBloc.meaningSize),
               ),
               const SizedBox(height: 12.0),
               Row(

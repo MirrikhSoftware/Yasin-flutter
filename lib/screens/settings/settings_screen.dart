@@ -131,7 +131,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case SizeType.arabic:
         return _sBloc.arabicSize;
       case SizeType.meainig:
-        return _sBloc.meaingSize;
+        return _sBloc.meaningSize;
       case SizeType.transcription:
         return _sBloc.trSize;
     }

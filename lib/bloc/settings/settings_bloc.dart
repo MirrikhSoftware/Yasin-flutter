@@ -8,11 +8,11 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   double _arabicSize = AppPref.arabicSize;
-  double _meaingSize = AppPref.meaningSize;
+  double _meaningSize = AppPref.meaningSize;
   double _trSize = AppPref.trSize;
 
   double get arabicSize => _arabicSize;
-  double get meaingSize => _meaingSize;
+  double get meaningSize => _meaningSize;
   double get trSize => _trSize;
 
   SettingsBloc() : super(SettingsInitial()) {
@@ -33,7 +33,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     MeaningTextSizeChanged event,
     Emitter emit,
   ) async {
-    _meaingSize = event.size;
+    _meaningSize = event.size;
     emit(SettingsInitial());
   }
 
