@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yaaseen/bloc/audio/audio_bloc.dart';
 import 'package:yaaseen/bloc/player/player_bloc.dart';
+import 'package:yaaseen/core/constants/enums.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
@@ -8,15 +10,14 @@ class PlayerTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlayerBloc, PlayingState>(builder: (context, state) {
-      PlayerBloc playerBloc = BlocProvider.of(context);
-      int id = playerBloc.playingId;
+    return BlocBuilder<AudioBloc, AudioState>(builder: (context, state) {
+      AudioBloc audioBloc = BlocProvider.of(context);
+      int id = state.currentPlaying;
 
       if (id == 0) {
         return const SizedBox();
       }
 
-      bool isPlaying = state is PlayerPlayingState;
       return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOutQuad,
@@ -46,32 +47,33 @@ class PlayerTab extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const Spacer(),
                 AppIconButton(
                   icon: Icons.skip_previous,
-                  onPressed: () => playerBloc.add(PlayerPrevEvent()),
+                  onPressed: () => audioBloc.add(const AudioEvent.toPrevious()),
                 ),
-                // SizedBox(width: 12.w),
+                const SizedBox(width: 12.0),
                 AppIconButton(
-                  icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                  icon: state.status == PlayerStatus.playing
+                      ? Icons.pause
+                      : Icons.play_arrow,
                   onPressed: () {
-                    if (isPlaying) {
-                      playerBloc.add(PauseAudioEvent());
+                    if (state.status == PlayerStatus.playing) {
+                      audioBloc.add(const AudioEvent.paused());
                     } else {
-                      playerBloc.add(PlayAudioEvent(id));
+                      audioBloc.add(const AudioEvent.resumed());
                     }
                   },
                 ),
-                // SizedBox(width: 12.w),
+                const SizedBox(width: 12.0),
                 AppIconButton(
                   icon: Icons.skip_next,
-                  onPressed: () => playerBloc.add(PlayerNextEvent()),
+                  onPressed: () => audioBloc.add(const AudioEvent.toNext()),
                 ),
                 AppIconButton(
                   icon: Icons.stop,
                   onPressed: () {
-                    playerBloc.add(PlayerStopEvent());
+                    audioBloc.add(const AudioEvent.stopped());
                   },
                 ),
               ],

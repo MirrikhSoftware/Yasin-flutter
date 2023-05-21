@@ -13,7 +13,6 @@
 
 // RegExp('\\(.*?\\)')
 import 'package:flutter/material.dart';
-import 'package:yaaseen/widgets/widgets.dart';
 
 class HighlightText extends StatelessWidget {
   final String source;
@@ -36,9 +35,7 @@ class HighlightText extends StatelessWidget {
     return Text.rich(TextSpan(children: _highlightOccurrences()));
   }
 
-  List<TextSpan> _highlightOccurrences({
-    TextType type = TextType.meaning,
-  }) {
+  List<TextSpan> _highlightOccurrences() {
     Iterable<Match> matches = const Iterable.empty();
 
     if (pattern == null) {

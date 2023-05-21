@@ -6,10 +6,10 @@ import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/services/services.dart';
 
 void main() async {
+  print('==================');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await HiveService.init();
-  await AppAudioService.init();
 
   runApp(const MyApp());
 

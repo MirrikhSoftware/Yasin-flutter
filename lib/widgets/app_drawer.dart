@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/constants.dart';
 import 'package:yaaseen/route/routes.dart';
-import 'package:yaaseen/services/app_audio_service.dart';
 
 /// It's a stateful widget that displays a drawer with a list of options
 
@@ -90,14 +89,6 @@ class AppDrawer extends StatelessWidget {
                 await Share.share(
                   '${AppStrings.download_app.tr()}\n\n${AppStrings.app_link}',
                 );
-              },
-            ),
-            _setTitle(
-              // key: AppKeys.shareApp,
-              icon: AppIcons.play,
-              title: 'Play',
-              onTap: () async {
-                AppAudioService.play();
               },
             ),
 

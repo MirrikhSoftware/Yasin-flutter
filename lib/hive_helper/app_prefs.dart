@@ -5,7 +5,6 @@ import 'package:yaaseen/hive_helper/hive_box_names.dart';
 
 class AppPref {
   static final Box<dynamic> _box = Hive.box(HiveBoxNames.prefs);
-  static final Box<dynamic> _langBox = Hive.box(HiveBoxNames.language);
 
   // === SAVING VERSES TO STORAGE =========================================== //
 
@@ -39,10 +38,10 @@ class AppPref {
   // === APP LOCALE ================================================= //
 
   static Future setLocale(String locale) async {
-    await _langBox.put(HiveKeys.locale, locale);
+    await _box.put(HiveKeys.locale, locale);
   }
 
-  static String get locale => _langBox.get(HiveKeys.locale) ?? 'cr';
+  static String get locale => _box.get(HiveKeys.locale) ?? 'cr';
 
   // === SCROLL POSITOIN ================================================= //
 
@@ -50,7 +49,7 @@ class AppPref {
     await _box.put(HiveKeys.scrollOffset, offset);
   }
 
-  static double get srcollOffset => _box.get(HiveKeys.scrollOffset) ?? 0;
+  static double get scrollOffset => _box.get(HiveKeys.scrollOffset) ?? 0;
 
   // === SCROLL POSITOIN ================================================= //
 

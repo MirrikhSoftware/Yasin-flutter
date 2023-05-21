@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaaseen/bloc/audio/audio_bloc.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
@@ -95,13 +96,16 @@ class VerseListTile extends StatelessWidget {
                         key: AppKeys.play,
                         icon: isPlaying ? Icons.pause : Icons.play_arrow,
                         onPressed: () async {
-                          PlayerBloc playerBloc = BlocProvider.of(context);
+                          BlocProvider.of<AudioBloc>(context).add(
+                            AudioEvent.played(index: verse.id),
+                          );
+                          // PlayerBloc playerBloc = BlocProvider.of(context);
 
-                          if (isPlaying) {
-                            playerBloc.add(PauseAudioEvent());
-                          } else {
-                            playerBloc.add(PlayAudioEvent(verse.verseId));
-                          }
+                          // if (isPlaying) {
+                          //   playerBloc.add(PauseAudioEvent());
+                          // } else {
+                          //   playerBloc.add(PlayAudioEvent(verse.verseId));
+                          // }
                         },
                       );
                     },

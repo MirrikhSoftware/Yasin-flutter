@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yaaseen/bloc/audio/audio_bloc.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController =
-      ScrollController(initialScrollOffset: AppPref.srcollOffset);
+      ScrollController(initialScrollOffset: AppPref.scrollOffset);
 
   final List<GlobalKey> _keys = [];
   final List<VerseModel> verses = HiveBoxes.verseBox.values.toList();
@@ -55,54 +56,65 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const AppDrawer(),
-      bottomNavigationBar: const PlayerTab(),
-      body: CustomScrollView(
-        controller: _scrollController,
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            title: Text(AppStrings.app_name.tr()),
-            actions: [
-              AppIconButton(
-                icon: CupertinoIcons.search,
-                onPressed: () {
-                  showSearch(
-                    context: context,
-                    delegate: AppSearchDelegate(),
-                  );
-                },
-              )
+    return BlocConsumer<AudioBloc, AudioState>(
+      listener: (context, state) {
+        print(state.status);
+        print(state.currentPlaying);
+      },
+      builder: (context, state) {
+        return Scaffold(
+          drawer: const AppDrawer(),
+          bottomNavigationBar: const PlayerTab(),
+          body: CustomScrollView(
+            controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverAppBar(
+                floating: true,
+                title: Text(AppStrings.app_name.tr()),
+                actions: [
+                  AppIconButton(
+                    icon: CupertinoIcons.search,
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: AppSearchDelegate(),
+                      );
+                    },
+                  )
+                ],
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SvgPicture.asset(
+                    AppIcons.basmalah,
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.black,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final int itemIndex = index ~/ 2;
+                    if (index.isEven) {
+                      VerseModel verse = verses[itemIndex];
+                      GlobalKey key = _keys[itemIndex];
+                      return VerseListTile(key: key, verse: verse);
+                    }
+                    return const Divider(thickness: 1.0, height: 24.0);
+                  },
+                  childCount: math.max(0, verses.length * 2 - 1),
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 24.0))
             ],
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: SvgPicture.asset(
-                AppIcons.basmalah,
-                color: AppColors.black,
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final int itemIndex = index ~/ 2;
-                if (index.isEven) {
-                  VerseModel verse = verses[itemIndex];
-                  GlobalKey key = _keys[itemIndex];
-                  return VerseListTile(key: key, verse: verse);
-                }
-                return const Divider(thickness: 1.0, height: 24.0);
-              },
-              childCount: math.max(0, verses.length * 2 - 1),
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 24.0))
-        ],
-      ),
+        );
+      },
     );
   }
 }
