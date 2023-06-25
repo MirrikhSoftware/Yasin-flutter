@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/route/route_names.dart';
+import 'package:yaaseen/screens/book/book_page.dart';
 import 'package:yaaseen/screens/screens.dart';
 
 class AppRoutes {
@@ -22,6 +23,9 @@ class AppRoutes {
 
       case RouteNames.about:
         return _route(const AboutScreen());
+
+      case RouteNames.paged:
+        return _route(const BookViewPage());
 
       // case RouteNames.test:
       //   return _route(const TestScreen());

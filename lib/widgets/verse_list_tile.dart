@@ -16,8 +16,8 @@ class VerseListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     SettingsBloc sizeBloc = context.watch();
     AppFormatter formatter = AppFormatter();
-    late String number = formatter.numberFormat(verse.verseId);
-    late String formatted = '\uFD3F$number\uFD3E';
+    final number = formatter.numberFormat(verse.verseId);
+    final formatted = '\uFD3F$number\uFD3E';
 
     return ValueListenableBuilder(
       valueListenable: HiveBoxes.verseBox.listenable(keys: [verse.key]),

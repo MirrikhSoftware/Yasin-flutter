@@ -38,6 +38,11 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             _setTitle(
+              icon: AppIcons.alif,
+              title: AppStrings.arabic_text.tr(),
+              onTap: () => AppNavigator.pushNamed(RouteNames.paged),
+            ),
+            _setTitle(
               key: AppKeys.bookmarks,
               icon: AppIcons.bookmark_outlined,
               title: AppStrings.bookmarks.tr(),
