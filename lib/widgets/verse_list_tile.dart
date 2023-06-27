@@ -29,6 +29,7 @@ class VerseListTile extends StatelessWidget {
             children: [
               // ARABIC
               ArabicText(
+                fontFamily: 'Me-Quran2',
                 arabic: '${verse.arabic} $formatted',
                 textAlign: TextAlign.start,
               ),

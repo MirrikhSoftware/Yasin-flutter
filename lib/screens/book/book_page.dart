@@ -13,11 +13,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/core.dart';
-import 'package:yaaseen/core/data/data.dart';
 import 'package:yaaseen/core/data/page_data.dart';
 import 'package:yaaseen/models/page/page_model.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
-import 'package:yaaseen/widgets/widgets.dart';
 
 class BookViewPage extends StatefulWidget {
   const BookViewPage({super.key});
@@ -52,28 +50,70 @@ class _BookViewPageState extends State<BookViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      reverse: true,
-      itemCount: pagedVerses.length,
-      itemBuilder: (context, index) {
-        final page = pagedVerses[index];
+    return Scaffold(
+      body: PageView.builder(
+        reverse: true,
+        itemCount: pagedVerses.length,
+        itemBuilder: (context, index) {
+          final page = pagedVerses[index];
 
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
-            child: ArabicText(
-              fontSize: 18,
-              arabic: _getText(page.verses),
-              textAlign: TextAlign.justify,
+          return Card(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 64,
+                ),
+                child: Text.rich(
+                  _getArabicText(page.verses),
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.justify,
+                )),
+          );
+        },
+      ),
+    );
+  }
+
+  TextSpan _getArabicText(List<VerseModel> verses) {
+    final arabicList = <String>[];
+    final numbers = <String>[];
+    for (var i = 0; i < verses.length; i++) {
+      String arabic = verses[i].arabic;
+      String number = formatter.numberFormat(verses[i].verseId);
+      String formatted = '\uFD3F$number\uFD3E';
+      arabicList.add(arabic);
+      numbers.add(formatted);
+    }
+    return TextSpan(
+      children: List.generate(
+        arabicList.length * 2,
+        (index) {
+          final arabic = arabicList[index ~/ 2];
+          final number = numbers[index ~/ 2];
+          if (index % 2 == 0) {
+            return TextSpan(
+              text: arabic,
+              locale: const Locale('ar'),
+              style: const TextStyle(
+                fontFamily: 'Me-Quran2',
+                fontSize: 20.0,
+                height: 2.2,
+              ),
+            );
+          }
+          return TextSpan(
+            text: ' $number ',
+            locale: const Locale('ar'),
+            style: const TextStyle(
+              fontFamily: AppFonts.meQuran,
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
   String _getText(List<VerseModel> verses) {
-    AppFormatter formatter = AppFormatter();
     List<String> arabicList = [];
     for (var i = 0; i < verses.length; i++) {
       String arabic = verses[i].arabic;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/audio/audio_bloc.dart';
-import 'package:yaaseen/bloc/player/player_bloc.dart';
 import 'package:yaaseen/core/constants/enums.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/widgets/widgets.dart';

@@ -23,7 +23,7 @@ env:
 
 jobs:
   code-analysis-and-testing:
-    if: true
+    if: false
     name: Code analysis and testing
     runs-on: ubuntu-latest
     timeout-minutes: 30

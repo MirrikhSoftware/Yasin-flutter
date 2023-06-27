@@ -60,13 +60,41 @@ flutter:
       fonts:
         - asset: assets/fonts/arabic/Me-Quran-Regular.ttf
 
+    - family: Me-Quran2
+      fonts:
+        - asset: assets/fonts/arabic/me_quran.ttf
+
     - family: Al-Qalam
       fonts:
         - asset: assets/fonts/arabic/al-qalam-kitab.ttf
 
+    - family: Kitab
+      fonts:
+        - asset: assets/fonts/arabic/kitab.ttf
+
     - family: Amiri
       fonts:
         - asset: assets/fonts/arabic/Amiri-Bold.ttf
+
+    - family: Uthman
+      fonts:
+        - asset: assets/fonts/arabic/UthmanTN1Ver10.otf
+
+    - family: OpenDyslexic
+      fonts:
+        - asset: assets/fonts/arabic/OpenDyslexic.otf
+
+    - family: P443
+      fonts:
+        - asset: assets/fonts/arabic/p443.woff2
+
+    - family: P444
+      fonts:
+        - asset: assets/fonts/arabic/p444.woff2
+
+    - family: P445
+      fonts:
+        - asset: assets/fonts/arabic/p445.woff2
 
     - family: Poppins
       fonts:

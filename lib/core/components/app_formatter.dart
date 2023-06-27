@@ -2,7 +2,7 @@ import 'package:yaaseen/models/verse/verse_model.dart';
 
 class AppFormatter {
   String numberFormat(int number) {
-    Map<String, String> numbers = {
+    const numbers = {
       '0': '٠',
       '1': '١',
       '2': '٢',

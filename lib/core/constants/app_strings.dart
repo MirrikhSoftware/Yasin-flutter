@@ -32,6 +32,7 @@ class AppStrings {
   static const String news = 'news';
   static const String search = 'search';
   static const String notFound = 'not_found';
+  static const String paged = 'paged';
 }
 
 extension StringExtension on String {
@@ -72,6 +73,7 @@ class AppLocales {
           'Yosin surasi mobil ilovasini "Play Store"dan yuklab oling',
           'Ёсин сураси мобил иловасини "Play Store"дан юклаб олинг',
         ),
+        AppStrings.paged: _setString('Sahifali', 'Саҳифали'),
       };
   Map<String, String> _setString(String uz, String cr) => {
         "uz": uz,

@@ -57,10 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AudioBloc, AudioState>(
-      listener: (context, state) {
-        print(state.status);
-        print(state.currentPlaying);
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           drawer: const AppDrawer(),

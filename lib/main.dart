@@ -6,7 +6,6 @@ import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/services/services.dart';
 
 void main() async {
-  print('==================');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await HiveService.init();
@@ -17,7 +16,6 @@ void main() async {
 
   AppPref.setCounter();
 
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

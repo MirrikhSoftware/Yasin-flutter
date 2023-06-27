@@ -38,8 +38,8 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             _setTitle(
-              icon: AppIcons.alif,
-              title: AppStrings.arabic_text.tr(),
+              icon: AppIcons.book,
+              title: AppStrings.paged.tr(),
               onTap: () => AppNavigator.pushNamed(RouteNames.paged),
             ),
             _setTitle(
@@ -139,9 +139,12 @@ class AppDrawer extends StatelessWidget {
         title: Text(title),
         leading: SvgPicture.asset(
           icon,
-          color: AppColors.green,
           height: 18.0,
           width: 18.0,
+          colorFilter: const ColorFilter.mode(
+            AppColors.green,
+            BlendMode.srcIn,
+          ),
         ),
       );
 }
