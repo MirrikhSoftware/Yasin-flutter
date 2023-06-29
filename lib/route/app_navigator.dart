@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class AppNavigator {
   static final _navigatorKey = GlobalKey<NavigatorState>();
 
-  static Future<dynamic> pushNamed(String routeName, {Object? args}) {
-    return _navigatorKey.currentState!.pushNamed(routeName, arguments: args);
+  static Future<dynamic> pushNamed(String routeName, {Object? args}) async {
+    return _navigatorKey.currentState?.pushNamed(routeName, arguments: args);
   }
 
   static Future<dynamic> pushReplacementNamed(
@@ -17,8 +17,8 @@ class AppNavigator {
     );
   }
 
-  static Future<dynamic> pushNamedAndRemoveUntil(String routeName) {
-    return _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+  static Future<dynamic> pushNamedAndRemoveUntil(String routeName) async {
+    return _navigatorKey.currentState?.pushNamedAndRemoveUntil(
       routeName,
       (route) => false,
     );
@@ -33,14 +33,14 @@ class AppNavigator {
         MaterialPageRoute(builder: (_) => page),
       );
 
-  static void pop() => _navigatorKey.currentState!.pop();
+  static void pop<T extends Object?>([T? result]) =>
+      _navigatorKey.currentState?.pop(result);
 
   static void checkAndPop() {
     if (_navigatorKey.currentState!.canPop()) {
       pop();
     }
   }
-
 
   static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
 }

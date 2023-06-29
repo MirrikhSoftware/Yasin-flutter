@@ -6,7 +6,9 @@ import 'package:yaaseen/route/routes.dart';
 /// It's a stateful widget that displays a drawer with a list of options
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  final ValueChanged<String> onLanguageChanged;
+  const AppDrawer({Key? key, required this.onLanguageChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,12 @@ class AppDrawer extends StatelessWidget {
             ),
             Text(
               AppStrings.app_name.tr(),
-              style:
-                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            _setTitle(
+            DrawerListTile(
               key: AppKeys.readingMode,
               icon: AppIcons.alif,
               title: AppStrings.arabic_text.tr(),
@@ -37,47 +41,33 @@ class AppDrawer extends StatelessWidget {
                 AppNavigator.pushNamed(RouteNames.reading);
               },
             ),
-            _setTitle(
+            DrawerListTile(
               icon: AppIcons.book,
               title: AppStrings.paged.tr(),
               onTap: () => AppNavigator.pushNamed(RouteNames.paged),
             ),
-            _setTitle(
-              key: AppKeys.bookmarks,
-              icon: AppIcons.bookmark_outlined,
-              title: AppStrings.bookmarks.tr(),
-              onTap: () {
-                AppNavigator.pushNamed(RouteNames.bookmarks);
-              },
-            ),
-            // Badge(
-            //   showBadge: false,
-            //   position: BadgePosition(top: 8.0, start: 8.w),
-            //   child: _setTitle(
-            //     icon: AppIcons.alert,
-            //     title: AppStrings.news.tr(),
-            //     onTap: () {
-            //       AppNavigator.pushNamed(RouteNames.news).then(
-            //         (value) => setState(() {}),
-            //       );
-            //     },
-            //   ),
+            // DrawerListTile(
+            //   key: AppKeys.bookmarks,
+            //   icon: AppIcons.bookmark_outlined,
+            //   title: AppStrings.bookmarks.tr(),
+            //   onTap: () {
+            //     AppNavigator.pushNamed(RouteNames.bookmarks);
+            //   },
             // ),
-            _setTitle(
+            DrawerListTile(
               key: AppKeys.settings,
               icon: AppIcons.settings,
               title: AppStrings.settings.tr(),
-              onTap: () {
-                AppNavigator.pushNamed(RouteNames.settings);
+              onTap: () async {
+                AppNavigator.pop();
+                final result =
+                    await AppNavigator.pushNamed(RouteNames.settings);
+                if (result != null) {
+                  onLanguageChanged.call(result.toString());
+                }
               },
             ),
-            // _setTitle(
-            //     icon: AppIcons.book,
-            //     title: 'Ilova haqida',
-            //     onTap: () {
-            //       AppNavigator.pushNamed(RouteNames.about);
-            //     }),
-            _setTitle(
+            DrawerListTile(
               key: AppKeys.rate,
               icon: AppIcons.rating_outlined,
               title: AppStrings.rate_app.tr(),
@@ -86,7 +76,7 @@ class AppDrawer extends StatelessWidget {
                 await inAppReview.openStoreListing();
               },
             ),
-            _setTitle(
+            DrawerListTile(
               key: AppKeys.shareApp,
               icon: AppIcons.share,
               title: AppStrings.share_app.tr(),
@@ -96,7 +86,6 @@ class AppDrawer extends StatelessWidget {
                 );
               },
             ),
-
             const Spacer(),
             ListTile(
               title: Text(AppStrings.version.tr()),
@@ -116,35 +105,37 @@ class AppDrawer extends StatelessWidget {
       ),
     );
   }
+}
 
-  /// It returns a ListTile widget with a leading icon and a title.
-  ///
-  /// Args:
-  ///   icon (String): The icon to be displayed on the left side of the list tile.
-  ///   title (String): The title of the list tile.
-  ///   onTap (VoidCallback): This is the function that will be called when the user taps on the list
-  /// tile.
-  ListTile _setTitle({
-    required String icon,
-    required String title,
-    VoidCallback? onTap,
-    Key? key,
-  }) =>
-      ListTile(
-        key: key,
-        // dense: true,
-        horizontalTitleGap: 0,
+class DrawerListTile extends StatelessWidget {
+  final String icon;
+  final String title;
+  final VoidCallback? onTap;
+  const DrawerListTile({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.onTap,
+  });
 
-        onTap: onTap,
-        title: Text(title),
-        leading: SvgPicture.asset(
-          icon,
-          height: 18.0,
-          width: 18.0,
-          colorFilter: const ColorFilter.mode(
-            AppColors.green,
-            BlendMode.srcIn,
-          ),
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      key: key,
+      // dense: true,
+      horizontalTitleGap: 0,
+
+      onTap: onTap,
+      title: Text(title),
+      leading: SvgPicture.asset(
+        icon,
+        height: 18.0,
+        width: 18.0,
+        colorFilter: const ColorFilter.mode(
+          AppColors.green,
+          BlendMode.srcIn,
         ),
-      );
+      ),
+    );
+  }
 }

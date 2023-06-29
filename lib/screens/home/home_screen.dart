@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          drawer: const AppDrawer(),
+          drawer: AppDrawer(onLanguageChanged: (value) => setState(() {})),
           bottomNavigationBar: const PlayerTab(),
           body: CustomScrollView(
             controller: _scrollController,

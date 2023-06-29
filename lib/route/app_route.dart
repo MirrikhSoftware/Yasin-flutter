@@ -33,6 +33,7 @@ class AppRoutes {
     return null;
   }
 
-  MaterialPageRoute _route(Widget route) =>
-      MaterialPageRoute(builder: (_) => route);
+  MaterialPageRoute _route(Widget route) => MaterialPageRoute(
+        builder: (_) => route,
+      );
 }

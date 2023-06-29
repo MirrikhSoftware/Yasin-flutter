@@ -3,6 +3,7 @@ import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/hive_helper/app_prefs.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
+import 'package:yaaseen/route/routes.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 import 'package:yaaseen/core/core.dart';
 
@@ -20,25 +21,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late String formatted = '\uFD3F$number\uFD3E';
 
   String _locale = AppPref.locale;
+  final _oldLocale = AppPref.locale;
   late final SettingsBloc _sBloc = BlocProvider.of(context);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
-        return Scaffold(
-          appBar: SimpleAppBar(title: AppStrings.settings.tr()),
-          body: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: VerseListTile(verse: _verse),
+        return WillPopScope(
+          onWillPop: () async {
+            if (_locale != _oldLocale) {
+              AppNavigator.pop(_locale);
+              return false;
+            }
+            return true;
+          },
+          child: Scaffold(
+            appBar: SimpleAppBar(title: AppStrings.settings.tr()),
+            body: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: VerseListTile(verse: _verse),
+                  ),
                 ),
-              ),
-              _showLocale(),
-              _setData(SizeType.arabic),
-              _setData(SizeType.transcription),
-              _setData(SizeType.meainig),
-            ],
+                _showLocale(),
+                _setData(SizeType.arabic),
+                _setData(SizeType.transcription),
+                _setData(SizeType.meainig),
+              ],
+            ),
           ),
         );
       },
