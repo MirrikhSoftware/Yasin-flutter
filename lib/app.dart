@@ -5,12 +5,11 @@ import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
 import 'package:yaaseen/core/theme/app_theme.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
-import 'package:yaaseen/services/analytics_service.dart';
 import 'package:yaaseen/services/app_audio_service.dart';
 import 'route/routes.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +36,9 @@ class MyApp extends StatelessWidget {
           navigatorKey: AppNavigator.navigatorKey,
           initialRoute: RouteNames.initial,
           onGenerateRoute: AppRoutes().onGenerateRoute,
-          navigatorObservers: [
-            AnalyticsService.getAnalyticsObserver(),
-          ],
+          // navigatorObservers: [
+          //   AnalyticsService.getAnalyticsObserver(),
+          // ],
         ),
       ),
     );

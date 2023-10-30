@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
 
-class HomeAppBar extends StatefulWidget with PreferredSizeWidget {
+class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
   @override

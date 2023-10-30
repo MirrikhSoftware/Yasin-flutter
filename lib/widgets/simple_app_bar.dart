@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
+class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   const SimpleAppBar({Key? key, required this.title}) : super(key: key);
 

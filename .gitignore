@@ -32,6 +32,7 @@
 /build/
 /lib/core/constants/app_secure.dart
 lib/screens/test/
+/assets/db/
 
 # Web related
 lib/generated_plugin_registrant.dart
