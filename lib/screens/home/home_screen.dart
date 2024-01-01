@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
       listenWhen: (previous, current) =>
           previous.currentPlaying != current.currentPlaying,
       listener: (context, state) {
+        final index = state.currentPlaying;
+
         scrollController.scrollTo(
           index: state.currentPlaying == 0
               ? state.currentPlaying

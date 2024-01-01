@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AudioBloc(audioService: AppAudioService())
-            ..add(const AudioEvent.started()),
+          create: (_) => SettingsBloc()..add(const SettingsEvent.started()),
         ),
         BlocProvider(
-          create: (_) => SettingsBloc()..add(const SettingsEvent.started()),
+          create: (_) => AudioBloc(audioService: AppAudioService())
+            ..add(const AudioEvent.started()),
         ),
         BlocProvider(create: (_) => NetworkBloc()..add(ListenConnection()))
       ],
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           title: AppStrings.app_name.tr(),
           theme: AppTheme().green,
           navigatorKey: AppNavigator.navigatorKey,
-          initialRoute: RouteNames.initial,
+          initialRoute: RouteNames.home,
           onGenerateRoute: AppRoutes().onGenerateRoute,
           // navigatorObservers: [
           //   AnalyticsService.getAnalyticsObserver(),

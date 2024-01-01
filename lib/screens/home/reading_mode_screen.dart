@@ -3,7 +3,7 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class ReadingModeScreen extends StatelessWidget {
-  const ReadingModeScreen({Key? key}) : super(key: key);
+  const ReadingModeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
