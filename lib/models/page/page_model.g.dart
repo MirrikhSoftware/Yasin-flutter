@@ -6,7 +6,8 @@ part of 'page_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PageModel _$$_PageModelFromJson(Map<String, dynamic> json) => _$_PageModel(
+_$PageModelImpl _$$PageModelImplFromJson(Map<String, dynamic> json) =>
+    _$PageModelImpl(
       surah: json['surah'] as int? ?? 83,
       start: json['start'] as int? ?? 1,
       end: json['end'] as int? ?? 3,
@@ -16,7 +17,7 @@ _$_PageModel _$$_PageModelFromJson(Map<String, dynamic> json) => _$_PageModel(
           const [],
     );
 
-Map<String, dynamic> _$$_PageModelToJson(_$_PageModel instance) =>
+Map<String, dynamic> _$$PageModelImplToJson(_$PageModelImpl instance) =>
     <String, dynamic>{
       'surah': instance.surah,
       'start': instance.start,

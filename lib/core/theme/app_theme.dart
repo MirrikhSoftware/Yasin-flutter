@@ -21,6 +21,7 @@ class AppTheme {
       );
 
   ThemeData get green => ThemeData(
+      useMaterial3: false,
       canvasColor: AppColors.background,
       primaryColor: AppColors.green,
       // splashColor: AppColors.,

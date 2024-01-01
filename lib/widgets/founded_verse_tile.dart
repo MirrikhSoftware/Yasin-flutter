@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaaseen/bloc/blocs.dart';
+import 'package:yaaseen/bloc/audio/audio_bloc.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
@@ -73,20 +73,19 @@ class FoundedVerseTile extends StatelessWidget {
             const SizedBox(width: 12.0),
 
             // PLAY
-            BlocBuilder<PlayerBloc, PlayingState>(
+            BlocBuilder<AudioBloc, AudioState>(
               builder: (context, state) {
-                bool isPlaying =
-                    (state is PlayerPlayingState) && state.id == verse.verseId;
+                bool isPlaying = state.currentPlaying == verse.verseId;
                 return RoundedIconButton(
                   key: AppKeys.play,
                   icon: isPlaying ? Icons.pause : Icons.play_arrow,
                   onPressed: () async {
-                    PlayerBloc playerBloc = BlocProvider.of(context);
+                    final playerBloc = BlocProvider.of<AudioBloc>(context);
 
                     if (isPlaying) {
-                      playerBloc.add(PauseAudioEvent());
+                      playerBloc.add(const AudioEvent.paused());
                     } else {
-                      playerBloc.add(PlayAudioEvent(verse.verseId));
+                      playerBloc.add(AudioEvent.played(index: verse.id));
                     }
                   },
                 );

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:yaaseen/bloc/audio/audio_bloc.dart';
-import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
@@ -25,34 +24,24 @@ class _HomeScreenState extends State<HomeScreen> {
     scrollController = ItemScrollController();
 
     // AnalyticsService.analytics.log(name: 'HomeScreen');
-
-    PlayerBloc playerBloc = BlocProvider.of(context);
-    playerBloc.player.onPlayerComplete.listen((event) {
-      // int id = playerBloc.playingId;
-
-      // if (id < 83) {
-      //   playerBloc.add(PlayAudioEvent(id + 1));
-      // } else {
-      //   _scrollController.animateTo(
-      //     0.0,
-      //     duration: const Duration(seconds: 3),
-      //     curve: Curves.easeIn,
-      //   );
-
-      //   playerBloc.add(PlayerStopEvent());
-      // }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AudioBloc, AudioState>(
-      listener: (context, state) {},
+      listenWhen: (previous, current) =>
+          previous.currentPlaying != current.currentPlaying,
+      listener: (context, state) {
+        scrollController.scrollTo(
+          index: state.currentPlaying == 0
+              ? state.currentPlaying
+              : state.currentPlaying - 1,
+          duration: const Duration(milliseconds: 300),
+          alignment: .05,
+        );
+      },
       builder: (context, state) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-          ),
           drawer: AppDrawer(onLanguageChanged: (value) => setState(() {})),
           bottomNavigationBar: const PlayerTab(),
           appBar: AppBar(

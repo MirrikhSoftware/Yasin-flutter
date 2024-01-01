@@ -79,21 +79,22 @@ class _$PageModelCopyWithImpl<$Res, $Val extends PageModel>
 }
 
 /// @nodoc
-abstract class _$$_PageModelCopyWith<$Res> implements $PageModelCopyWith<$Res> {
-  factory _$$_PageModelCopyWith(
-          _$_PageModel value, $Res Function(_$_PageModel) then) =
-      __$$_PageModelCopyWithImpl<$Res>;
+abstract class _$$PageModelImplCopyWith<$Res>
+    implements $PageModelCopyWith<$Res> {
+  factory _$$PageModelImplCopyWith(
+          _$PageModelImpl value, $Res Function(_$PageModelImpl) then) =
+      __$$PageModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int surah, int start, int end, List<VerseModel> verses});
 }
 
 /// @nodoc
-class __$$_PageModelCopyWithImpl<$Res>
-    extends _$PageModelCopyWithImpl<$Res, _$_PageModel>
-    implements _$$_PageModelCopyWith<$Res> {
-  __$$_PageModelCopyWithImpl(
-      _$_PageModel _value, $Res Function(_$_PageModel) _then)
+class __$$PageModelImplCopyWithImpl<$Res>
+    extends _$PageModelCopyWithImpl<$Res, _$PageModelImpl>
+    implements _$$PageModelImplCopyWith<$Res> {
+  __$$PageModelImplCopyWithImpl(
+      _$PageModelImpl _value, $Res Function(_$PageModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +105,7 @@ class __$$_PageModelCopyWithImpl<$Res>
     Object? end = null,
     Object? verses = null,
   }) {
-    return _then(_$_PageModel(
+    return _then(_$PageModelImpl(
       surah: null == surah
           ? _value.surah
           : surah // ignore: cast_nullable_to_non_nullable
@@ -127,16 +128,16 @@ class __$$_PageModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PageModel implements _PageModel {
-  const _$_PageModel(
+class _$PageModelImpl implements _PageModel {
+  const _$PageModelImpl(
       {this.surah = 83,
       this.start = 1,
       this.end = 3,
       final List<VerseModel> verses = const []})
       : _verses = verses;
 
-  factory _$_PageModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PageModelFromJson(json);
+  factory _$PageModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PageModelImplFromJson(json);
 
   @override
   @JsonKey()
@@ -165,7 +166,7 @@ class _$_PageModel implements _PageModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PageModel &&
+            other is _$PageModelImpl &&
             (identical(other.surah, surah) || other.surah == surah) &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
@@ -180,12 +181,12 @@ class _$_PageModel implements _PageModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PageModelCopyWith<_$_PageModel> get copyWith =>
-      __$$_PageModelCopyWithImpl<_$_PageModel>(this, _$identity);
+  _$$PageModelImplCopyWith<_$PageModelImpl> get copyWith =>
+      __$$PageModelImplCopyWithImpl<_$PageModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PageModelToJson(
+    return _$$PageModelImplToJson(
       this,
     );
   }
@@ -196,10 +197,10 @@ abstract class _PageModel implements PageModel {
       {final int surah,
       final int start,
       final int end,
-      final List<VerseModel> verses}) = _$_PageModel;
+      final List<VerseModel> verses}) = _$PageModelImpl;
 
   factory _PageModel.fromJson(Map<String, dynamic> json) =
-      _$_PageModel.fromJson;
+      _$PageModelImpl.fromJson;
 
   @override
   int get surah;
@@ -211,6 +212,6 @@ abstract class _PageModel implements PageModel {
   List<VerseModel> get verses;
   @override
   @JsonKey(ignore: true)
-  _$$_PageModelCopyWith<_$_PageModel> get copyWith =>
+  _$$PageModelImplCopyWith<_$PageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

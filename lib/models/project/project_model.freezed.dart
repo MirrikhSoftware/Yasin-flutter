@@ -80,22 +80,22 @@ class _$ProjectModelCopyWithImpl<$Res, $Val extends ProjectModel>
 }
 
 /// @nodoc
-abstract class _$$_ProjectModelCopyWith<$Res>
+abstract class _$$ProjectModelImplCopyWith<$Res>
     implements $ProjectModelCopyWith<$Res> {
-  factory _$$_ProjectModelCopyWith(
-          _$_ProjectModel value, $Res Function(_$_ProjectModel) then) =
-      __$$_ProjectModelCopyWithImpl<$Res>;
+  factory _$$ProjectModelImplCopyWith(
+          _$ProjectModelImpl value, $Res Function(_$ProjectModelImpl) then) =
+      __$$ProjectModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String publisher, String logo});
 }
 
 /// @nodoc
-class __$$_ProjectModelCopyWithImpl<$Res>
-    extends _$ProjectModelCopyWithImpl<$Res, _$_ProjectModel>
-    implements _$$_ProjectModelCopyWith<$Res> {
-  __$$_ProjectModelCopyWithImpl(
-      _$_ProjectModel _value, $Res Function(_$_ProjectModel) _then)
+class __$$ProjectModelImplCopyWithImpl<$Res>
+    extends _$ProjectModelCopyWithImpl<$Res, _$ProjectModelImpl>
+    implements _$$ProjectModelImplCopyWith<$Res> {
+  __$$ProjectModelImplCopyWithImpl(
+      _$ProjectModelImpl _value, $Res Function(_$ProjectModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_ProjectModelCopyWithImpl<$Res>
     Object? publisher = null,
     Object? logo = null,
   }) {
-    return _then(_$_ProjectModel(
+    return _then(_$ProjectModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -129,12 +129,12 @@ class __$$_ProjectModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProjectModel implements _ProjectModel {
-  const _$_ProjectModel(
+class _$ProjectModelImpl implements _ProjectModel {
+  const _$ProjectModelImpl(
       {this.id = "", this.name = "", this.publisher = "", this.logo = ""});
 
-  factory _$_ProjectModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectModelFromJson(json);
+  factory _$ProjectModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectModelImplFromJson(json);
 
   @override
   @JsonKey()
@@ -158,7 +158,7 @@ class _$_ProjectModel implements _ProjectModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProjectModel &&
+            other is _$ProjectModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.publisher, publisher) ||
@@ -173,12 +173,12 @@ class _$_ProjectModel implements _ProjectModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProjectModelCopyWith<_$_ProjectModel> get copyWith =>
-      __$$_ProjectModelCopyWithImpl<_$_ProjectModel>(this, _$identity);
+  _$$ProjectModelImplCopyWith<_$ProjectModelImpl> get copyWith =>
+      __$$ProjectModelImplCopyWithImpl<_$ProjectModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProjectModelToJson(
+    return _$$ProjectModelImplToJson(
       this,
     );
   }
@@ -189,10 +189,10 @@ abstract class _ProjectModel implements ProjectModel {
       {final String id,
       final String name,
       final String publisher,
-      final String logo}) = _$_ProjectModel;
+      final String logo}) = _$ProjectModelImpl;
 
   factory _ProjectModel.fromJson(Map<String, dynamic> json) =
-      _$_ProjectModel.fromJson;
+      _$ProjectModelImpl.fromJson;
 
   @override
   String get id;
@@ -204,6 +204,6 @@ abstract class _ProjectModel implements ProjectModel {
   String get logo;
   @override
   @JsonKey(ignore: true)
-  _$$_ProjectModelCopyWith<_$_ProjectModel> get copyWith =>
+  _$$ProjectModelImplCopyWith<_$ProjectModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

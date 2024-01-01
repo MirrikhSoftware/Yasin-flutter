@@ -3,6 +3,7 @@
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/hive_helper/hive_adapters.dart';
 import 'package:yaaseen/hive_helper/hive_types.dart';
+import 'package:yaaseen/models/qori/qori.dart';
 part 'verse_model.g.dart';
 
 @HiveType(
@@ -142,4 +143,7 @@ class VerseModel extends HiveObject {
     data['is_saved'] = isSaved;
     return data;
   }
+
+  String getAudioUrl(QoriModel qori) =>
+      'https://cdn.islamic.network/quran/audio/128/${qori}/$_id.mp3';
 }

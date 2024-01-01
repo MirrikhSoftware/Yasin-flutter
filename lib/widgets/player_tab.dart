@@ -5,12 +5,12 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class PlayerTab extends StatelessWidget {
-  const PlayerTab({Key? key}) : super(key: key);
+  const PlayerTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AudioBloc, AudioState>(builder: (context, state) {
-      AudioBloc audioBloc = BlocProvider.of(context);
+      final audioBloc = BlocProvider.of<AudioBloc>(context);
       int id = state.currentPlaying;
 
       if (id == 0) {
@@ -67,7 +67,9 @@ class PlayerTab extends StatelessWidget {
                 const SizedBox(width: 12.0),
                 AppIconButton(
                   icon: Icons.skip_next,
-                  onPressed: () => audioBloc.add(const AudioEvent.toNext()),
+                  onPressed: () => audioBloc.add(
+                    const AudioEvent.toNext(skip: true),
+                  ),
                 ),
                 AppIconButton(
                   icon: Icons.stop,

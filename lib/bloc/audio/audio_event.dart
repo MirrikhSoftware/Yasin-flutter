@@ -7,6 +7,6 @@ class AudioEvent with _$AudioEvent {
   const factory AudioEvent.paused() = _Paused;
   const factory AudioEvent.stopped() = _Stopped;
   const factory AudioEvent.resumed() = _Resumed;
-  const factory AudioEvent.toNext() = _ToNext;
+  const factory AudioEvent.toNext({@Default(false) bool skip}) = _ToNext;
   const factory AudioEvent.toPrevious() = _ToPrevious;
 }

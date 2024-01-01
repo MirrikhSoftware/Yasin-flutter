@@ -6,15 +6,15 @@ part of 'platform_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PlatformModel _$$_PlatformModelFromJson(Map<String, dynamic> json) =>
-    _$_PlatformModel(
+_$PlatformModelImpl _$$PlatformModelImplFromJson(Map<String, dynamic> json) =>
+    _$PlatformModelImpl(
       platform: $enumDecode(_$PlatformEnumEnumMap, json['platform']),
       id: json['id'] as String? ?? "",
       link: json['link'] as String? ?? "",
       rating: (json['rating'] as num?)?.toDouble() ?? 5.0,
     );
 
-Map<String, dynamic> _$$_PlatformModelToJson(_$_PlatformModel instance) =>
+Map<String, dynamic> _$$PlatformModelImplToJson(_$PlatformModelImpl instance) =>
     <String, dynamic>{
       'platform': _$PlatformEnumEnumMap[instance.platform]!,
       'id': instance.id,

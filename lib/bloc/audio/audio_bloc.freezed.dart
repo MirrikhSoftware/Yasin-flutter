@@ -23,7 +23,7 @@ mixin _$AudioEvent {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ mixin _$AudioEvent {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) =>
       throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ mixin _$AudioEvent {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) =>
@@ -105,24 +105,25 @@ class _$AudioEventCopyWithImpl<$Res, $Val extends AudioEvent>
 }
 
 /// @nodoc
-abstract class _$$_StartedCopyWith<$Res> {
-  factory _$$_StartedCopyWith(
-          _$_Started value, $Res Function(_$_Started) then) =
-      __$$_StartedCopyWithImpl<$Res>;
+abstract class _$$StartedImplCopyWith<$Res> {
+  factory _$$StartedImplCopyWith(
+          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
+      __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StartedCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_Started>
-    implements _$$_StartedCopyWith<$Res> {
-  __$$_StartedCopyWithImpl(_$_Started _value, $Res Function(_$_Started) _then)
+class __$$StartedImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$StartedImpl>
+    implements _$$StartedImplCopyWith<$Res> {
+  __$$StartedImplCopyWithImpl(
+      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Started implements _Started {
-  const _$_Started();
+class _$StartedImpl implements _Started {
+  const _$StartedImpl();
 
   @override
   String toString() {
@@ -132,7 +133,7 @@ class _$_Started implements _Started {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Started);
+        (other.runtimeType == runtimeType && other is _$StartedImpl);
   }
 
   @override
@@ -146,7 +147,7 @@ class _$_Started implements _Started {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
     return started();
@@ -160,7 +161,7 @@ class _$_Started implements _Started {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
     return started?.call();
@@ -174,7 +175,7 @@ class _$_Started implements _Started {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
@@ -232,22 +233,24 @@ class _$_Started implements _Started {
 }
 
 abstract class _Started implements AudioEvent {
-  const factory _Started() = _$_Started;
+  const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$_PlayedCopyWith<$Res> {
-  factory _$$_PlayedCopyWith(_$_Played value, $Res Function(_$_Played) then) =
-      __$$_PlayedCopyWithImpl<$Res>;
+abstract class _$$PlayedImplCopyWith<$Res> {
+  factory _$$PlayedImplCopyWith(
+          _$PlayedImpl value, $Res Function(_$PlayedImpl) then) =
+      __$$PlayedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int? index});
 }
 
 /// @nodoc
-class __$$_PlayedCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_Played>
-    implements _$$_PlayedCopyWith<$Res> {
-  __$$_PlayedCopyWithImpl(_$_Played _value, $Res Function(_$_Played) _then)
+class __$$PlayedImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$PlayedImpl>
+    implements _$$PlayedImplCopyWith<$Res> {
+  __$$PlayedImplCopyWithImpl(
+      _$PlayedImpl _value, $Res Function(_$PlayedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -255,7 +258,7 @@ class __$$_PlayedCopyWithImpl<$Res>
   $Res call({
     Object? index = freezed,
   }) {
-    return _then(_$_Played(
+    return _then(_$PlayedImpl(
       index: freezed == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -266,8 +269,8 @@ class __$$_PlayedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Played implements _Played {
-  const _$_Played({this.index});
+class _$PlayedImpl implements _Played {
+  const _$PlayedImpl({this.index});
 
   @override
   final int? index;
@@ -281,7 +284,7 @@ class _$_Played implements _Played {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Played &&
+            other is _$PlayedImpl &&
             (identical(other.index, index) || other.index == index));
   }
 
@@ -291,8 +294,8 @@ class _$_Played implements _Played {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlayedCopyWith<_$_Played> get copyWith =>
-      __$$_PlayedCopyWithImpl<_$_Played>(this, _$identity);
+  _$$PlayedImplCopyWith<_$PlayedImpl> get copyWith =>
+      __$$PlayedImplCopyWithImpl<_$PlayedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -302,7 +305,7 @@ class _$_Played implements _Played {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
     return played(index);
@@ -316,7 +319,7 @@ class _$_Played implements _Played {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
     return played?.call(index);
@@ -330,7 +333,7 @@ class _$_Played implements _Played {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
@@ -388,32 +391,34 @@ class _$_Played implements _Played {
 }
 
 abstract class _Played implements AudioEvent {
-  const factory _Played({final int? index}) = _$_Played;
+  const factory _Played({final int? index}) = _$PlayedImpl;
 
   int? get index;
   @JsonKey(ignore: true)
-  _$$_PlayedCopyWith<_$_Played> get copyWith =>
+  _$$PlayedImplCopyWith<_$PlayedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PausedCopyWith<$Res> {
-  factory _$$_PausedCopyWith(_$_Paused value, $Res Function(_$_Paused) then) =
-      __$$_PausedCopyWithImpl<$Res>;
+abstract class _$$PausedImplCopyWith<$Res> {
+  factory _$$PausedImplCopyWith(
+          _$PausedImpl value, $Res Function(_$PausedImpl) then) =
+      __$$PausedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_PausedCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_Paused>
-    implements _$$_PausedCopyWith<$Res> {
-  __$$_PausedCopyWithImpl(_$_Paused _value, $Res Function(_$_Paused) _then)
+class __$$PausedImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$PausedImpl>
+    implements _$$PausedImplCopyWith<$Res> {
+  __$$PausedImplCopyWithImpl(
+      _$PausedImpl _value, $Res Function(_$PausedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Paused implements _Paused {
-  const _$_Paused();
+class _$PausedImpl implements _Paused {
+  const _$PausedImpl();
 
   @override
   String toString() {
@@ -423,7 +428,7 @@ class _$_Paused implements _Paused {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Paused);
+        (other.runtimeType == runtimeType && other is _$PausedImpl);
   }
 
   @override
@@ -437,7 +442,7 @@ class _$_Paused implements _Paused {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
     return paused();
@@ -451,7 +456,7 @@ class _$_Paused implements _Paused {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
     return paused?.call();
@@ -465,7 +470,7 @@ class _$_Paused implements _Paused {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
@@ -523,28 +528,29 @@ class _$_Paused implements _Paused {
 }
 
 abstract class _Paused implements AudioEvent {
-  const factory _Paused() = _$_Paused;
+  const factory _Paused() = _$PausedImpl;
 }
 
 /// @nodoc
-abstract class _$$_StoppedCopyWith<$Res> {
-  factory _$$_StoppedCopyWith(
-          _$_Stopped value, $Res Function(_$_Stopped) then) =
-      __$$_StoppedCopyWithImpl<$Res>;
+abstract class _$$StoppedImplCopyWith<$Res> {
+  factory _$$StoppedImplCopyWith(
+          _$StoppedImpl value, $Res Function(_$StoppedImpl) then) =
+      __$$StoppedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StoppedCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_Stopped>
-    implements _$$_StoppedCopyWith<$Res> {
-  __$$_StoppedCopyWithImpl(_$_Stopped _value, $Res Function(_$_Stopped) _then)
+class __$$StoppedImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$StoppedImpl>
+    implements _$$StoppedImplCopyWith<$Res> {
+  __$$StoppedImplCopyWithImpl(
+      _$StoppedImpl _value, $Res Function(_$StoppedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Stopped implements _Stopped {
-  const _$_Stopped();
+class _$StoppedImpl implements _Stopped {
+  const _$StoppedImpl();
 
   @override
   String toString() {
@@ -554,7 +560,7 @@ class _$_Stopped implements _Stopped {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Stopped);
+        (other.runtimeType == runtimeType && other is _$StoppedImpl);
   }
 
   @override
@@ -568,7 +574,7 @@ class _$_Stopped implements _Stopped {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
     return stopped();
@@ -582,7 +588,7 @@ class _$_Stopped implements _Stopped {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
     return stopped?.call();
@@ -596,7 +602,7 @@ class _$_Stopped implements _Stopped {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
@@ -654,28 +660,29 @@ class _$_Stopped implements _Stopped {
 }
 
 abstract class _Stopped implements AudioEvent {
-  const factory _Stopped() = _$_Stopped;
+  const factory _Stopped() = _$StoppedImpl;
 }
 
 /// @nodoc
-abstract class _$$_ResumedCopyWith<$Res> {
-  factory _$$_ResumedCopyWith(
-          _$_Resumed value, $Res Function(_$_Resumed) then) =
-      __$$_ResumedCopyWithImpl<$Res>;
+abstract class _$$ResumedImplCopyWith<$Res> {
+  factory _$$ResumedImplCopyWith(
+          _$ResumedImpl value, $Res Function(_$ResumedImpl) then) =
+      __$$ResumedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ResumedCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_Resumed>
-    implements _$$_ResumedCopyWith<$Res> {
-  __$$_ResumedCopyWithImpl(_$_Resumed _value, $Res Function(_$_Resumed) _then)
+class __$$ResumedImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$ResumedImpl>
+    implements _$$ResumedImplCopyWith<$Res> {
+  __$$ResumedImplCopyWithImpl(
+      _$ResumedImpl _value, $Res Function(_$ResumedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Resumed implements _Resumed {
-  const _$_Resumed();
+class _$ResumedImpl implements _Resumed {
+  const _$ResumedImpl();
 
   @override
   String toString() {
@@ -685,7 +692,7 @@ class _$_Resumed implements _Resumed {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Resumed);
+        (other.runtimeType == runtimeType && other is _$ResumedImpl);
   }
 
   @override
@@ -699,7 +706,7 @@ class _$_Resumed implements _Resumed {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
     return resumed();
@@ -713,7 +720,7 @@ class _$_Resumed implements _Resumed {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
     return resumed?.call();
@@ -727,7 +734,7 @@ class _$_Resumed implements _Resumed {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
@@ -785,41 +792,70 @@ class _$_Resumed implements _Resumed {
 }
 
 abstract class _Resumed implements AudioEvent {
-  const factory _Resumed() = _$_Resumed;
+  const factory _Resumed() = _$ResumedImpl;
 }
 
 /// @nodoc
-abstract class _$$_ToNextCopyWith<$Res> {
-  factory _$$_ToNextCopyWith(_$_ToNext value, $Res Function(_$_ToNext) then) =
-      __$$_ToNextCopyWithImpl<$Res>;
+abstract class _$$ToNextImplCopyWith<$Res> {
+  factory _$$ToNextImplCopyWith(
+          _$ToNextImpl value, $Res Function(_$ToNextImpl) then) =
+      __$$ToNextImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool skip});
 }
 
 /// @nodoc
-class __$$_ToNextCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_ToNext>
-    implements _$$_ToNextCopyWith<$Res> {
-  __$$_ToNextCopyWithImpl(_$_ToNext _value, $Res Function(_$_ToNext) _then)
+class __$$ToNextImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$ToNextImpl>
+    implements _$$ToNextImplCopyWith<$Res> {
+  __$$ToNextImplCopyWithImpl(
+      _$ToNextImpl _value, $Res Function(_$ToNextImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? skip = null,
+  }) {
+    return _then(_$ToNextImpl(
+      skip: null == skip
+          ? _value.skip
+          : skip // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_ToNext implements _ToNext {
-  const _$_ToNext();
+class _$ToNextImpl implements _ToNext {
+  const _$ToNextImpl({this.skip = false});
+
+  @override
+  @JsonKey()
+  final bool skip;
 
   @override
   String toString() {
-    return 'AudioEvent.toNext()';
+    return 'AudioEvent.toNext(skip: $skip)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ToNext);
+        (other.runtimeType == runtimeType &&
+            other is _$ToNextImpl &&
+            (identical(other.skip, skip) || other.skip == skip));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, skip);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ToNextImplCopyWith<_$ToNextImpl> get copyWith =>
+      __$$ToNextImplCopyWithImpl<_$ToNextImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -829,10 +865,10 @@ class _$_ToNext implements _ToNext {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
-    return toNext();
+    return toNext(skip);
   }
 
   @override
@@ -843,10 +879,10 @@ class _$_ToNext implements _ToNext {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
-    return toNext?.call();
+    return toNext?.call(skip);
   }
 
   @override
@@ -857,12 +893,12 @@ class _$_ToNext implements _ToNext {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
     if (toNext != null) {
-      return toNext();
+      return toNext(skip);
     }
     return orElse();
   }
@@ -915,29 +951,34 @@ class _$_ToNext implements _ToNext {
 }
 
 abstract class _ToNext implements AudioEvent {
-  const factory _ToNext() = _$_ToNext;
+  const factory _ToNext({final bool skip}) = _$ToNextImpl;
+
+  bool get skip;
+  @JsonKey(ignore: true)
+  _$$ToNextImplCopyWith<_$ToNextImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToPreviousCopyWith<$Res> {
-  factory _$$_ToPreviousCopyWith(
-          _$_ToPrevious value, $Res Function(_$_ToPrevious) then) =
-      __$$_ToPreviousCopyWithImpl<$Res>;
+abstract class _$$ToPreviousImplCopyWith<$Res> {
+  factory _$$ToPreviousImplCopyWith(
+          _$ToPreviousImpl value, $Res Function(_$ToPreviousImpl) then) =
+      __$$ToPreviousImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ToPreviousCopyWithImpl<$Res>
-    extends _$AudioEventCopyWithImpl<$Res, _$_ToPrevious>
-    implements _$$_ToPreviousCopyWith<$Res> {
-  __$$_ToPreviousCopyWithImpl(
-      _$_ToPrevious _value, $Res Function(_$_ToPrevious) _then)
+class __$$ToPreviousImplCopyWithImpl<$Res>
+    extends _$AudioEventCopyWithImpl<$Res, _$ToPreviousImpl>
+    implements _$$ToPreviousImplCopyWith<$Res> {
+  __$$ToPreviousImplCopyWithImpl(
+      _$ToPreviousImpl _value, $Res Function(_$ToPreviousImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ToPrevious implements _ToPrevious {
-  const _$_ToPrevious();
+class _$ToPreviousImpl implements _ToPrevious {
+  const _$ToPreviousImpl();
 
   @override
   String toString() {
@@ -947,7 +988,7 @@ class _$_ToPrevious implements _ToPrevious {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ToPrevious);
+        (other.runtimeType == runtimeType && other is _$ToPreviousImpl);
   }
 
   @override
@@ -961,7 +1002,7 @@ class _$_ToPrevious implements _ToPrevious {
     required TResult Function() paused,
     required TResult Function() stopped,
     required TResult Function() resumed,
-    required TResult Function() toNext,
+    required TResult Function(bool skip) toNext,
     required TResult Function() toPrevious,
   }) {
     return toPrevious();
@@ -975,7 +1016,7 @@ class _$_ToPrevious implements _ToPrevious {
     TResult? Function()? paused,
     TResult? Function()? stopped,
     TResult? Function()? resumed,
-    TResult? Function()? toNext,
+    TResult? Function(bool skip)? toNext,
     TResult? Function()? toPrevious,
   }) {
     return toPrevious?.call();
@@ -989,7 +1030,7 @@ class _$_ToPrevious implements _ToPrevious {
     TResult Function()? paused,
     TResult Function()? stopped,
     TResult Function()? resumed,
-    TResult Function()? toNext,
+    TResult Function(bool skip)? toNext,
     TResult Function()? toPrevious,
     required TResult orElse(),
   }) {
@@ -1047,7 +1088,7 @@ class _$_ToPrevious implements _ToPrevious {
 }
 
 abstract class _ToPrevious implements AudioEvent {
-  const factory _ToPrevious() = _$_ToPrevious;
+  const factory _ToPrevious() = _$ToPreviousImpl;
 }
 
 /// @nodoc
@@ -1099,22 +1140,22 @@ class _$AudioStateCopyWithImpl<$Res, $Val extends AudioState>
 }
 
 /// @nodoc
-abstract class _$$_AudioStateCopyWith<$Res>
+abstract class _$$AudioStateImplCopyWith<$Res>
     implements $AudioStateCopyWith<$Res> {
-  factory _$$_AudioStateCopyWith(
-          _$_AudioState value, $Res Function(_$_AudioState) then) =
-      __$$_AudioStateCopyWithImpl<$Res>;
+  factory _$$AudioStateImplCopyWith(
+          _$AudioStateImpl value, $Res Function(_$AudioStateImpl) then) =
+      __$$AudioStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PlayerStatus status, int currentPlaying});
 }
 
 /// @nodoc
-class __$$_AudioStateCopyWithImpl<$Res>
-    extends _$AudioStateCopyWithImpl<$Res, _$_AudioState>
-    implements _$$_AudioStateCopyWith<$Res> {
-  __$$_AudioStateCopyWithImpl(
-      _$_AudioState _value, $Res Function(_$_AudioState) _then)
+class __$$AudioStateImplCopyWithImpl<$Res>
+    extends _$AudioStateCopyWithImpl<$Res, _$AudioStateImpl>
+    implements _$$AudioStateImplCopyWith<$Res> {
+  __$$AudioStateImplCopyWithImpl(
+      _$AudioStateImpl _value, $Res Function(_$AudioStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1123,7 +1164,7 @@ class __$$_AudioStateCopyWithImpl<$Res>
     Object? status = null,
     Object? currentPlaying = null,
   }) {
-    return _then(_$_AudioState(
+    return _then(_$AudioStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -1138,8 +1179,8 @@ class __$$_AudioStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AudioState implements _AudioState {
-  const _$_AudioState({required this.status, required this.currentPlaying});
+class _$AudioStateImpl implements _AudioState {
+  const _$AudioStateImpl({required this.status, required this.currentPlaying});
 
   @override
   final PlayerStatus status;
@@ -1155,7 +1196,7 @@ class _$_AudioState implements _AudioState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AudioState &&
+            other is _$AudioStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.currentPlaying, currentPlaying) ||
                 other.currentPlaying == currentPlaying));
@@ -1167,14 +1208,14 @@ class _$_AudioState implements _AudioState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AudioStateCopyWith<_$_AudioState> get copyWith =>
-      __$$_AudioStateCopyWithImpl<_$_AudioState>(this, _$identity);
+  _$$AudioStateImplCopyWith<_$AudioStateImpl> get copyWith =>
+      __$$AudioStateImplCopyWithImpl<_$AudioStateImpl>(this, _$identity);
 }
 
 abstract class _AudioState implements AudioState {
   const factory _AudioState(
       {required final PlayerStatus status,
-      required final int currentPlaying}) = _$_AudioState;
+      required final int currentPlaying}) = _$AudioStateImpl;
 
   @override
   PlayerStatus get status;
@@ -1182,6 +1223,6 @@ abstract class _AudioState implements AudioState {
   int get currentPlaying;
   @override
   @JsonKey(ignore: true)
-  _$$_AudioStateCopyWith<_$_AudioState> get copyWith =>
+  _$$AudioStateImplCopyWith<_$AudioStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

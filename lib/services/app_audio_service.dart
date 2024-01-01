@@ -1,5 +1,6 @@
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:yaaseen/core/core.dart';
 
 class AppAudioService {
   AppAudioService._instance() {
@@ -10,6 +11,8 @@ class AppAudioService {
 
   final _player = AudioPlayer();
 
+  AudioPlayer get player => _player;
+
   Future<void> init() async {
     await JustAudioBackground.init(
       androidNotificationChannelId: 'com.ryanheise.myapp.channel.audio',
@@ -17,11 +20,13 @@ class AppAudioService {
       androidNotificationOngoing: true,
     );
 
+    'INIT ISHGA TUSHDI'.printf();
+
     final source = ConcatenatingAudioSource(
       children: List.generate(
         83,
         (index) {
-          int verse = index + 1;
+          final verse = index;
           final id = 'asset:///assets/audio/$verse.mp3';
           return AudioSource.uri(
             Uri.parse(id),
@@ -39,11 +44,12 @@ class AppAudioService {
         },
       ),
     );
-    await _player.setAudioSource(source, initialIndex: 10);
+    await _player.setAudioSource(source);
   }
 
   Future<void> play() => _player.play();
   Future<void> pause() => _player.pause();
+  Future<void> stop() => _player.stop();
   Future<void> seekToIndex(int index) =>
       _player.seek(Duration.zero, index: index);
   Future<void> seekToNext() => _player.seekToNext();

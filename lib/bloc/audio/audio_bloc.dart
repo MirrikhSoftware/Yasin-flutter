@@ -16,6 +16,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yaaseen/core/constants/enums.dart';
+import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/services/app_audio_service.dart';
 
 part 'audio_event.dart';
@@ -32,13 +33,27 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     on<_Stopped>(_onStop);
     on<_ToNext>(_toNext);
     on<_ToPrevious>(_toPrevious);
+
+    // audioService.playerStateStream.listen((event) {
+    //   event.processingState.printf(name: 'AudioBloc');
+    //   if (event.processingState == ProcessingState.completed) {
+    //     add(const AudioEvent.toNext());
+    //   }
+    // });
+
+    audioService.player.currentIndexStream.listen((event) {
+      'Index: $event'.printf();
+      add(const AudioEvent.toNext());
+    });
   }
 
   FutureOr<void> _onStart(_Started event, Emitter emit) async =>
       await audioService.init();
 
   FutureOr<void> _onPlayed(_Played event, Emitter emit) async {
-    await audioService.play();
+    'ID: ${event.index}'.printf();
+    await audioService.seekToIndex(event.index ?? 0);
+    audioService.play();
     emit(state.copyWith(
       currentPlaying: event.index ?? 0,
       status: PlayerStatus.playing,
@@ -46,7 +61,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   }
 
   FutureOr<void> _onPause(_Paused event, Emitter emit) async {
-    await audioService.pause();
+    audioService.pause();
     emit(state.copyWith(status: PlayerStatus.pause));
   }
 
@@ -56,12 +71,14 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   }
 
   FutureOr<void> _onStop(_Stopped event, Emitter emit) async {
-    await audioService.play();
-    emit(state.copyWith(status: PlayerStatus.stop));
+    await audioService.stop();
+    emit(AudioState.initial());
   }
 
   FutureOr<void> _toNext(_ToNext event, Emitter emit) async {
-    await audioService.seekToNext();
+    if (event.skip) {
+      await audioService.seekToNext();
+    }
     emit(state.copyWith(currentPlaying: state.currentPlaying + 1));
   }
 
