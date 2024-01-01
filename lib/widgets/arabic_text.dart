@@ -9,13 +9,13 @@ class ArabicText extends StatelessWidget {
   final double? fontSize;
   final String? fontFamily;
   const ArabicText({
-    Key? key,
+    super.key,
     required this.arabic,
     required this.textAlign,
     this.target,
     this.fontSize,
     this.fontFamily,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ArabicText extends StatelessWidget {
             locale: const Locale('ar'),
             textDirection: TextDirection.rtl,
             style: TextStyle(
-              fontSize: fontSize ?? context.watch<SettingsBloc>().arabicSize,
+              fontSize: fontSize ?? state.arabicSize,
               fontFamily: fontFamily ?? AppFonts.meQuran,
               wordSpacing: 12,
               height: 1.8,

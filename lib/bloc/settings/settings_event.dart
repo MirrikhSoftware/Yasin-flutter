@@ -1,19 +1,26 @@
 part of 'settings_bloc.dart';
 
-abstract class SettingsEvent {}
-
-class ArabicTextSizeChanged extends SettingsEvent {
-  final double size;
-  ArabicTextSizeChanged(this.size);
+@immutable
+sealed class SettingsEvent {
+  const SettingsEvent();
+  const factory SettingsEvent.started() = _Started;
 }
 
-class MeaningTextSizeChanged extends SettingsEvent {
-  final double size;
-  MeaningTextSizeChanged(this.size);
+final class _Started extends SettingsEvent {
+  const _Started();
 }
 
-class TranscriptionTextSizeChanged extends SettingsEvent {
+final class ArabicTextSizeChanged extends SettingsEvent {
   final double size;
-  TranscriptionTextSizeChanged(this.size);
+  const ArabicTextSizeChanged(this.size);
 }
 
+final class MeaningTextSizeChanged extends SettingsEvent {
+  final double size;
+  const MeaningTextSizeChanged(this.size);
+}
+
+final class TranscriptionTextSizeChanged extends SettingsEvent {
+  final double size;
+  const TranscriptionTextSizeChanged(this.size);
+}

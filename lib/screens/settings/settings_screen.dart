@@ -8,7 +8,7 @@ import 'package:yaaseen/widgets/widgets.dart';
 import 'package:yaaseen/core/core.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -47,7 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _showLocale(),
                 _setData(SizeType.arabic),
                 _setData(SizeType.transcription),
-                _setData(SizeType.meainig),
+                _setData(SizeType.meaning),
               ],
             ),
           ),
@@ -105,7 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _sBloc.add(ArabicTextSizeChanged(v));
                   break;
 
-                case SizeType.meainig:
+                case SizeType.meaning:
                   _sBloc.add(MeaningTextSizeChanged(v));
 
                   break;
@@ -122,7 +122,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   await AppPref.setArabicSize(v);
                   break;
 
-                case SizeType.meainig:
+                case SizeType.meaning:
                   await AppPref.setMeaingSize(v);
                   break;
 
@@ -140,11 +140,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double _getSize(SizeType type) {
     switch (type) {
       case SizeType.arabic:
-        return _sBloc.arabicSize;
-      case SizeType.meainig:
-        return _sBloc.meaningSize;
+        return _sBloc.state.arabicSize;
+      case SizeType.meaning:
+        return _sBloc.state.meaningSize;
       case SizeType.transcription:
-        return _sBloc.trSize;
+        return _sBloc.state.transcriptionSize;
     }
   }
 
@@ -153,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case SizeType.arabic:
         return AppStrings.arabic.tr();
 
-      case SizeType.meainig:
+      case SizeType.meaning:
         return AppStrings.meaning.tr();
 
       case SizeType.transcription:
@@ -162,4 +162,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-enum SizeType { arabic, meainig, transcription }
+enum SizeType { arabic, meaning, transcription }

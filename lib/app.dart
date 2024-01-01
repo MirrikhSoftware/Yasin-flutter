@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
           create: (_) => AudioBloc(audioService: AppAudioService())
             ..add(const AudioEvent.started()),
         ),
-        BlocProvider(create: (_) => SettingsBloc()),
+        BlocProvider(
+          create: (_) => SettingsBloc()..add(const SettingsEvent.started()),
+        ),
         BlocProvider(create: (_) => NetworkBloc()..add(ListenConnection()))
       ],
       child: BlocListener<NetworkBloc, NetworkState>(

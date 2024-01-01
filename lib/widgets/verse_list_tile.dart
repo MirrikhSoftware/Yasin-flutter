@@ -14,7 +14,7 @@ class VerseListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeBloc = context.watch<SettingsBloc>();
+    final sizeBloc = context.watch<SettingsBloc>().state;
     final formatter = AppFormatter();
     final number = formatter.numberFormat(verse.verseId);
     final formatted = '\uFD3F$number\uFD3E';
@@ -39,7 +39,7 @@ class VerseListTile extends StatelessWidget {
               Text(
                 _getTranscription,
                 style: TextStyle(
-                  fontSize: sizeBloc.trSize,
+                  fontSize: sizeBloc.transcriptionSize,
                   fontStyle: FontStyle.italic,
                   letterSpacing: 2,
                 ),
