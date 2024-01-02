@@ -23,7 +23,7 @@ class VerseListTile extends StatelessWidget {
       valueListenable: HiveBoxes.verseBox.listenable(keys: [verse.key]),
       builder: (context, box, w) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

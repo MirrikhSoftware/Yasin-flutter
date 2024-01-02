@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:yaaseen/core/core.dart';
+import 'package:yaaseen/utils/logger.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -145,14 +146,14 @@ class NotificationService {
           AuthorizationStatus.provisional) {
       } else {}
     } catch (err) {
-      err.printf(name: 'NotificationService', isError: true);
+      Log.e(err, name: 'notification_service');
     }
   }
 
   static Future _getToken() async {
     FirebaseMessaging.instance.getToken().then((value) {
-      '================== token ================='.printf();
-      value.printf(name: 'NotificationService');
+      '================== token ================='.logD();
+      Log.d(value, name: 'notification_service');
     });
   }
 }

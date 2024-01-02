@@ -13,11 +13,11 @@
 
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:yaaseen/core/constants/enums.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/services/app_audio_service.dart';
+import 'package:yaaseen/utils/logger.dart';
 
 part 'audio_event.dart';
 part 'audio_state.dart';
@@ -42,7 +42,10 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     // });
 
     audioService.player.currentIndexStream.listen((event) {
-      'Index: $event'.printf();
+      if (state.status == PlayerStatus.stop) {
+        return;
+      }
+      Log.d('Indexes: $event/${state.currentPlaying}', name: 'audio_bloc');
       add(const AudioEvent.toNext());
     });
   }
@@ -51,7 +54,6 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
       await audioService.init();
 
   FutureOr<void> _onPlayed(_Played event, Emitter emit) async {
-    'ID: ${event.index}'.printf();
     await audioService.seekToIndex(event.index ?? 0);
     audioService.play();
     emit(state.copyWith(

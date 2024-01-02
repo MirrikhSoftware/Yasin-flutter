@@ -1,6 +1,7 @@
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:yaaseen/core/core.dart';
+import 'package:yaaseen/utils/logger.dart';
 
 class AppAudioService {
   AppAudioService._instance() {
@@ -20,7 +21,7 @@ class AppAudioService {
       androidNotificationOngoing: true,
     );
 
-    'INIT ISHGA TUSHDI'.printf();
+    'INIT ISHGA TUSHDI'.logD(name: 'AppAudioService');
 
     final source = ConcatenatingAudioSource(
       children: List.generate(

@@ -40,8 +40,7 @@ class LogService {
       String message = await _logToString(log);
       Uri url = Uri.parse('{DotEnv.telegramLink}$message');
 
-      http.Response response = await http.get(url);
-      response.body.printf();
+      final response = await http.get(url);
 
       if (response.statusCode == 200) {
         return HttpResult(statusCode: 200, isSuccess: true, response: '');
