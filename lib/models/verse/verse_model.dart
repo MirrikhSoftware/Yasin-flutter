@@ -145,5 +145,5 @@ class VerseModel extends HiveObject {
   }
 
   String getAudioUrl(QoriModel qori) =>
-      'https://cdn.islamic.network/quran/audio/128/${qori}/$_id.mp3';
+      'https://cdn.islamic.network/quran/audio/128/${qori.identifier}/$_id.mp3';
 }

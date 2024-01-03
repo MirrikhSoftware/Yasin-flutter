@@ -32,9 +32,8 @@ void main() async {
 
 Future _saveToStorage() async {
   Map<int, VerseModel> entries = {};
-  for (var verse in verses) {
+  for (final verse in verses) {
     final verseModel = VerseModel.fromJson(verse);
-
     entries[verseModel.key] = verseModel;
   }
   await HiveBoxes.verseBox.putAll(entries);

@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:yaaseen/core/core.dart';
+import 'package:yaaseen/widgets/scale_animation.dart';
 
 class RoundedIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
+  final double? width;
   const RoundedIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onPressed,
-  }) : super(key: key);
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ScaleAnimation(
       onTap: onPressed,
-      borderRadius: _borderRadius(),
       child: Container(
+        width: width,
         padding: const EdgeInsets.all(4.0),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.green, width: 2.0),
-          borderRadius: _borderRadius(),
+          borderRadius: BorderRadius.circular(32.0),
         ),
         child: Icon(icon, size: 18.0),
       ),
     );
   }
-
-  BorderRadius _borderRadius() => BorderRadius.circular(32.0);
 }

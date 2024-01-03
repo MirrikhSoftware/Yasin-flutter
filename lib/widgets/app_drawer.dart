@@ -7,8 +7,7 @@ import 'package:yaaseen/route/routes.dart';
 
 class AppDrawer extends StatelessWidget {
   final ValueChanged<String> onLanguageChanged;
-  const AppDrawer({Key? key, required this.onLanguageChanged})
-      : super(key: key);
+  const AppDrawer({super.key, required this.onLanguageChanged});
 
   @override
   Widget build(BuildContext context) {

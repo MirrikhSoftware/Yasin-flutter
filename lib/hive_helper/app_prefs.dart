@@ -5,7 +5,7 @@ import 'package:yaaseen/hive_helper/hive_box_names.dart';
 
 class AppPref {
   const AppPref._();
-  static final Box<dynamic> _box = Hive.box(HiveBoxNames.prefs);
+  static final Box<dynamic> _box = Hive.box(HiveBoxNames.pref);
 
   // === SAVING VERSES TO STORAGE =========================================== //
 

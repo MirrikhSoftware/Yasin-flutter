@@ -20,10 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
   late final ItemScrollController scrollController;
 
   final verses = HiveBoxes.verseBox.values.toList();
+  late final int initialIndex;
+
   @override
   void initState() {
     super.initState();
     scrollController = ItemScrollController();
+    initialIndex = AppPref.lastPlaying;
   }
 
   @override
@@ -59,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: ScrollablePositionedList.separated(
             itemScrollController: scrollController,
             itemCount: verses.length,
-            initialScrollIndex: AppPref.lastPlaying,
+            initialScrollIndex: initialIndex,
             padding: const EdgeInsets.symmetric(vertical: 24),
             physics: const ClampingScrollPhysics(),
             separatorBuilder: (context, index) => const Divider(height: 1.0),

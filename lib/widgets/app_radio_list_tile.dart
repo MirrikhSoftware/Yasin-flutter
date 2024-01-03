@@ -6,11 +6,11 @@ class AppRadioListTile extends StatelessWidget {
   final ValueChanged<Object?>? onChanged;
   final String group;
   const AppRadioListTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     required this.group,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ class HiveService {
     Hive.registerAdapter(LogAdapter());
 
     await Hive.openBox<VerseModel>(HiveBoxNames.verses);
-    await Hive.openBox<dynamic>(HiveBoxNames.prefs);
+    await Hive.openBox<dynamic>(HiveBoxNames.pref);
     await Hive.openBox<dynamic>(HiveBoxNames.language);
     await Hive.openBox<LogModel>(HiveBoxNames.log);
   }

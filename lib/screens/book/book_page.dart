@@ -33,7 +33,7 @@ class _BookViewPageState extends State<BookViewPage> {
     super.initState();
 
     final pages = PageData.page.where((page) => page['surah'] == 36);
-    for (var page in pages) {
+    for (final page in pages) {
       final pageModel = PageModel.fromJson(page);
       final selectedVerses = verses
           .where((verse) =>
@@ -78,9 +78,9 @@ class _BookViewPageState extends State<BookViewPage> {
     final arabicList = <String>[];
     final numbers = <String>[];
     for (var i = 0; i < verses.length; i++) {
-      String arabic = verses[i].arabic;
-      String number = formatter.numberFormat(verses[i].verseId);
-      String formatted = '\uFD3F$number\uFD3E';
+      final arabic = verses[i].arabic;
+      final number = formatter.numberFormat(verses[i].verseId);
+      final formatted = '\uFD3F$number\uFD3E';
       arabicList.add(arabic);
       numbers.add(formatted);
     }
@@ -113,15 +113,15 @@ class _BookViewPageState extends State<BookViewPage> {
     );
   }
 
-  String _getText(List<VerseModel> verses) {
-    List<String> arabicList = [];
-    for (var i = 0; i < verses.length; i++) {
-      String arabic = verses[i].arabic;
-      String number = formatter.numberFormat(i + 1);
-      String formatted = '\uFD3F$number\uFD3E';
-      arabicList.add('$arabic $formatted ');
-    }
+  // String _getText(List<VerseModel> verses) {
+  //   List<String> arabicList = [];
+  //   for (int i = 0; i < verses.length; i++) {
+  //     final arabic = verses[i].arabic;
+  //     final number = formatter.numberFormat(i + 1);
+  //     final formatted = '\uFD3F$number\uFD3E';
+  //     arabicList.add('$arabic $formatted ');
+  //   }
 
-    return arabicList.join();
-  }
+  //   return arabicList.join();
+  // }
 }

@@ -1,16 +1,16 @@
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/utils/logger.dart';
 
 class AppAudioService {
-  AppAudioService._instance() {
+  final AudioPlayer _player;
+
+  AppAudioService._instance(AudioPlayer audioPlayer) : _player = audioPlayer {
     _internal = this;
   }
   static AppAudioService? _internal;
-  factory AppAudioService() => _internal ?? AppAudioService._instance();
-
-  final _player = AudioPlayer();
+  factory AppAudioService(AudioPlayer audioPlayer) =>
+      _internal ?? AppAudioService._instance(audioPlayer);
 
   AudioPlayer get player => _player;
 

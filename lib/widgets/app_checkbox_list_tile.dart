@@ -6,11 +6,11 @@ class AppCheckboxListTile extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?>? onChanged;
   const AppCheckboxListTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

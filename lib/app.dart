@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:yaaseen/bloc/blocs.dart';
 import 'package:yaaseen/core/components/app_packages.dart';
 import 'package:yaaseen/core/constants/app_strings.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           create: (_) => SettingsBloc()..add(const SettingsEvent.started()),
         ),
         BlocProvider(
-          create: (_) => AudioBloc(audioService: AppAudioService())
+          create: (_) => AudioBloc(audioService: AppAudioService(AudioPlayer()))
             ..add(const AudioEvent.started()),
         ),
         BlocProvider(create: (_) => NetworkBloc()..add(ListenConnection()))

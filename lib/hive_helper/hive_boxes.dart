@@ -5,7 +5,7 @@ import 'package:yaaseen/models/models.dart';
 
 class HiveBoxes {
   static Box<VerseModel> get verseBox => Hive.box(HiveBoxNames.verses);
-  static Box<dynamic> get prefsBox => Hive.box(HiveBoxNames.prefs);
+  static Box<dynamic> get prefBox => Hive.box(HiveBoxNames.pref);
   static Box<dynamic> get langBox => Hive.box(HiveBoxNames.language);
   static Box<LogModel> get logBox => Hive.box(HiveBoxNames.log);
 }

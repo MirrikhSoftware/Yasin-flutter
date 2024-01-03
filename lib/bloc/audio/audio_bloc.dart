@@ -13,15 +13,15 @@
 
 import 'dart:async';
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 import 'package:yaaseen/core/constants/enums.dart';
 import 'package:yaaseen/core/core.dart';
+import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/services/app_audio_service.dart';
 import 'package:yaaseen/utils/logger.dart';
 
 part 'audio_event.dart';
 part 'audio_state.dart';
-part 'audio_bloc.freezed.dart';
 
 class AudioBloc extends Bloc<AudioEvent, AudioState> {
   final AppAudioService audioService;
@@ -29,36 +29,43 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     on<_Started>(_onStart);
     on<_Played>(_onPlayed);
     on<_Paused>(_onPause);
-    on<_Resumed>(_onResume);
     on<_Stopped>(_onStop);
     on<_ToNext>(_toNext);
     on<_ToPrevious>(_toPrevious);
-
-    // audioService.playerStateStream.listen((event) {
-    //   event.processingState.printf(name: 'AudioBloc');
-    //   if (event.processingState == ProcessingState.completed) {
-    //     add(const AudioEvent.toNext());
-    //   }
-    // });
+    on<_IndexChanged>(_changeIndex);
 
     audioService.player.currentIndexStream.listen((event) {
-      if (state.status == PlayerStatus.stop) {
+      if (state.status != PlayerStatus.playing) {
         return;
       }
       Log.d('Indexes: $event/${state.currentPlaying}', name: 'audio_bloc');
-      add(const AudioEvent.toNext());
+      add(AudioEvent.indexChanged(event ?? 0));
     });
   }
 
-  FutureOr<void> _onStart(_Started event, Emitter emit) async =>
-      await audioService.init();
+  FutureOr<void> _onStart(_Started event, Emitter emit) async {
+    await audioService.init();
+
+    final index = AppPref.lastPlaying;
+    if (index > 0) {
+      await audioService.seekToIndex(index);
+      emit(state.copyWith(
+        isInitial: true,
+        currentPlaying: index,
+        status: PlayerStatus.pause,
+      ));
+    }
+  }
 
   FutureOr<void> _onPlayed(_Played event, Emitter emit) async {
-    await audioService.seekToIndex(event.index ?? 0);
+    if (!state.isInitial) {
+      await audioService.seekToIndex(event.index ?? state.currentPlaying);
+    }
     audioService.play();
     emit(state.copyWith(
-      currentPlaying: event.index ?? 0,
+      currentPlaying: event.index,
       status: PlayerStatus.playing,
+      isInitial: false,
     ));
   }
 
@@ -67,25 +74,25 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     emit(state.copyWith(status: PlayerStatus.pause));
   }
 
-  FutureOr<void> _onResume(_Resumed event, Emitter emit) async {
-    await audioService.play();
-    emit(state.copyWith(status: PlayerStatus.playing));
-  }
-
   FutureOr<void> _onStop(_Stopped event, Emitter emit) async {
     await audioService.stop();
     emit(AudioState.initial());
   }
 
   FutureOr<void> _toNext(_ToNext event, Emitter emit) async {
-    if (event.skip) {
-      await audioService.seekToNext();
-    }
-    emit(state.copyWith(currentPlaying: state.currentPlaying + 1));
+    final nextIndex = (state.currentPlaying + 1) % 84;
+    add(AudioEvent.played(index: nextIndex));
   }
 
   FutureOr<void> _toPrevious(_ToPrevious event, Emitter emit) async {
-    await audioService.seekToPrevious();
-    emit(state.copyWith(currentPlaying: state.currentPlaying - 1));
+    final previousIndex = state.currentPlaying - 1;
+
+    if (!previousIndex.isNegative) {
+      add(AudioEvent.played(index: state.currentPlaying - 1));
+    }
+  }
+
+  void _changeIndex(_IndexChanged event, Emitter<AudioState> emit) {
+    emit(state.copyWith(currentPlaying: event.index));
   }
 }

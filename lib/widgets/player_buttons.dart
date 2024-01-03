@@ -13,6 +13,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:yaaseen/bloc/audio/audio_bloc.dart';
+import 'package:yaaseen/core/constants/enums.dart';
 import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
 
@@ -50,11 +51,13 @@ class PlayerButtons extends StatelessWidget {
         // PLAY
         BlocBuilder<AudioBloc, AudioState>(
           builder: (context, state) {
-            final isPlaying = state.currentPlaying == verse.verseId;
+            final isPlaying = state.currentPlaying == verse.verseId &&
+                state.status == PlayerStatus.playing;
             return RoundedIconButton(
+              // width: 120,
               key: AppKeys.play,
               icon: isPlaying ? Icons.pause : Icons.play_arrow,
-              onPressed: () async {
+              onPressed: () {
                 BlocProvider.of<AudioBloc>(context).add(
                   AudioEvent.played(index: verse.verseId),
                 );
