@@ -7,12 +7,17 @@ import 'package:yaaseen/route/app_navigator.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class AppSearchDelegate extends SearchDelegate {
+  final void Function(int verseId) onSearched;
+  AppSearchDelegate(this.onSearched);
   @override
   String? get searchFieldLabel => AppStrings.search.tr();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(foregroundColor: AppColors.white),
+        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.green,
         ),
@@ -110,8 +115,13 @@ class AppSearchDelegate extends SearchDelegate {
         itemCount: verses.length,
         separatorBuilder: (context, index) => const Divider(thickness: 1),
         itemBuilder: (context, index) {
-          VerseModel verse = verses[index];
-          return FoundedVerseTile(query: query, verse: verse);
+          final verse = verses[index];
+          return FoundedVerseTile(query: query, verse: verse).onClick(
+            () {
+              AppNavigator.pop();
+              onSearched(verse.verseId);
+            },
+          );
         },
       ),
     );

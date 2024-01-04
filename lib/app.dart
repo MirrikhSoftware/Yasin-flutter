@@ -23,7 +23,12 @@ class MyApp extends StatelessWidget {
           create: (_) => AudioBloc(audioService: AppAudioService(AudioPlayer()))
             ..add(const AudioEvent.started()),
         ),
-        BlocProvider(create: (_) => NetworkBloc()..add(ListenConnection()))
+        BlocProvider(
+          create: (_) => NetworkBloc(Connectivity())
+            ..add(
+              const NetworkEvent.listened(),
+            ),
+        )
       ],
       child: BlocListener<NetworkBloc, NetworkState>(
         listener: (context, state) {
@@ -31,16 +36,21 @@ class MyApp extends StatelessWidget {
             LogService.sendFromStorage();
           }
         },
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: AppStrings.app_name.tr(),
-          theme: AppTheme().green,
-          navigatorKey: AppNavigator.navigatorKey,
-          initialRoute: RouteNames.home,
-          onGenerateRoute: AppRoutes().onGenerateRoute,
-          // navigatorObservers: [
-          //   AnalyticsService.getAnalyticsObserver(),
-          // ],
+        child: MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: const TextScaler.linear(1.0),
+          ),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: AppStrings.app_name.tr(),
+            theme: AppTheme().green,
+            navigatorKey: AppNavigator.navigatorKey,
+            initialRoute: RouteNames.home,
+            onGenerateRoute: AppRoutes().onGenerateRoute,
+            // navigatorObservers: [
+            //   AnalyticsService.getAnalyticsObserver(),
+            // ],
+          ),
         ),
       ),
     );

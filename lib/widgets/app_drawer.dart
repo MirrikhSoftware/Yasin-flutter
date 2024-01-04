@@ -6,8 +6,7 @@ import 'package:yaaseen/route/routes.dart';
 /// It's a stateful widget that displays a drawer with a list of options
 
 class AppDrawer extends StatelessWidget {
-  final ValueChanged<String> onLanguageChanged;
-  const AppDrawer({super.key, required this.onLanguageChanged});
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,38 +31,25 @@ class AppDrawer extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            DrawerListTile(
-              key: AppKeys.readingMode,
-              icon: AppIcons.alif,
-              title: AppStrings.arabic_text.tr(),
-              onTap: () {
-                AppNavigator.pushNamed(RouteNames.reading);
-              },
-            ),
-            DrawerListTile(
-              icon: AppIcons.book,
-              title: AppStrings.paged.tr(),
-              onTap: () => AppNavigator.pushNamed(RouteNames.paged),
-            ),
             // DrawerListTile(
-            //   key: AppKeys.bookmarks,
-            //   icon: AppIcons.bookmark_outlined,
-            //   title: AppStrings.bookmarks.tr(),
+            //   key: AppKeys.readingMode,
+            //   icon: AppIcons.alif,
+            //   title: AppStrings.arabic_text.tr(),
             //   onTap: () {
-            //     AppNavigator.pushNamed(RouteNames.bookmarks);
+            //     AppNavigator.pushNamed(RouteNames.reading);
             //   },
             // ),
+            // DrawerListTile(
+            //   icon: AppIcons.book,
+            //   title: AppStrings.paged.tr(),
+            //   onTap: () => AppNavigator.pushNamed(RouteNames.paged),
+            // ),
             DrawerListTile(
-              key: AppKeys.settings,
-              icon: AppIcons.settings,
-              title: AppStrings.settings.tr(),
-              onTap: () async {
-                AppNavigator.pop();
-                final result =
-                    await AppNavigator.pushNamed(RouteNames.settings);
-                if (result != null) {
-                  onLanguageChanged.call(result.toString());
-                }
+              key: AppKeys.bookmarks,
+              icon: AppIcons.bookmark_outlined,
+              title: AppStrings.bookmarks.tr(),
+              onTap: () {
+                AppNavigator.pushNamed(RouteNames.bookmarks);
               },
             ),
             DrawerListTile(

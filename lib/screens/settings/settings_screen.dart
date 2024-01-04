@@ -22,7 +22,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   String _locale = AppPref.locale;
   final _oldLocale = AppPref.locale;
-  late final SettingsBloc _sBloc = BlocProvider.of(context);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(
@@ -45,9 +44,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 _showLocale(),
-                _setData(SizeType.arabic),
-                _setData(SizeType.transcription),
-                _setData(SizeType.meaning),
               ],
             ),
           ),
@@ -80,85 +76,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _locale = value.toString();
     });
-  }
-
-  Row _setData(SizeType type) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 4,
-          child: AppCheckboxListTile(
-            title: _getTitle(type),
-            value: true,
-            onChanged: (v) {},
-          ),
-        ),
-        Expanded(
-          flex: 7,
-          child: Slider(
-            max: 32,
-            min: 12,
-            value: _getSize(type),
-            onChanged: (v) async {
-              switch (type) {
-                case SizeType.arabic:
-                  _sBloc.add(ArabicTextSizeChanged(v));
-                  break;
-
-                case SizeType.meaning:
-                  _sBloc.add(MeaningTextSizeChanged(v));
-
-                  break;
-
-                case SizeType.transcription:
-                  _sBloc.add(TranscriptionTextSizeChanged(v));
-
-                  break;
-              }
-            },
-            onChangeEnd: (v) async {
-              switch (type) {
-                case SizeType.arabic:
-                  await AppPref.setArabicSize(v);
-                  break;
-
-                case SizeType.meaning:
-                  await AppPref.setMeaingSize(v);
-                  break;
-
-                case SizeType.transcription:
-                  await AppPref.setTranscriptionSize(v);
-                  break;
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  double _getSize(SizeType type) {
-    switch (type) {
-      case SizeType.arabic:
-        return _sBloc.state.arabicSize;
-      case SizeType.meaning:
-        return _sBloc.state.meaningSize;
-      case SizeType.transcription:
-        return _sBloc.state.transcriptionSize;
-    }
-  }
-
-  String _getTitle(SizeType type) {
-    switch (type) {
-      case SizeType.arabic:
-        return AppStrings.arabic.tr();
-
-      case SizeType.meaning:
-        return AppStrings.meaning.tr();
-
-      case SizeType.transcription:
-        return AppStrings.transcription.tr();
-    }
   }
 }
 

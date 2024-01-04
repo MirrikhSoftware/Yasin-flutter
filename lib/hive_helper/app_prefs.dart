@@ -22,7 +22,7 @@ class AppPref {
 
   // === MEANING SIZE ======================================================= //
 
-  static Future setMeaingSize(double size) async {
+  static Future setMeaningSize(double size) async {
     await _box.put(HiveKeys.meaningSize, size);
   }
 
@@ -65,15 +65,24 @@ class AppPref {
   }
 
   static int get counter => _box.get(HiveKeys.counter) ?? 0;
+
+  static Future<void> setBool(String key, bool value) => _box.put(key, value);
+  static bool getBool(String key, {bool defaultValue = false}) => _box.get(
+        key,
+        defaultValue: defaultValue,
+      );
 }
 
 class HiveKeys {
-  static const String saved = 'saved';
-  static const String arabicSize = 'arabic_size';
-  static const String meaningSize = 'meaning_size';
-  static const String transcriptionSize = 'transcription_size';
-  static const String locale = 'locale';
-  static const String scrollOffset = 'scroll_offset';
-  static const String lastPlaying = 'last_playing';
-  static const String counter = 'counter';
+  static const saved = 'saved';
+  static const arabicSize = 'arabic_size';
+  static const meaningSize = 'meaning_size';
+  static const transcriptionSize = 'transcription_size';
+  static const locale = 'locale';
+  static const scrollOffset = 'scroll_offset';
+  static const lastPlaying = 'last_playing';
+  static const counter = 'counter';
+  static const showArabic = 'show_arabic';
+  static const showMeaning = 'show_meaning ';
+  static const showTranscription = 'show_transcription';
 }

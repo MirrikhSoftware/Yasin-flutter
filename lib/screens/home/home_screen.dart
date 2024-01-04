@@ -7,6 +7,7 @@ import 'package:yaaseen/core/core.dart';
 import 'package:yaaseen/hive_helper/hive_boxes.dart';
 import 'package:yaaseen/hive_helper/hive_helper.dart';
 import 'package:yaaseen/models/verse/verse_model.dart';
+import 'package:yaaseen/widgets/settings_popup.dart';
 import 'package:yaaseen/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -46,17 +47,39 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          drawer: AppDrawer(onLanguageChanged: (value) => setState(() {})),
+          drawer: const AppDrawer(),
           bottomNavigationBar: const PlayerTab(),
           appBar: AppBar(
             title: Text(AppStrings.app_name.tr()),
             actions: [
               IconButton(
-                onPressed: () {
-                  showSearch(context: context, delegate: AppSearchDelegate());
-                },
                 icon: const Icon(CupertinoIcons.search),
-              )
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: AppSearchDelegate((verseId) {
+                      scrollController.scrollTo(
+                        index: verseId - 1,
+                        duration: const Duration(milliseconds: 200),
+                      );
+                    }),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.more_vert),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => SettingsPopup(
+                      onLocaleChanged: (value) async {
+                        await AppPref.setLocale(value);
+                        setState(() {});
+                      },
+                    ),
+                  );
+                },
+              ),
             ],
           ),
           body: ScrollablePositionedList.separated(

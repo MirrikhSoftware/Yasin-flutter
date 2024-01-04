@@ -32,7 +32,10 @@ class HighlightText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(TextSpan(children: _highlightOccurrences()));
+    return Text.rich(
+      TextSpan(children: _highlightOccurrences()),
+      // textAlign: TextAlign.justify,
+    );
   }
 
   List<TextSpan> _highlightOccurrences() {

@@ -8,11 +8,12 @@ class AppTheme {
         iconTheme: const IconThemeData(color: AppColors.primary),
         buttonTheme: const ButtonThemeData(buttonColor: AppColors.primary),
         appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            iconTheme: IconThemeData(color: AppColors.primary),
-            systemOverlayStyle:
-                SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark)),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(color: AppColors.primary),
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
+        ),
         scrollbarTheme: ScrollbarThemeData(
             interactive: true,
             crossAxisMargin: 6.0,
@@ -24,15 +25,20 @@ class AppTheme {
       useMaterial3: false,
       canvasColor: AppColors.background,
       primaryColor: AppColors.green,
+      checkboxTheme: CheckboxThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      ),
       // splashColor: AppColors.,
       primaryColorLight: AppColors.green,
       iconTheme: const IconThemeData(color: AppColors.green),
       buttonTheme: const ButtonThemeData(buttonColor: AppColors.green),
       appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.green,
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: AppColors.green,
-              statusBarIconBrightness: Brightness.light)),
+        backgroundColor: AppColors.green,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: AppColors.green,
+          statusBarIconBrightness: Brightness.light,
+        ),
+      ),
       sliderTheme: SliderThemeData(
           trackHeight: 2.0,
           // trackShape: CustomTrackShape(),

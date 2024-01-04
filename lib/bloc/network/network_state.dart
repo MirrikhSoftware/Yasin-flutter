@@ -1,9 +1,18 @@
 part of 'network_bloc.dart';
 
-abstract class NetworkState {}
+@immutable
+abstract class NetworkState {
+  const NetworkState();
+}
 
-class NetworkInitial extends NetworkState {}
+final class NetworkInitial extends NetworkState {
+  const NetworkInitial();
+}
 
-class NetworkSuccess extends NetworkState {}
+final class NetworkSuccess extends NetworkState {
+  const NetworkSuccess();
+}
 
-class NetworkFailure extends NetworkState {}
+final class NetworkFailure extends NetworkState {
+  const NetworkFailure();
+}

@@ -14,7 +14,7 @@ class VerseListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeBloc = context.watch<SettingsBloc>().state;
+    final settingsBloc = context.watch<SettingsBloc>().state;
     final formatter = AppFormatter();
     final number = formatter.numberFormat(verse.verseId);
     final formatted = '\uFD3F$number\uFD3E';
@@ -28,24 +28,29 @@ class VerseListTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ARABIC
-              ArabicText(
-                fontFamily: 'Me-Quran2',
-                arabic: '${verse.arabic} $formatted',
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(height: 20.0),
+
+              if (settingsBloc.showArabic) ...{
+                ArabicText(
+                  fontFamily: 'Me-Quran2',
+                  arabic: '${verse.arabic} $formatted',
+                  textAlign: TextAlign.start,
+                ),
+                const SizedBox(height: 20.0),
+              },
 
               // TRANSCRIPTION
-              Text(
-                _getTranscription,
-                style: TextStyle(
-                  fontSize: sizeBloc.transcriptionSize,
-                  fontStyle: FontStyle.italic,
-                  letterSpacing: 2,
-                ),
-              ),
 
-              const SizedBox(height: 10.0),
+              if (settingsBloc.showTranscription) ...{
+                Text(
+                  _getTranscription,
+                  style: TextStyle(
+                    fontSize: settingsBloc.transcriptionSize,
+                    fontStyle: FontStyle.italic,
+                    letterSpacing: 2,
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+              },
 
               // MEAINGS
               // Text(
@@ -53,17 +58,20 @@ class VerseListTile extends StatelessWidget {
               //   style: TextStyle(fontSize: sizeBloc.meaingSize),
               // ),
 
-              HighlightText(
-                source: '${verse.verseId}. $_getMeaning',
-                target: '${verse.verseId} - oyat',
-                pattern: RegExp(r'\(.*\)'),
-                simpleStyle: TextStyle(
-                  fontSize: sizeBloc.meaningSize,
-                  fontWeight: FontWeight.w600,
+              if (settingsBloc.showMeaning) ...{
+                HighlightText(
+                  source: '${verse.verseId}. $_getMeaning',
+                  target: '${verse.verseId} - oyat',
+                  pattern: RegExp(r'\(.*\)'),
+                  simpleStyle: TextStyle(
+                    fontSize: settingsBloc.meaningSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  highlightStyle: TextStyle(fontSize: settingsBloc.meaningSize),
                 ),
-                highlightStyle: TextStyle(fontSize: sizeBloc.meaningSize),
-              ),
-              const SizedBox(height: 12.0),
+                const SizedBox(height: 12.0),
+              },
+
               PlayerButtons(verse: verse),
             ],
           ),
