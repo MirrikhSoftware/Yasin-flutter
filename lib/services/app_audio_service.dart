@@ -25,7 +25,7 @@ class AppAudioService {
 
     final source = ConcatenatingAudioSource(
       children: List.generate(
-        83,
+        84,
         (index) {
           final verse = index;
           final id = 'asset:///assets/audio/$verse.mp3';
